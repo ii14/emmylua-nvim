@@ -5,8 +5,8 @@ Neovim completion library for [sumneko/lua-language-server](https://github.com/s
 If you have your entire runtime path as a workspace (like on the code snippet below),
 it should just work after installing this just like any other plugin. If not, include
 the cloned repository in `Lua.workspace.library`.
-```
-lspconfig.sumneko.setup {
+```lua
+lspconfig.sumneko_lua.setup {
   settings = {
     Lua = {
       workspace = {
