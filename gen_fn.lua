@@ -63,6 +63,9 @@ local function parse_fn(line)
       return
     end
   end
+
+  ins('')
+  ins('---@return any')
   if not KEYWORDS[name] then
     ins(('function vim.fn.%s(%s) end'):format(name, table.concat(args, ', ')))
   else
