@@ -5,19 +5,18 @@ local lines = {[[
 ---@meta
 
 ---@class vim.opt.Opt
----@generic Type
 local Opt = {}
 
----@return Type
+---@return any
 function Opt:get() end
 
----@param value: Type
+---@param value any
 function Opt:append(value) end
 
----@param value: Type
+---@param value any
 function Opt:prepend(value) end
 
----@param value: Type
+---@param value any
 function Opt:remove(value) end
 ]]}
 
@@ -53,7 +52,7 @@ for _, key in ipairs(opts) do
 
   ins('')
   if doc then ins(doc) end
-  ins(('---@type vim.opt.Opt<%s>'):format(opt.type))
+  ins('---@type vim.opt.Opt')
   ins(('vim.opt.%s = %s'):format(opt.name, default))
 
   -- vim.bo and vim.wo sucks anyway

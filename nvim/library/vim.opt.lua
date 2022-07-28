@@ -1,19 +1,18 @@
 ---@meta
 
 ---@class vim.opt.Opt
----@generic Type
 local Opt = {}
 
----@return Type
+---@return any
 function Opt:get() end
 
----@param value: Type
+---@param value any
 function Opt:append(value) end
 
----@param value: Type
+---@param value any
 function Opt:prepend(value) end
 
----@param value: Type
+---@param value any
 function Opt:remove(value) end
 
 
@@ -34,7 +33,7 @@ vim.o.aleph = 224
 ---aleph=128 applies to PC code, and aleph=224 applies to ISO 8859-8.
 ---See |rileft.txt|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.aleph = 224
 
 ---Allow CTRL-_ in Insert and Command-line mode.  This is default off, to
@@ -50,7 +49,7 @@ vim.o.allowrevins = false
 ---into reverse Insert mode, and don't know how to get out.  See
 ---'revins'.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.allowrevins = false
 
 ---Tells Vim what to do with characters with East Asian Width Class
@@ -110,7 +109,7 @@ vim.o.ambiwidth = "single"
 ---set to one of CJK locales.  See Unicode Standard Annex #11
 ---(http://www.unicode.org/reports/tr11).
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.ambiwidth = "single"
 
 ---This option can be set to start editing Arabic text.
@@ -146,7 +145,7 @@ vim.o.arabic = false
 ---option).
 ---Also see |arabic.txt|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.arabic = false
 
 ---When on and 'termbidi' is off, the required visual character
@@ -178,7 +177,7 @@ vim.o.arabicshape = true
 ---Arabic is a complex language which requires other settings, for
 ---further details see |arabic.txt|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.arabicshape = true
 
 ---When on, Vim will change the current working directory whenever you
@@ -196,7 +195,7 @@ vim.o.autochdir = false
 ---or selected.
 ---Note: When this option is on some plugins may not work.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.autochdir = false
 
 ---Copy indent from current line when starting a new line (typing <CR>
@@ -236,7 +235,7 @@ vim.o.autoindent = true
 ---<Esc> or <CR>, the cursor position when moving up or down is after the
 ---deleted indent; Vi puts the cursor somewhere in the deleted indent}.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.autoindent = true
 
 ---When a file has been detected to have been changed outside of Vim and
@@ -264,7 +263,7 @@ vim.o.autoread = true
 ---	:set autoread<
 ---```
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.autoread = true
 
 ---Write the contents of the file, if it has been modified, on each
@@ -294,7 +293,7 @@ vim.o.autowrite = false
 ---Some buffers will not be written, specifically when 'buftype' is
 ---"nowrite", "nofile", "terminal" or "prompt".
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.autowrite = false
 
 ---Like 'autowrite', but also used for commands ":edit", ":enew", ":quit",
@@ -310,7 +309,7 @@ vim.o.autowriteall = false
 ---Setting this option also implies that Vim behaves like 'autowrite' has
 ---been set.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.autowriteall = false
 
 ---When set to "dark" or "light", adjusts the default color groups for
@@ -374,7 +373,7 @@ vim.o.background = "dark"
 ---option, you must load syntax.vim again to see the result.  This can be
 ---done with ":syntax on".
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.background = "dark"
 
 ---Influences the working of <BS>, <Del>, CTRL-W and CTRL-U in Insert
@@ -422,7 +421,7 @@ vim.o.backspace = "indent,eol,start"
 ---  2	same as ":set backspace=indent,eol,start"
 ---  3	same as ":set backspace=indent,eol,nostop"
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.backspace = "indent,eol,start"
 
 ---Make a backup before overwriting a file.  Leave it around after the
@@ -450,7 +449,7 @@ vim.o.backup = false
 ---When 'patchmode' is set, the backup may be renamed to become the
 ---oldest version of a file.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.backup = false
 
 ---When writing a file and a backup is made, this option tells how it's
@@ -580,7 +579,7 @@ vim.o.backupcopy = "auto"
 ---the system may refuse to do this.  In that case the "auto" value will
 ---again not rename the file.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.backupcopy = "auto"
 
 ---List of directories for the backup file, separated with commas.
@@ -678,7 +677,7 @@ vim.o.backupdir = ".,/home/ms/.local/var/nvim/backup//"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.backupdir = ".,/home/ms/.local/var/nvim/backup//"
 
 ---String which is appended to a file name to make the name of the
@@ -714,7 +713,7 @@ vim.o.backupext = "~"
 ---```
 ---Use 'backupdir' to put the backup in a different directory.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.backupext = "~"
 
 ---A list of file patterns.  When one of the patterns matches with the
@@ -766,7 +765,7 @@ vim.o.backupskip = "/tmp/*"
 ---backup would be made by renaming the original file crontab won't see
 ---the newly created file).  Also see 'backupcopy' and |crontab|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.backupskip = "/tmp/*"
 
 ---Specifies for which events the bell will not be rung. It is a comma-
@@ -842,7 +841,7 @@ vim.o.belloff = "all"
 ---indicate that an error occurred. It can be silenced by adding the
 ---"error" keyword.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.belloff = "all"
 
 ---This option should be set before editing a binary file.  You can also
@@ -902,7 +901,7 @@ vim.o.binary = false
 ---the last line if there is none; this would make the file longer).  See
 ---the 'endofline' option.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.binary = false
 
 ---When writing a file and the following conditions are met, a BOM (Byte
@@ -940,7 +939,7 @@ vim.o.bomb = false
 ---don't see it when editing.  When you don't change the options, the BOM
 ---will be restored when writing the file.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.bomb = false
 
 ---This option lets you choose which characters might cause a line
@@ -952,7 +951,7 @@ vim.o.breakat = " \t!@*-+;:,./?"
 ---This option lets you choose which characters might cause a line
 ---break if 'linebreak' is on.  Only works for ASCII characters.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.breakat = " \t!@*-+;:,./?"
 
 ---Every wrapped line will continue visually indented (same amount of
@@ -966,7 +965,7 @@ vim.o.breakindent = false
 ---space as the beginning of that line), thus preserving horizontal blocks
 ---of text.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.breakindent = false
 
 ---Settings for 'breakindent'. It can consist of the following optional
@@ -1014,7 +1013,7 @@ vim.o.breakindentopt = ""
 ---		    for indentation.
 ---The default value for min is 20, shift and list is 0.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.breakindentopt = ""
 
 ---Which directory to use for the file browser:
@@ -1034,7 +1033,7 @@ vim.o.browsedir = ""
 ---   current	Use the current directory.
 ---   {path}	Use the specified directory
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.browsedir = ""
 
 ---This option specifies what happens when a buffer is no longer
@@ -1080,7 +1079,7 @@ vim.o.bufhidden = ""
 ---This option is used together with 'buftype' and 'swapfile' to specify
 ---special kinds of buffers.   See |special-buffers|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.bufhidden = ""
 
 ---When this option is set, the buffer shows up in the buffer list.  If
@@ -1098,7 +1097,7 @@ vim.o.buflisted = true
 ---a file name or marks.  Vim sets it when starting to edit a buffer.
 ---But not when moving to a buffer with ":buffer".
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.buflisted = true
 
 ---The value of this option specifies the type of a buffer:
@@ -1194,7 +1193,7 @@ vim.o.buftype = ""
 ---without saving.  For writing there must be matching |BufWriteCmd|,
 ---|FileWriteCmd| or |FileAppendCmd| autocommands.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.buftype = ""
 
 ---Specifies details about changing the case of letters.  It may contain
@@ -1220,7 +1219,7 @@ vim.o.casemap = "internal,keepascii"
 ---		case mapping, the current locale is not effective.
 ---		This probably only matters for Turkish.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.casemap = "internal,keepascii"
 
 ---When on, |:cd|, |:tcd| and |:lcd| without an argument changes the
@@ -1236,7 +1235,7 @@ vim.o.cdhome = false
 ---When off, those commands just print the current directory name.
 ---On Unix this option has no effect.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cdhome = false
 
 ---This is a list of directories which will be searched when using the
@@ -1278,7 +1277,7 @@ vim.o.cdpath = ",,"
 ---security reasons.
 ---(parts of 'cdpath' can be passed to the shell to expand file names).
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cdpath = ",,"
 
 ---The key used in Command-line Mode to open the command-line window.
@@ -1306,7 +1305,7 @@ vim.o.cedit = "\6"
 ---|Nvi| also has this option, but it only uses the first character.
 ---See |cmdwin|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cedit = "\6"
 
 ---|channel| connected to the buffer, or 0 if no channel is connected.
@@ -1320,7 +1319,7 @@ vim.o.channel = 0
 ---In a |:terminal| buffer this is the terminal channel.
 ---Read-only.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.channel = 0
 
 ---An expression that is used for character encoding conversion.  It is
@@ -1396,7 +1395,7 @@ vim.o.charconvert = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.charconvert = ""
 
 ---Enables automatic C program indenting.  See 'cinkeys' to set the keys
@@ -1426,7 +1425,7 @@ vim.o.cindent = false
 ---option or 'indentexpr'.
 ---This option is not used when 'paste' is set.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cindent = false
 
 ---A list of keys that, when typed in Insert mode, cause reindenting of
@@ -1444,7 +1443,7 @@ vim.o.cinkeys = "0{,0},0),0],:,0#,!^F,o,O,e"
 ---For the format of this option see |cinkeys-format|.
 ---See |C-indenting|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cinkeys = "0{,0},0),0],:,0#,!^F,o,O,e"
 
 ---The 'cinoptions' affect the way 'cindent' reindents lines in a C
@@ -1458,7 +1457,7 @@ vim.o.cinoptions = ""
 ---program.  See |cinoptions-values| for the values of this option, and
 ---|C-indenting| for info on C indenting in general.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cinoptions = ""
 
 ---Keywords that are interpreted as a C++ scope declaration by |cino-g|.
@@ -1530,7 +1529,7 @@ vim.o.cinscopedecls = "public,protected,private"
 ---		will additionally copy the text into register
 ---		'*'. See |clipboard|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cinscopedecls = "public,protected,private"
 
 ---These keywords start an extra indent in the next line when
@@ -1550,13 +1549,13 @@ vim.o.cinwords = "if,else,while,do,for,switch"
 ---matter, include the keyword both the uppercase and lowercase:
 ---"if,If,IF".
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cinwords = "if,else,while,do,for,switch"
 
 ---@type string
 vim.o.clipboard = ""
 
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.clipboard = ""
 
 ---Number of screen lines to use for the command-line.  Helps avoiding
@@ -1572,7 +1571,7 @@ vim.o.cmdheight = 1
 ---The value of this option is stored with the tab page, so that each tab
 ---page can have a different value.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.cmdheight = 1
 
 ---Number of screen lines to use for the command-line window. |cmdwin|
@@ -1582,7 +1581,7 @@ vim.o.cmdwinheight = 7
 
 ---Number of screen lines to use for the command-line window. |cmdwin|
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.cmdwinheight = 7
 
 ---'colorcolumn' is a comma-separated list of screen columns that are
@@ -1616,7 +1615,7 @@ vim.o.colorcolumn = ""
 ---When 'textwidth' is zero then the items with '-' and '+' are not used.
 ---A maximum of 256 columns are highlighted.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.colorcolumn = ""
 
 ---Number of columns of the screen.  Normally this is set by the terminal
@@ -1652,7 +1651,7 @@ vim.o.columns = 80
 ---```
 ---Minimum value is 12, maximum value is 10000.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.columns = 80
 
 ---A comma-separated list of strings that can start a comment line.  See
@@ -1666,7 +1665,7 @@ vim.o.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-"
 ---|format-comments|.  See |option-backslash| about using backslashes to
 ---insert a space.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-"
 
 ---A template for a comment.  The "%s" in the value is replaced with the
@@ -1680,13 +1679,13 @@ vim.o.commentstring = "/*%s*/"
 ---comment text.  Currently only used to add markers for folding, see
 ---|fold-marker|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.commentstring = "/*%s*/"
 
 ---@type boolean
 vim.o.compatible = false
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.compatible = false
 
 ---This option specifies how keyword completion |ins-completion| works
@@ -1760,7 +1759,7 @@ vim.o.complete = ".,w,b,u,t"
 ---based expansion (e.g., dictionary |i_CTRL-X_CTRL-K|, included patterns
 ---|i_CTRL-X_CTRL-I|, tags |i_CTRL-X_CTRL-]| and normal expansions).
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.complete = ".,w,b,u,t"
 
 ---This option specifies a function to be used for Insert mode completion
@@ -1780,7 +1779,7 @@ vim.o.completefunc = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.completefunc = ""
 
 ---A comma-separated list of options for Insert mode completion
@@ -1844,7 +1843,7 @@ vim.o.completeopt = "menu,preview"
 ---	    select one from the menu. Only works in combination with
 ---	    "menu" or "menuone".
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.completeopt = "menu,preview"
 
 ---		{only for MS-Windows}
@@ -1874,7 +1873,7 @@ vim.o.completeslash = ""
 ---For Insert mode completion the buffer-local value is used.  For
 ---command line completion the global value is used.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.completeslash = ""
 
 ---Sets the modes in which text in the cursor line can also be concealed.
@@ -1912,7 +1911,7 @@ vim.o.concealcursor = ""
 ---Keep in mind that the cursor position is not always where it's
 ---displayed.  E.g., when moving vertically it may change column.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.concealcursor = ""
 
 ---Determine how text with the "conceal" syntax attribute |:syn-conceal|
@@ -1956,7 +1955,7 @@ vim.o.conceallevel = 0
 ---edit and copy the text.  This can be changed with the 'concealcursor'
 ---option.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.conceallevel = 0
 
 ---When 'confirm' is on, certain operations that would normally
@@ -1980,7 +1979,7 @@ vim.o.confirm = false
 ---command.
 ---Also see the |confirm()| function and the 'v' flag in 'guioptions'.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.confirm = false
 
 ---Copy the structure of the existing lines indent when autoindenting a
@@ -2006,7 +2005,7 @@ vim.o.copyindent = false
 ---line, the remaining space is filled in the normal manner.
 ---See 'preserveindent'.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.copyindent = false
 
 ---A sequence of single character flags.  When a character is present
@@ -2474,7 +2473,7 @@ vim.o.cpoptions = "aABceFs_"
 ---	_	When using |cw| on a word, do not include the
 ---		whitespace following the word in the motion.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cpoptions = "aABceFs_"
 
 ---Determines how many components of the path to show in a list of tags.
@@ -2486,7 +2485,7 @@ vim.o.cscopepathcomp = 0
 ---Determines how many components of the path to show in a list of tags.
 ---See |cscopepathcomp|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.cscopepathcomp = 0
 
 ---Specifies the command to execute cscope.  See |cscopeprg|.
@@ -2500,7 +2499,7 @@ vim.o.cscopeprg = "cscope"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cscopeprg = "cscope"
 
 ---Specifies whether to use quickfix window to show cscope results.
@@ -2512,7 +2511,7 @@ vim.o.cscopequickfix = ""
 ---Specifies whether to use quickfix window to show cscope results.
 ---See |cscopequickfix|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cscopequickfix = ""
 
 ---In the absence of a prefix (-P) for cscope. setting this option enables
@@ -2526,7 +2525,7 @@ vim.o.cscoperelative = false
 ---to use the basename of cscope.out path as the prefix.
 ---See |cscoperelative|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cscoperelative = false
 
 ---Use cscope for tag commands.  See |cscope-options|.
@@ -2536,7 +2535,7 @@ vim.o.cscopetag = false
 
 ---Use cscope for tag commands.  See |cscope-options|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cscopetag = false
 
 ---Determines the order in which ":cstag" performs a search.  See
@@ -2548,13 +2547,13 @@ vim.o.cscopetagorder = 0
 ---Determines the order in which ":cstag" performs a search.  See
 ---|cscopetagorder|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.cscopetagorder = 0
 
 ---@type boolean
 vim.o.cscopeverbose = true
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cscopeverbose = true
 
 ---When this option is set, as the cursor in the current
@@ -2576,7 +2575,7 @@ vim.o.cursorbind = false
 ---inserted and deleted lines (though not characters within a line) are
 ---taken into account.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cursorbind = false
 
 ---Highlight the screen column of the cursor with CursorColumn
@@ -2602,7 +2601,7 @@ vim.o.cursorcolumn = false
 ---	au WinEnter * set cursorline cursorcolumn
 ---```
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cursorcolumn = false
 
 ---Highlight the text line of the cursor with CursorLine |hl-CursorLine|.
@@ -2618,7 +2617,7 @@ vim.o.cursorline = false
 ---When Visual mode is active the highlighting isn't used to make it
 ---easier to see the selected text.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.cursorline = false
 
 ---Comma-separated list of settings for how 'cursorline' is displayed.
@@ -2652,7 +2651,7 @@ vim.o.cursorlineopt = "both"
 ---
 ---"line" and "screenline" cannot be used together.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.cursorlineopt = "both"
 
 ---These values can be used:
@@ -2680,7 +2679,7 @@ vim.o.debug = ""
 ---"msg" and "throw" are useful for debugging 'foldexpr', 'formatexpr' or
 ---'indentexpr'.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.debug = ""
 
 ---Pattern to be used to find a macro definition.  It is a search
@@ -2740,7 +2739,7 @@ vim.o.define = "^\\s*#\\s*define"
 ---	let &l:define = '^\s*\ze\k\+\s*=\s*function('
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.define = "^\\s*#\\s*define"
 
 ---If editing Unicode and this option is set, backspace and Normal mode
@@ -2766,7 +2765,7 @@ vim.o.delcombine = false
 ---may have combining characters overtop of base characters, and want
 ---to remove only the combining ones.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.delcombine = false
 
 ---List of file names, separated by commas, that are used to lookup words
@@ -2818,7 +2817,7 @@ vim.o.dictionary = ""
 ---uses another default.
 ---Backticks cannot be used in this option for security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.dictionary = ""
 
 ---Join the current window in the group of windows that shows differences
@@ -2830,7 +2829,7 @@ vim.o.diff = false
 ---Join the current window in the group of windows that shows differences
 ---between files.  See |diff-mode|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.diff = false
 
 ---Expression which is evaluated to obtain a diff file (either ed-style
@@ -2846,7 +2845,7 @@ vim.o.diffexpr = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.diffexpr = ""
 
 ---Option settings for diff mode.  It can consist of the following items.
@@ -3046,7 +3045,7 @@ vim.o.diffopt = "internal,filler,closeoff"
 ---	:set diffopt-=internal  " do NOT use the internal diff parser
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.diffopt = "internal,filler,closeoff"
 
 ---Enable the entering of digraphs in Insert mode with {char1} <BS>
@@ -3058,7 +3057,7 @@ vim.o.digraph = false
 ---Enable the entering of digraphs in Insert mode with {char1} <BS>
 ---{char2}.  See |digraphs|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.digraph = false
 
 ---List of directory names for the swap file, separated with commas.
@@ -3166,7 +3165,7 @@ vim.o.directory = "/home/ms/.local/var/nvim/swap//"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.directory = "/home/ms/.local/var/nvim/swap//"
 
 ---Change the way text is displayed.  This is comma-separated list of
@@ -3208,7 +3207,7 @@ vim.o.display = "lastline,msgsep"
 ---When neither "lastline" nor "truncate" is included, a last line that
 ---doesn't fit is replaced with "@" lines.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.display = "lastline,msgsep"
 
 ---Tells when the 'equalalways' option applies:
@@ -3224,13 +3223,13 @@ vim.o.eadirection = "both"
 ---	hor	horizontally, height of windows is not affected
 ---	both	width and height of windows is affected
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.eadirection = "both"
 
 ---@type boolean
 vim.o.edcompatible = false
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.edcompatible = false
 
 ---When on all Unicode emoji characters are considered to be full width.
@@ -3246,7 +3245,7 @@ vim.o.emoji = true
 ---single width.  Unfortunately there is no good specification for this
 ---and it has been determined on trial-and-error basis.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.emoji = true
 
 ---String-encoding used internally and for |RPC| communication.
@@ -3262,7 +3261,7 @@ vim.o.encoding = "utf-8"
 ---
 ---See 'fileencoding' to control file-content encoding.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.encoding = "utf-8"
 
 ---When writing a file and this option is off and the 'binary' option
@@ -3292,7 +3291,7 @@ vim.o.endofline = true
 ---that when you write the file the situation from the original file can
 ---be kept.  But you can change it if you want to.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.endofline = true
 
 ---When on, all the windows are automatically made the same size after
@@ -3328,7 +3327,7 @@ vim.o.equalalways = true
 ---currently not equalized (it's complicated, but may be implemented in
 ---the future).
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.equalalways = true
 
 ---External program to use for "=" command.  When this option is empty
@@ -3350,7 +3349,7 @@ vim.o.equalprg = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.equalprg = ""
 
 ---Ring the bell (beep or screen flash) for error messages.  This only
@@ -3368,7 +3367,7 @@ vim.o.errorbells = false
 ---mode).  See 'visualbell' to make the bell behave like a screen flash
 ---or do nothing. See 'belloff' to finetune when to ring the bell.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.errorbells = false
 
 ---Name of the errorfile for the QuickFix mode (see |:cf|).
@@ -3392,7 +3391,7 @@ vim.o.errorfile = "errors.err"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.errorfile = "errors.err"
 
 ---Scanf-like description of the format for the lines in the error file
@@ -3404,7 +3403,7 @@ vim.o.errorformat = "%*[^\"]\"%f\"%*\\D%l: %m,\"%f\"%*\\D%l: %m,%-G%f:%l: (Each 
 ---Scanf-like description of the format for the lines in the error file
 ---(see |errorformat|).
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.errorformat = "%*[^\"]\"%f\"%*\\D%l: %m,\"%f\"%*\\D%l: %m,%-G%f:%l: (Each undeclared identifier is reported only once,%-G%f:%l: for each function it appears in.),%-GIn file included from %f:%l:%c:,%-GIn file included from %f:%l:%c\\,,%-GIn file included from %f:%l:%c,%-GIn file included from %f:%l,%-G%*[ ]from %f:%l:%c,%-G%*[ ]from %f:%l:,%-G%*[ ]from %f:%l\\,,%-G%*[ ]from %f:%l,%f:%l:%c:%m,%f(%l):%m,%f:%l:%m,\"%f\"\\, line %l%*\\D%c%*[^ ] %m,%D%*\\a[%*\\d]: Entering directory %*[`']%f',%X%*\\a[%*\\d]: Leaving directory %*[`']%f',%D%*\\a: Entering directory %*[`']%f',%X%*\\a: Leaving directory %*[`']%f',%DMaking %*\\a in %f,%f|%l| %m"
 
 ---A list of autocommand event names, which are to be ignored.
@@ -3426,7 +3425,7 @@ vim.o.eventignore = ""
 ---    :set ei=WinEnter,WinLeave
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.eventignore = ""
 
 ---In Insert mode: Use the appropriate number of spaces to insert a
@@ -3446,13 +3445,13 @@ vim.o.expandtab = false
 ---This option is reset when the 'paste' option is set and restored when
 ---the 'paste' option is reset.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.expandtab = false
 
 ---@type boolean
 vim.o.exrc = false
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.exrc = false
 
 ---File-content encoding for the current buffer. Conversion is done with
@@ -3534,7 +3533,7 @@ vim.o.fileencoding = ""
 ---
 ---This option cannot be changed when 'modifiable' is off.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.fileencoding = ""
 
 ---This is a list of character encodings considered when starting to edit
@@ -3642,7 +3641,7 @@ vim.o.fileencodings = "ucs-bom,utf-8,default,latin1"
 ---Setting this option does not have an effect until the next time a file
 ---is read.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.fileencodings = "ucs-bom,utf-8,default,latin1"
 
 ---This gives the <EOL> of the current buffer, which is used for
@@ -3680,7 +3679,7 @@ vim.o.fileformat = "unix"
 ---option is set, because the file would be different when written.
 ---This option cannot be changed when 'modifiable' is off.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.fileformat = "unix"
 
 ---This gives the end-of-line (<EOL>) formats that will be tried when
@@ -3778,7 +3777,7 @@ vim.o.fileformats = "unix,dos"
 ---  used.
 ---Also see |file-formats|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.fileformats = "unix,dos"
 
 ---When set case is ignored when using file names and directories.
@@ -3790,7 +3789,7 @@ vim.o.fileignorecase = false
 ---When set case is ignored when using file names and directories.
 ---See 'wildignorecase' for only ignoring case when doing completion.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.fileignorecase = false
 
 ---When this option is set, the FileType autocommand event is triggered.
@@ -3840,7 +3839,7 @@ vim.o.filetype = ""
 ---'S' flag in 'cpoptions'.
 ---Only normal file name characters can be used, "/\*?[|<>" are illegal.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.filetype = ""
 
 ---Characters to fill the statuslines and vertical separators.
@@ -3968,7 +3967,7 @@ vim.o.fillchars = ""
 ---  diff:c	DiffDelete		|hl-DiffDelete|
 ---  eob:c		EndOfBuffer		|hl-EndOfBuffer|
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.fillchars = ""
 
 ---When writing a file and this option is on, <EOL> at the end of file
@@ -3988,7 +3987,7 @@ vim.o.fixendofline = true
 ---matter.
 ---See the 'endofline' option.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.fixendofline = true
 
 ---When set to "all", a fold is closed when the cursor isn't in it and
@@ -4002,7 +4001,7 @@ vim.o.foldclose = ""
 ---its level is higher than 'foldlevel'.  Useful if you want folds to
 ---automatically close when moving out of them.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldclose = ""
 
 ---When and how to draw the foldcolumn. Valid values are:
@@ -4024,7 +4023,7 @@ vim.o.foldcolumn = "0"
 ---    "[1-9]":      to display a fixed number of columns
 ---See |folding|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldcolumn = "0"
 
 ---When off, all folds are open.  This option can be used to quickly
@@ -4046,7 +4045,7 @@ vim.o.foldenable = true
 ---This option is set by commands that create a new fold or close a fold.
 ---See |folding|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.foldenable = true
 
 ---The expression used for when 'foldmethod' is "expr".  It is evaluated
@@ -4074,7 +4073,7 @@ vim.o.foldexpr = "0"
 ---It is not allowed to change text or jump to another window while
 ---evaluating 'foldexpr' |textlock|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldexpr = "0"
 
 ---Used only when 'foldmethod' is "indent".  Lines starting with
@@ -4090,7 +4089,7 @@ vim.o.foldignore = "#"
 ---lines.  White space is skipped before checking for this character.
 ---The default "#" works well for C programs.  See |fold-indent|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldignore = "#"
 
 ---Sets the fold level: Folds with a higher level will be closed.
@@ -4108,7 +4107,7 @@ vim.o.foldlevel = 0
 ---This option is set by commands like |zm|, |zM| and |zR|.
 ---See |fold-foldlevel|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.foldlevel = 0
 
 ---Sets 'foldlevel' when starting to edit another buffer in a window.
@@ -4134,7 +4133,7 @@ vim.o.foldlevelstart = -1
 ---overrule the 'foldlevel' value for specific files.
 ---When the value is negative, it is not used.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.foldlevelstart = -1
 
 ---The start and end marker used when 'foldmethod' is "marker".  There
@@ -4150,7 +4149,7 @@ vim.o.foldmarker = "{{{,}}}"
 ---marker is a literal string (a regular expression would be too slow).
 ---See |fold-marker|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldmarker = "{{{,}}}"
 
 ---The kind of folding used for the current window.  Possible values:
@@ -4172,7 +4171,7 @@ vim.o.foldmethod = "manual"
 ---|fold-syntax|	syntax	    Syntax highlighting items specify folds.
 ---|fold-diff|	diff	    Fold text that is not changed.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldmethod = "manual"
 
 ---Sets the number of screen lines above which a fold can be displayed
@@ -4194,7 +4193,7 @@ vim.o.foldminlines = 1
 ---"zc" to close a fold, which is displayed open because it's smaller
 ---than 'foldminlines', a following "zc" may close a containing fold.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.foldminlines = 1
 
 ---Sets the maximum nesting of folds for the "indent" and "syntax"
@@ -4208,7 +4207,7 @@ vim.o.foldnestmax = 20
 ---methods.  This avoids that too many folds will be created.  Using more
 ---than 20 doesn't work, because the internal limit is 20.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.foldnestmax = 20
 
 ---Specifies for which type of commands folds will be opened, if the
@@ -4276,7 +4275,7 @@ vim.o.foldopen = "block,hor,mark,percent,quickfix,search,tag,undo"
 ---To close folds you can re-apply 'foldlevel' with the |zx| command or
 ---set the 'foldclose' option to "all".
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldopen = "block,hor,mark,percent,quickfix,search,tag,undo"
 
 ---An expression which is used to specify the text displayed for a closed
@@ -4302,7 +4301,7 @@ vim.o.foldtext = "foldtext()"
 ---It is not allowed to change text or jump to another window while
 ---evaluating 'foldtext' |textlock|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.foldtext = "foldtext()"
 
 ---Expression which is evaluated to format a range of lines for the |gq|
@@ -4374,7 +4373,7 @@ vim.o.formatexpr = ""
 ---This option cannot be set in a modeline when 'modelineexpr' is off.
 ---NOTE: This option is set to "" when 'compatible' is set.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.formatexpr = ""
 
 ---A pattern that is used to recognize a list header.  This is used for
@@ -4400,7 +4399,7 @@ vim.o.formatlistpat = "^\\s*\\d\\+[\\]:.)}\\t ]\\s*"
 ---The default recognizes a number, followed by an optional punctuation
 ---character and white space.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.formatlistpat = "^\\s*\\d\\+[\\]:.)}\\t ]\\s*"
 
 ---This is a sequence of letters which describes how automatic
@@ -4420,7 +4419,7 @@ vim.o.formatoptions = "tcqj"
 ---To avoid problems with flags that are added in the future, use the
 ---"+=" and "-=" feature of ":set" |add-option-flags|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.formatoptions = "tcqj"
 
 ---The name of an external program that will be used to format the lines
@@ -4450,7 +4449,7 @@ vim.o.formatprg = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.formatprg = ""
 
 ---When on, the OS function fsync() will be called after saving a file
@@ -4486,7 +4485,7 @@ vim.o.fsync = false
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.fsync = false
 
 ---When on, the ":substitute" flag 'g' is default on.  This means that
@@ -4520,7 +4519,7 @@ vim.o.gdefault = false
 ---of this option.  Also, many users get confused that adding the /g flag
 ---has the opposite effect of that it normally does.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.gdefault = false
 
 ---Format to recognize for the ":grep" command output.
@@ -4534,7 +4533,7 @@ vim.o.grepformat = "%f:%l:%m,%f:%l%m,%f  %l%m"
 ---This is a scanf-like string that uses the same format as the
 ---'errorformat' option: see |errorformat|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.grepformat = "%f:%l:%m,%f:%l%m,%f  %l%m"
 
 ---Program to use for the |:grep| command.  This option may contain '%'
@@ -4576,7 +4575,7 @@ vim.o.grepprg = "grep -n $* /dev/null"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.grepprg = "grep -n $* /dev/null"
 
 ---Configures the cursor style for each mode. Works in the GUI and many
@@ -4896,13 +4895,13 @@ vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 ---    :set guifont=Andale_Mono:h7.5:w4.5
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 
 ---@type string
 vim.o.guifont = ""
 
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.guifont = ""
 
 ---Comma-separated list of fonts to be used for double-width characters.
@@ -4924,7 +4923,7 @@ vim.o.guifontwide = ""
 ---When 'guifont' has a valid font and 'guifontwide' is empty Vim will
 ---attempt to set 'guifontwide' to a matching double-width font.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.guifontwide = ""
 
 ---This option only has an effect in the GUI version of Vim.  It is a
@@ -5092,7 +5091,7 @@ vim.o.guioptions = ""
 ---	try to keep 'lines' and 'columns' the same when adding and
 ---	removing GUI components.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.guioptions = ""
 
 ---When non-empty describes the text to use in a label of the GUI tab
@@ -5126,7 +5125,7 @@ vim.o.guitablabel = ""
 ---present in 'guioptions'.  For the non-GUI tab pages line 'tabline' is
 ---used.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.guitablabel = ""
 
 ---When non-empty describes the text to use in a tooltip for the GUI tab
@@ -5148,7 +5147,7 @@ vim.o.guitabtooltip = ""
 ---	:let &guitabtooltip = "line one\nline two"
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.guitabtooltip = ""
 
 ---Name of the main help file.  All distributed help files should be
@@ -5174,7 +5173,7 @@ vim.o.helpfile = "/usr/share/nvim/runtime/doc/help.txt"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.helpfile = "/usr/share/nvim/runtime/doc/help.txt"
 
 ---Minimal initial height of the help window when it is opened with the
@@ -5192,7 +5191,7 @@ vim.o.helpheight = 20
 ---windows.  When the height is less than 'helpheight', the height is
 ---set to 'helpheight'.  Set to zero to disable.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.helpheight = 20
 
 ---Comma-separated list of languages.  Vim will use the first language
@@ -5228,7 +5227,7 @@ vim.o.helplang = ""
 ---try to find the tag in the current language before using this option.
 ---See |help-translated|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.helplang = ""
 
 ---When off a buffer is unloaded (including loss of undo information)
@@ -5264,13 +5263,13 @@ vim.o.hidden = true
 ---To hide a specific buffer use the 'bufhidden' option.
 ---'hidden' is set for one command with ":hide {command}" |:hide|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.hidden = true
 
 ---@type string
 vim.o.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:NonText,d:Directory,e:ErrorMsg,i:IncSearch,l:Search,y:CurSearch,m:MoreMsg,M:ModeMsg,n:LineNr,a:LineNrAbove,b:LineNrBelow,N:CursorLineNr,G:CursorLineSign,O:CursorLineFoldr:Question,s:StatusLine,S:StatusLineNC,c:VertSplit,t:Title,v:Visual,V:VisualNOS,w:WarningMsg,W:WildMenu,f:Folded,F:FoldColumn,A:DiffAdd,C:DiffChange,D:DiffDelete,T:DiffText,>:SignColumn,-:Conceal,B:SpellBad,P:SpellCap,R:SpellRare,L:SpellLocal,+:Pmenu,=:PmenuSel,x:PmenuSbar,X:PmenuThumb,*:TabLine,#:TabLineSel,_:TabLineFill,!:CursorColumn,.:CursorLine,o:ColorColumn,q:QuickFixLine,0:Whitespace,I:NormalNC"
 
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:NonText,d:Directory,e:ErrorMsg,i:IncSearch,l:Search,y:CurSearch,m:MoreMsg,M:ModeMsg,n:LineNr,a:LineNrAbove,b:LineNrBelow,N:CursorLineNr,G:CursorLineSign,O:CursorLineFoldr:Question,s:StatusLine,S:StatusLineNC,c:VertSplit,t:Title,v:Visual,V:VisualNOS,w:WarningMsg,W:WildMenu,f:Folded,F:FoldColumn,A:DiffAdd,C:DiffChange,D:DiffDelete,T:DiffText,>:SignColumn,-:Conceal,B:SpellBad,P:SpellCap,R:SpellRare,L:SpellLocal,+:Pmenu,=:PmenuSel,x:PmenuSbar,X:PmenuThumb,*:TabLine,#:TabLineSel,_:TabLineFill,!:CursorColumn,.:CursorLine,o:ColorColumn,q:QuickFixLine,0:Whitespace,I:NormalNC"
 
 ---A history of ":" commands, and a history of previous search patterns
@@ -5286,7 +5285,7 @@ vim.o.history = 10000
 ---each of these histories (see |cmdline-editing|).
 ---The maximum value is 10000.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.history = 10000
 
 ---When on, the keyboard is mapped for the Hebrew character set.
@@ -5300,7 +5299,7 @@ vim.o.hkmap = false
 ---Normally you would set 'allowrevins' and use CTRL-_ in insert mode to
 ---toggle this option.  See |rileft.txt|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.hkmap = false
 
 ---When on, phonetic keyboard mapping is used.  'hkmap' must also be on.
@@ -5314,7 +5313,7 @@ vim.o.hkmapp = false
 ---This is useful if you have a non-Hebrew keyboard.
 ---See |rileft.txt|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.hkmapp = false
 
 ---When there is a previous search pattern, highlight all its matches.
@@ -5360,7 +5359,7 @@ vim.o.hlsearch = true
 ---You can specify whether the highlight status is restored on startup
 ---with the 'h' flag in 'shada' |shada-h|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.hlsearch = true
 
 ---When on, the icon text of the window will be set to the value of
@@ -5378,7 +5377,7 @@ vim.o.icon = false
 ---Overridden by the 'iconstring' option.
 ---Only works if the terminal supports setting window icons.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.icon = false
 
 ---When this option is not empty, it will be used for the icon text of
@@ -5400,7 +5399,7 @@ vim.o.iconstring = ""
 ---'titlestring' for example settings.
 ---This option cannot be set in a modeline when 'modelineexpr' is off.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.iconstring = ""
 
 ---Ignore case in search patterns.  Also used when searching in the tags
@@ -5418,7 +5417,7 @@ vim.o.ignorecase = false
 ---Can be overruled by using "\c" or "\C" in the pattern, see
 ---|/ignorecase|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.ignorecase = false
 
 ---When set the Input Method is always on when starting to edit a command
@@ -5436,7 +5435,7 @@ vim.o.imcmdline = false
 ---English characters directly, e.g., when it's used to type accented
 ---characters with dead keys.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.imcmdline = false
 
 ---When set the Input Method is never used.  This is useful to disable
@@ -5452,7 +5451,7 @@ vim.o.imdisable = false
 ---Currently this option is on by default for SGI/IRIX machines.  This
 ---may change in later releases.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.imdisable = false
 
 ---Specifies whether :lmap or an Input Method (IM) is to be used in
@@ -5492,7 +5491,7 @@ vim.o.iminsert = 0
 ---The value is set to 1 when setting 'keymap' to a valid keymap name.
 ---It is also used for the argument of commands like "r" and "f".
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.iminsert = 0
 
 ---Specifies whether :lmap or an Input Method (IM) is to be used when
@@ -5522,7 +5521,7 @@ vim.o.imsearch = -1
 ---The value is set to 1 when it is not -1 and setting the 'keymap'
 ---option to a valid keymap name.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.imsearch = -1
 
 ---When nonempty, shows the effects of |:substitute|, |:smagic|,
@@ -5556,7 +5555,7 @@ vim.o.inccommand = "nosplit"
 ---'redrawtime') then 'inccommand' is automatically disabled until
 ---|Command-line-mode| is done.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.inccommand = "nosplit"
 
 ---Pattern to be used to find an include command.  It is a search
@@ -5586,7 +5585,7 @@ vim.o.include = "^\\s*#\\s*include"
 ---'includeexpr' to process the matched text.
 ---See |option-backslash| about including spaces and backslashes.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.include = "^\\s*#\\s*include"
 
 ---Expression to be used to transform the string found with the 'include'
@@ -5628,7 +5627,7 @@ vim.o.includeexpr = ""
 ---It is not allowed to change text or jump to another window while
 ---evaluating 'includeexpr' |textlock|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.includeexpr = ""
 
 ---While typing a search command, show where the pattern, as it was typed
@@ -5700,7 +5699,7 @@ vim.o.incsearch = true
 ---CTRL-R CTRL-W can be used to add the word at the end of the current
 ---match, excluding the characters that were already typed.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.incsearch = true
 
 ---Expression which is evaluated to obtain the proper indent for a line.
@@ -5772,7 +5771,7 @@ vim.o.indentexpr = ""
 ---It is not allowed to change text or jump to another window while
 ---evaluating 'indentexpr' |textlock|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.indentexpr = ""
 
 ---A list of keys that, when typed in Insert mode, cause reindenting of
@@ -5788,7 +5787,7 @@ vim.o.indentkeys = "0{,0},0),0],:,0#,!^F,o,O,e"
 ---The format is identical to 'cinkeys', see |indentkeys-format|.
 ---See |C-indenting| and |indent-expression|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.indentkeys = "0{,0},0),0],:,0#,!^F,o,O,e"
 
 ---When doing keyword completion in insert mode |ins-completion|, and
@@ -5812,13 +5811,13 @@ vim.o.infercase = false
 ---and there is a letter before it, the completed part is made uppercase.
 ---With 'noinfercase' the match is used as-is.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.infercase = false
 
 ---@type boolean
 vim.o.insertmode = false
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.insertmode = false
 
 ---The characters specified by this option are included in file names and
@@ -5916,7 +5915,7 @@ vim.o.isfname = "@,48-57,/,.,-,_,+,,,#,$,%,~,="
 ---			comma, plus <Tab>.
 ---See |option-backslash| about including spaces and backslashes.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.isfname = "@,48-57,/,.,-,_,+,,,#,$,%,~,="
 
 ---The characters given by this option are included in identifiers.
@@ -5942,7 +5941,7 @@ vim.o.isident = "@,48-57,_,192-255"
 ---expand "$HOME/.local/state/nvim/shada/main.shada".  Maybe you should
 ---change 'iskeyword' instead.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.isident = "@,48-57,_,192-255"
 
 ---Keywords are used in searching and recognizing with many commands:
@@ -5974,7 +5973,7 @@ vim.o.iskeyword = "@,48-57,_,192-255"
 ---This option also influences syntax highlighting, unless the syntax
 ---uses |:syn-iskeyword|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.iskeyword = "@,48-57,_,192-255"
 
 ---The characters given by this option are displayed directly on the
@@ -6034,7 +6033,7 @@ vim.o.isprint = "@,161-255"
 ---Unprintable and zero-width Unicode characters are displayed as <xxxx>.
 ---There is no option to specify these characters.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.isprint = "@,161-255"
 
 ---Insert two spaces after a '.', '?' and '!' with a join command.
@@ -6046,7 +6045,7 @@ vim.o.joinspaces = false
 ---Insert two spaces after a '.', '?' and '!' with a join command.
 ---Otherwise only one space is inserted.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.joinspaces = false
 
 ---List of words that change the behavior of the |jumplist|.
@@ -6068,7 +6067,7 @@ vim.o.jumpoptions = ""
 ---		jumplist and then jumping to a location.
 ---		|jumplist-stack|
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.jumpoptions = ""
 
 ---Name of a keyboard mapping.  See |mbyte-keymap|.
@@ -6086,7 +6085,7 @@ vim.o.keymap = ""
 ---'imsearch' is also set to one, unless it was -1
 ---Only normal file name characters can be used, "/\*?[|<>" are illegal.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.keymap = ""
 
 ---List of comma-separated words, which enable special things that keys
@@ -6112,7 +6111,7 @@ vim.o.keymodel = ""
 ---<PageUp> and <PageDown>.
 ---The 'keymodel' option is set by the |:behave| command.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.keymodel = ""
 
 ---Program to use for the |K| command.  Environment variables are
@@ -6152,7 +6151,7 @@ vim.o.keywordprg = ":Man"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.keywordprg = ":Man"
 
 ---This option allows switching your keyboard into a special language
@@ -6242,7 +6241,7 @@ vim.o.langmap = ""
 ---allowing to switch between mappings for different languages/encodings.
 ---Use a mapping to avoid having to type it each time!
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.langmap = ""
 
 ---Language to use for menu translation.  Tells which file is loaded
@@ -6302,13 +6301,13 @@ vim.o.langmenu = ""
 ---```
 ---Warning: This deletes all menus that you defined yourself!
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.langmenu = ""
 
 ---@type boolean
 vim.o.langnoremap = true
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.langnoremap = true
 
 ---When off, setting 'langmap' does not apply to characters resulting from
@@ -6322,7 +6321,7 @@ vim.o.langremap = false
 ---a mapping.  If setting 'langmap' disables some of your mappings, make
 ---sure this option is off.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.langremap = false
 
 ---The value of this option influences when the last window will have a
@@ -6346,7 +6345,7 @@ vim.o.laststatus = 2
 ---The screen looks nicer with a status line if you have several
 ---windows, but it takes another screen line. |status-line|
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.laststatus = 2
 
 ---When this option is set, the screen will not be redrawn while
@@ -6362,7 +6361,7 @@ vim.o.lazyredraw = false
 ---typed.  Also, updating the window title is postponed.  To force an
 ---update use |:redraw|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.lazyredraw = false
 
 ---If on, Vim will wrap long lines at a character in 'breakat' rather
@@ -6388,7 +6387,7 @@ vim.o.linebreak = false
 ---Note that <Tab> characters after an <EOL> are mostly not displayed
 ---with the right amount of white space.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.linebreak = false
 
 ---Number of lines of the Vim window.
@@ -6420,7 +6419,7 @@ vim.o.lines = 24
 ---```
 ---Minimum value is 2, maximum value is 1000.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.lines = 24
 
 ---		{only in the GUI}
@@ -6444,7 +6443,7 @@ vim.o.linespace = 0
 ---'linespace' to a negative value.  This may cause display problems
 ---though!
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.linespace = 0
 
 ---Lisp mode: When <Enter> is typed in insert mode set the indent for
@@ -6470,7 +6469,7 @@ vim.o.lisp = false
 ---calling an external program if 'equalprg' is empty.
 ---This option is not used when 'paste' is set.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.lisp = false
 
 ---Comma-separated list of words that influence the Lisp indenting.
@@ -6482,7 +6481,7 @@ vim.o.lispwords = "defun,define,defmacro,set!,lambda,if,case,let,flet,let*,letre
 ---Comma-separated list of words that influence the Lisp indenting.
 ---|'lisp'|
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.lispwords = "defun,define,defmacro,set!,lambda,if,case,let,flet,let*,letrec,do,do*,define-syntax,let-syntax,letrec-syntax,destructuring-bind,defpackage,defparameter,defstruct,deftype,defvar,do-all-symbols,do-external-symbols,do-symbols,dolist,dotimes,ecase,etypecase,eval-when,labels,macrolet,multiple-value-bind,multiple-value-call,multiple-value-prog1,multiple-value-setq,prog1,progv,typecase,unless,unwind-protect,when,with-input-from-string,with-open-file,with-open-stream,with-output-to-string,with-package-iterator,define-condition,handler-bind,handler-case,restart-bind,restart-case,with-simple-restart,store-value,use-value,muffle-warning,abort,continue,with-slots,with-slots*,with-accessors,with-accessors*,defclass,defmethod,print-unreadable-object"
 
 ---List mode: By default, show tabs as ">", trailing spaces as "-", and
@@ -6518,7 +6517,7 @@ vim.o.list = false
 ---or 'wrapmargin') when 'cpoptions' includes 'L'.  See 'listchars' for
 ---changing the way tabs are displayed.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.list = false
 
 ---Strings to use in 'list' mode and for the |:list| command.  It is a
@@ -6722,7 +6721,7 @@ vim.o.listchars = "tab:> ,trail:-,nbsp:+"
 ---"precedes". |hl-Whitespace| for "nbsp", "space", "tab", "multispace",
 ---"lead" and "trail".
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.listchars = "tab:> ,trail:-,nbsp:+"
 
 ---When on the plugin scripts are loaded when starting up |load-plugins|.
@@ -6740,7 +6739,7 @@ vim.o.loadplugins = true
 ---Note that using the "-u NONE" and "--noplugin" command line arguments
 ---reset this option. |-u| |--noplugin|
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.loadplugins = true
 
 ---Changes the special characters that can be used in search patterns.
@@ -6762,7 +6761,7 @@ vim.o.magic = true
 ---situation write patterns that work when 'magic' is on.  Include "\M"
 ---when you want to |/\M|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.magic = true
 
 ---Name of the errorfile for the |:make| command (see |:make_makeprg|)
@@ -6792,7 +6791,7 @@ vim.o.makeef = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.makeef = ""
 
 ---Encoding used for reading the output of external commands.  When empty,
@@ -6824,7 +6823,7 @@ vim.o.makeencoding = ""
 ---	:set makeencoding=char	" system locale is used
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.makeencoding = ""
 
 ---Program to use for the ":make" command.  See |:make_makeprg|.
@@ -6870,7 +6869,7 @@ vim.o.makeprg = "make"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.makeprg = "make"
 
 ---Characters that form pairs.  The |%| command jumps from one to the
@@ -6916,7 +6915,7 @@ vim.o.matchpairs = "(:),{:},[:]"
 ---For a more advanced way of using "%", see the matchit.vim plugin in
 ---the $VIMRUNTIME/plugin directory. |add-local-help|
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.matchpairs = "(:),{:},[:]"
 
 ---Tenths of a second to show the matching paren, when 'showmatch' is
@@ -6930,13 +6929,13 @@ vim.o.matchtime = 5
 ---set.  Note that this is not in milliseconds, like other options that
 ---set a time.  This is to be compatible with Nvi.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.matchtime = 5
 
 ---@type number
 vim.o.maxcombine = 6
 
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.maxcombine = 6
 
 ---Maximum depth of function calls for user functions.  This normally
@@ -6958,7 +6957,7 @@ vim.o.maxfuncdepth = 100
 ---command recursion, see |E169|.
 ---See also |:function|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.maxfuncdepth = 100
 
 ---Maximum number of times a mapping is done without resulting in a
@@ -6976,7 +6975,7 @@ vim.o.maxmapdepth = 1000
 ---because the 'w' is used before the next mapping is done.  See also
 ---|key-mapping|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.maxmapdepth = 1000
 
 ---Maximum amount of memory (in Kbyte) to use for pattern matching.
@@ -7008,7 +7007,7 @@ vim.o.maxmempattern = 1000
 ---Vim may run out of memory before hitting the 'maxmempattern' limit, in
 ---which case you get an "Out of memory" error instead.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.maxmempattern = 1000
 
 ---Maximum number of items to use in a menu.  Used for menus that are
@@ -7022,7 +7021,7 @@ vim.o.menuitems = 25
 ---generated from a list of items, e.g., the Buffers menu.  Changing this
 ---option has no direct effect, the menu must be refreshed first.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.menuitems = 25
 
 ---Parameters for |:mkspell|.  This tunes when to start compressing the
@@ -7102,7 +7101,7 @@ vim.o.mkspellmem = "460000,2000,500"
 ---
 ---This option cannot be set from a |modeline| or in the |sandbox|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.mkspellmem = "460000,2000,500"
 
 ---If 'modeline' is on 'modelines' gives the number of lines that is
@@ -7116,7 +7115,7 @@ vim.o.modeline = true
 ---checked for set commands.  If 'modeline' is off or 'modelines' is zero
 ---no lines are checked.  See |modeline|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.modeline = true
 
 ---When on allow some options that are an expression to be set in the
@@ -7134,7 +7133,7 @@ vim.o.modelineexpr = false
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.modelineexpr = false
 
 ---If 'modeline' is on 'modelines' gives the number of lines that is
@@ -7148,7 +7147,7 @@ vim.o.modelines = 5
 ---checked for set commands.  If 'modeline' is off or 'modelines' is zero
 ---no lines are checked.  See |modeline|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.modelines = 5
 
 ---When off the buffer contents cannot be changed.  The 'fileformat' and
@@ -7162,7 +7161,7 @@ vim.o.modifiable = true
 ---'fileencoding' options also can't be changed.
 ---Can be reset on startup with the |-M| command line argument.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.modifiable = true
 
 ---When on, the buffer is considered to be modified.  This option is set
@@ -7212,7 +7211,7 @@ vim.o.modified = false
 ---Note that the text may actually be the same, e.g. 'modified' is set
 ---when using "rA" on an "A".
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.modified = false
 
 ---When on, listings pause when the whole screen is filled.  You will get
@@ -7226,7 +7225,7 @@ vim.o.more = true
 ---the |more-prompt|.  When this option is off there are no pauses, the
 ---listing continues until finished.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.more = true
 
 ---Enables mouse support. For example, to enable the mouse in Normal mode
@@ -7336,7 +7335,7 @@ vim.o.mouse = ""
 ---			'keymodel'	"startsel,stopsel"	""
 ---			'selection'	"exclusive"		"inclusive"
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.mouse = ""
 
 ---The window that the mouse pointer is on is automatically activated.
@@ -7354,7 +7353,7 @@ vim.o.mousefocus = false
 ---default because it makes using the pull down menus a little goofy, as
 ---a pointer transit may activate a window unintentionally.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.mousefocus = false
 
 ---		{only works in the GUI}
@@ -7368,7 +7367,7 @@ vim.o.mousehide = true
 ---When on, the mouse pointer is hidden when characters are typed.
 ---The mouse pointer is restored when the mouse is moved.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.mousehide = true
 
 ---Sets the model to use for the mouse.  The name mostly specifies what
@@ -7476,7 +7475,7 @@ vim.o.mousemodel = "extend"
 ---
 ---The 'mousemodel' option is set by the |:behave| command.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.mousemodel = "extend"
 
 ---This option tells Vim what the mouse pointer should look like in
@@ -7604,7 +7603,7 @@ vim.o.mouseshape = ""
 ---indicate no input when the hit-enter prompt is displayed (since
 ---clicking the mouse has no effect in this state.)
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.mouseshape = ""
 
 ---Defines the maximum time in msec between two mouse clicks for the
@@ -7616,7 +7615,7 @@ vim.o.mousetime = 500
 ---Defines the maximum time in msec between two mouse clicks for the
 ---second click to be recognized as a multi click.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.mousetime = 500
 
 ---This defines what bases Vim will consider for numbers when using the
@@ -7676,7 +7675,7 @@ vim.o.nrformats = "bin,hex"
 ---considered decimal.  This also happens for numbers that are not
 ---recognized as octal or hex.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.nrformats = "bin,hex"
 
 ---Print the line number in front of each line.  When the 'n' option is
@@ -7724,7 +7723,7 @@ vim.o.number = false
 ---    |nobody         |  3 nobody     |  0 nobody     |3   nobody
 ---    |there          |  4 there      |  1 there      |  1 there
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.number = false
 
 ---Minimal number of columns to use for the line number.  Only relevant
@@ -7752,7 +7751,7 @@ vim.o.numberwidth = 4
 ---up to 999. When the buffer has 1000 lines five columns will be used.
 ---The minimum value is 1, the maximum value is 20.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.numberwidth = 4
 
 ---This option specifies a function to be used for Insert mode omni
@@ -7776,7 +7775,7 @@ vim.o.omnifunc = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.omnifunc = ""
 
 ---		{only for Windows}
@@ -7796,7 +7795,7 @@ vim.o.opendevice = false
 ---Note that on Windows editing "aux.h", "lpt1.txt" and the like also
 ---result in editing a device.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.opendevice = false
 
 ---This option specifies a function to be called by the |g@| operator.
@@ -7814,7 +7813,7 @@ vim.o.operatorfunc = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.operatorfunc = ""
 
 ---Directories used to find packages.  See |packages| and |rtp-packages|.
@@ -7824,7 +7823,7 @@ vim.o.packpath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/usr/
 
 ---Directories used to find packages.  See |packages| and |rtp-packages|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.packpath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/usr/share/kubuntu-default-settings/kf5-settings/nvim,/home/ms/.local/share/nvim/site,/usr/share/i3/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/usr/share/nvim/runtime,/usr/lib/x86_64-linux-gnu/nvim,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/usr/share/i3/nvim/site/after,/home/ms/.local/share/nvim/site/after,/usr/share/kubuntu-default-settings/kf5-settings/nvim/after,/etc/xdg/nvim/after,/etc/xdg/xdg-i3/nvim/after,/home/ms/.config/nvim/after"
 
 ---Specifies the nroff macros that separate paragraphs.  These are pairs
@@ -7836,7 +7835,7 @@ vim.o.paragraphs = "IPLPPPQPP TPHPLIPpLpItpplpipbp"
 ---Specifies the nroff macros that separate paragraphs.  These are pairs
 ---of two letters (see |object-motions|).
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.paragraphs = "IPLPPPQPP TPHPLIPpLpItpplpipbp"
 
 ---This option is obsolete; |bracketed-paste-mode| is built-in.
@@ -7930,7 +7929,7 @@ vim.o.paste = false
 ---Since mapping doesn't work while 'paste' is active, you need to use
 ---the 'pastetoggle' option to toggle the 'paste' option with some key.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.paste = false
 
 ---When non-empty, specifies the key sequence that toggles the 'paste'
@@ -7986,7 +7985,7 @@ vim.o.pastetoggle = ""
 ---sequence.
 ---When the value has several bytes 'ttimeoutlen' applies.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.pastetoggle = ""
 
 ---Expression which is evaluated to apply a patch to a file and generate
@@ -7998,7 +7997,7 @@ vim.o.patchexpr = ""
 ---Expression which is evaluated to apply a patch to a file and generate
 ---the resulting new version of the file.  See |diff-patchexpr|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.patchexpr = ""
 
 ---When non-empty the oldest version of a file is kept.  This can be used
@@ -8038,7 +8037,7 @@ vim.o.patchmode = ""
 ---recognized as a compressed file.
 ---Only normal file name characters can be used, "/\*?[|<>" are illegal.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.patchmode = ""
 
 ---This is a list of directories which will be searched when using the
@@ -8174,7 +8173,7 @@ vim.o.path = ".,/usr/include,,"
 ---Replace the ';' with a ':' or whatever separator is used.  Note that
 ---this doesn't work when $INCL contains a comma or white space.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.path = ".,/usr/include,,"
 
 ---When changing the indent of the current line, preserve as much of the
@@ -8206,7 +8205,7 @@ vim.o.preserveindent = false
 ---Also see 'copyindent'.
 ---Use |:retab| to clean up white space.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.preserveindent = false
 
 ---Default height for a preview window.  Used for |:ptag| and associated
@@ -8218,7 +8217,7 @@ vim.o.previewheight = 12
 ---Default height for a preview window.  Used for |:ptag| and associated
 ---commands.  Used for |CTRL-W_}| when no count is given.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.previewheight = 12
 
 ---Identifies the preview window.  Only one window can have this option
@@ -8232,7 +8231,7 @@ vim.o.previewwindow = false
 ---set.  It's normally not set directly, but by using one of the commands
 ---|:ptag|, |:pedit|, etc.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.previewwindow = false
 
 ---The name of the printer to be used for |:hardcopy|.
@@ -8248,7 +8247,7 @@ vim.o.printdevice = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printdevice = ""
 
 ---Sets the character encoding used when printing.
@@ -8260,7 +8259,7 @@ vim.o.printencoding = ""
 ---Sets the character encoding used when printing.
 ---See |penc-option|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printencoding = ""
 
 ---Expression used to print the PostScript produced with |:hardcopy|.
@@ -8276,7 +8275,7 @@ vim.o.printexpr = "system(['lpr'] + (empty(&printdevice)?[]:['-P', &printdevice]
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printexpr = "system(['lpr'] + (empty(&printdevice)?[]:['-P', &printdevice]) + [v:fname_in]). delete(v:fname_in)+ v:shell_error"
 
 ---The name of the font that will be used for |:hardcopy|.
@@ -8288,7 +8287,7 @@ vim.o.printfont = "courier"
 ---The name of the font that will be used for |:hardcopy|.
 ---See |pfn-option|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printfont = "courier"
 
 ---The format of the header produced in |:hardcopy| output.
@@ -8300,7 +8299,7 @@ vim.o.printheader = "%<%f%h%m%=Page %N"
 ---The format of the header produced in |:hardcopy| output.
 ---See |pheader-option|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printheader = "%<%f%h%m%=Page %N"
 
 ---The CJK character set to be used for CJK output from |:hardcopy|.
@@ -8312,7 +8311,7 @@ vim.o.printmbcharset = ""
 ---The CJK character set to be used for CJK output from |:hardcopy|.
 ---See |pmbcs-option|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printmbcharset = ""
 
 ---List of font names to be used for CJK output from |:hardcopy|.
@@ -8324,7 +8323,7 @@ vim.o.printmbfont = ""
 ---List of font names to be used for CJK output from |:hardcopy|.
 ---See |pmbfn-option|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printmbfont = ""
 
 ---List of items that control the format of the output of |:hardcopy|.
@@ -8336,13 +8335,13 @@ vim.o.printoptions = ""
 ---List of items that control the format of the output of |:hardcopy|.
 ---See |popt-option|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.printoptions = ""
 
 ---@type boolean
 vim.o.prompt = true
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.prompt = true
 
 ---Enables pseudo-transparency for the |popup-menu|. Valid values are in
@@ -8376,7 +8375,7 @@ vim.o.pumblend = 0
 ---```
 ---UI-dependent. Works best with RGB colors. 'termguicolors'
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.pumblend = 0
 
 ---Maximum number of items to show in the popup menu
@@ -8388,7 +8387,7 @@ vim.o.pumheight = 0
 ---Maximum number of items to show in the popup menu
 ---(|ins-completion-menu|). Zero means "use available screen space".
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.pumheight = 0
 
 ---Minimum width for the popup menu (|ins-completion-menu|).  If the
@@ -8402,7 +8401,7 @@ vim.o.pumwidth = 15
 ---cursor column + 'pumwidth' exceeds screen width, the popup menu is
 ---nudged to fit on the screen.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.pumwidth = 15
 
 ---Specifies the python version used for pyx* functions and commands
@@ -8422,7 +8421,7 @@ vim.o.pyxversion = 3
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.pyxversion = 3
 
 ---This option specifies a function to be used to get the text to display
@@ -8450,7 +8449,7 @@ vim.o.quickfixtextfunc = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.quickfixtextfunc = ""
 
 ---The characters that are used to escape quotes in a string.  Used for
@@ -8468,7 +8467,7 @@ vim.o.quoteescape = "\\"
 ---the following character will be skipped.  The default value makes the
 ---text "foo\"bar\\" considered to be one string.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.quoteescape = "\\"
 
 ---If on, writes fail unless you use a '!'.  Protects you from
@@ -8492,7 +8491,7 @@ vim.o.readonly = false
 ---set for the newly edited buffer.
 ---See 'modifiable' for disallowing changes to the buffer.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.readonly = false
 
 ---Flags to change the way redrawing works, for debugging purposes.
@@ -8550,7 +8549,7 @@ vim.o.redrawdebug = ""
 ---    nodelta	Send all internally redrawn cells to the UI, even if
 ---                they are unchanged from the already displayed state.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.redrawdebug = ""
 
 ---Time in milliseconds for redrawing the display.  Applies to
@@ -8576,7 +8575,7 @@ vim.o.redrawtime = 2000
 ---This is used to avoid that Vim hangs when using a very complicated
 ---pattern.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.redrawtime = 2000
 
 ---This selects the default regexp engine. |two-engines|
@@ -8608,7 +8607,7 @@ vim.o.regexpengine = 0
 ---many states.  This should prevent Vim from hanging on a combination of
 ---a complex pattern with long text.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.regexpengine = 0
 
 ---Show the line number relative to the line with the cursor in front of
@@ -8650,13 +8649,13 @@ vim.o.relativenumber = false
 ---'number', see |number_relativenumber| for all combinations of the two
 ---options.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.relativenumber = false
 
 ---@type boolean
 vim.o.remap = true
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.remap = true
 
 ---Threshold for reporting number of lines changed.  When the number of
@@ -8674,7 +8673,7 @@ vim.o.report = 2
 ---For the ":substitute" command the number of substitutions is used
 ---instead of the number of lines.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.report = 2
 
 ---Inserting characters in Insert mode will work backwards.  See "typing
@@ -8692,7 +8691,7 @@ vim.o.revins = false
 ---This option is reset when 'paste' is set and restored when 'paste' is
 ---reset.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.revins = false
 
 ---When on, display orientation becomes right-to-left, i.e., characters
@@ -8718,7 +8717,7 @@ vim.o.rightleft = false
 ---and left-to-right strings so that both sets are displayed properly
 ---in different windows).  Also see |rileft.txt|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.rightleft = false
 
 ---Each word in this option enables the command line editing to work in
@@ -8740,7 +8739,7 @@ vim.o.rightleftcmd = "search"
 ---This is useful for languages such as Hebrew and Arabic.
 ---The 'rightleft' option must be set for 'rightleftcmd' to take effect.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.rightleftcmd = "search"
 
 ---Show the line and column number of the cursor position, separated by a
@@ -8792,7 +8791,7 @@ vim.o.ruler = true
 ---If you don't want to see the ruler all the time but want to know where
 ---you are, use "g CTRL-G" |g_CTRL-G|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.ruler = true
 
 ---When this option is not empty, it determines the content of the ruler
@@ -8822,7 +8821,7 @@ vim.o.rulerformat = ""
 ---	:set rulerformat=%15(%c%V\ %p%%%)
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.rulerformat = ""
 
 ---List of directories to be searched for these runtime files:
@@ -8974,7 +8973,7 @@ vim.o.runtimepath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/u
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.runtimepath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/usr/share/kubuntu-default-settings/kf5-settings/nvim,/home/ms/.local/share/nvim/site,/usr/share/i3/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/usr/share/nvim/runtime,/usr/lib/x86_64-linux-gnu/nvim,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/usr/share/i3/nvim/site/after,/home/ms/.local/share/nvim/site/after,/usr/share/kubuntu-default-settings/kf5-settings/nvim/after,/etc/xdg/nvim/after,/etc/xdg/xdg-i3/nvim/after,/home/ms/.config/nvim/after"
 
 ---Number of lines to scroll with CTRL-U and CTRL-D commands.  Will be
@@ -8996,7 +8995,7 @@ vim.o.scroll = 0
 ---be used as the new value for 'scroll'.  Reset to half the window
 ---height with ":set scroll=0".
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.scroll = 0
 
 ---Maximum number of lines kept beyond the visible screen. Lines at the
@@ -9012,7 +9011,7 @@ vim.o.scrollback = -1
 ---Minimum is 1, maximum is 100000.
 ---Only in |terminal| buffers.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.scrollback = -1
 
 ---See also |scroll-binding|.  When this option is set, the current
@@ -9038,7 +9037,7 @@ vim.o.scrollbind = false
 ---file.  This means that ":split | edit file" results in two windows
 ---with scroll-binding, but ":split file" does not.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.scrollbind = false
 
 ---Minimal number of lines to scroll when the cursor gets off the
@@ -9058,7 +9057,7 @@ vim.o.scrolljump = 1
 ---percentage of the window height.  Thus -50 scrolls half the window
 ---height.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.scrolljump = 1
 
 ---Minimal number of screen lines to keep above and below the cursor.
@@ -9090,7 +9089,7 @@ vim.o.scrolloff = 0
 ---```
 ---For scrolling horizontally see 'sidescrolloff'.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.scrolloff = 0
 
 ---This is a comma-separated list of words that specifies how
@@ -9152,7 +9151,7 @@ vim.o.scrollopt = "ver,jump"
 ---When 'diff' mode is active there always is vertical scroll binding,
 ---even when "ver" isn't there.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.scrollopt = "ver,jump"
 
 ---Specifies the nroff macros that separate sections.  These are pairs of
@@ -9166,7 +9165,7 @@ vim.o.sections = "SHNHH HUnhsh"
 ---two letters (See |object-motions|).  The default makes a section start
 ---at the nroff macros ".SH", ".NH", ".H", ".HU", ".nh" and ".sh".
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.sections = "SHNHH HUnhsh"
 
 ---When on, ":autocmd", shell and write commands are not allowed in
@@ -9192,7 +9191,7 @@ vim.o.secure = false
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.secure = false
 
 ---This option defines the behavior of the selection.  It is only used
@@ -9238,7 +9237,7 @@ vim.o.selection = "inclusive"
 ---
 ---The 'selection' option is set by the |:behave| command.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.selection = "inclusive"
 
 ---This is a comma-separated list of words, which specifies when to start
@@ -9262,7 +9261,7 @@ vim.o.selectmode = ""
 ---See |Select-mode|.
 ---The 'selectmode' option is set by the |:behave| command.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.selectmode = ""
 
 ---Changes the effect of the |:mksession| command.  It is a comma-
@@ -9344,7 +9343,7 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
 ---If you leave out "options" many things won't work well after restoring
 ---the session.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
 
 ---When non-empty, the shada file is read upon startup and written
@@ -9574,7 +9573,7 @@ vim.o.shada = "!,'100,<50,s10,h"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shada = "!,'100,<50,s10,h"
 
 ---When non-empty, overrides the file name used for |shada| (viminfo).
@@ -9594,7 +9593,7 @@ vim.o.shadafile = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shadafile = ""
 
 ---Name of the shell to use for ! and :! commands.  When changing the
@@ -9704,7 +9703,7 @@ vim.o.shell = "/usr/bin/zsh"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shell = "/usr/bin/zsh"
 
 ---Flag passed to the shell to execute "!" and ":!" commands; e.g.,
@@ -9734,7 +9733,7 @@ vim.o.shellcmdflag = "-c"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shellcmdflag = "-c"
 
 ---String to be used to put the output of the ":make" command in the
@@ -9798,7 +9797,7 @@ vim.o.shellpipe = "2>&1| tee"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shellpipe = "2>&1| tee"
 
 ---Quoting character(s), put around the command passed to the shell, for
@@ -9828,7 +9827,7 @@ vim.o.shellquote = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shellquote = ""
 
 ---String to be used to put the output of a filter command in a temporary
@@ -9878,7 +9877,7 @@ vim.o.shellredir = ">%s 2>&1"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shellredir = ">%s 2>&1"
 
 ---		{only for MS-Windows}
@@ -9914,7 +9913,7 @@ vim.o.shellslash = false
 ---```
 ---Also see 'completeslash'.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.shellslash = false
 
 ---When on, use temp files for shell commands.  When off use a pipe.
@@ -9942,7 +9941,7 @@ vim.o.shelltemp = true
 ---'shelltemp' is off.
 ---|system()| does not respect this option, it always uses pipes.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.shelltemp = true
 
 ---When 'shellxquote' is set to "(" then the characters listed in this
@@ -9956,7 +9955,7 @@ vim.o.shellxescape = ""
 ---option will be escaped with a '^' character.  This makes it possible
 ---to execute most external commands with cmd.exe.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shellxescape = ""
 
 ---Quoting character(s), put around the command passed to the shell, for
@@ -9982,7 +9981,7 @@ vim.o.shellxquote = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shellxquote = ""
 
 ---Round indent to multiple of 'shiftwidth'.  Applies to > and <
@@ -9996,7 +9995,7 @@ vim.o.shiftround = false
 ---commands.  CTRL-T and CTRL-D in Insert mode always round the indent to
 ---a multiple of 'shiftwidth' (this is Vi compatible).
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.shiftround = false
 
 ---Number of spaces to use for each step of (auto)indent.  Used for
@@ -10012,7 +10011,7 @@ vim.o.shiftwidth = 8
 ---When zero the 'ts' value will be used.  Use the |shiftwidth()|
 ---function to get the effective shiftwidth value.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.shiftwidth = 8
 
 ---This option helps to avoid all the |hit-enter| prompts caused by file
@@ -10120,7 +10119,7 @@ vim.o.shortmess = "filnxtToOF"
 ---    shm=a	Abbreviation, but no loss of information.
 ---    shm=at	Abbreviation, and truncate message when necessary.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.shortmess = "filnxtToOF"
 
 ---String to put at the start of lines that have been wrapped.  Useful
@@ -10172,7 +10171,7 @@ vim.o.showbreak = ""
 ---	:setlocal showbreak=NONE
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.showbreak = ""
 
 ---Show (partial) command in the last line of the screen.  Set this
@@ -10198,7 +10197,7 @@ vim.o.showcmd = true
 ---- When selecting a block, the size in screen characters:
 ---  {lines}x{columns}.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.showcmd = true
 
 ---When completing a word in insert mode (see |ins-completion|) from the
@@ -10222,7 +10221,7 @@ vim.o.showfulltag = false
 ---'completeopt', because the completion from the search pattern may not
 ---match the typed text.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.showfulltag = false
 
 ---When a bracket is inserted, briefly jump to the matching one.  The
@@ -10264,7 +10263,7 @@ vim.o.showmatch = false
 ---around |pi_paren.txt|.
 ---Note: Use of the short form is rated PG.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.showmatch = false
 
 ---If in Insert, Replace or Visual mode put a message on the last line.
@@ -10276,7 +10275,7 @@ vim.o.showmode = true
 ---If in Insert, Replace or Visual mode put a message on the last line.
 ---The |hl-ModeMsg| highlight group determines the highlighting.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.showmode = true
 
 ---The value of this option specifies when the line with tab page labels
@@ -10300,7 +10299,7 @@ vim.o.showtabline = 1
 ---line.
 ---See |tab-page| for more information about tab pages.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.showtabline = 1
 
 ---The minimal number of columns to scroll horizontally.  Used only when
@@ -10318,7 +10317,7 @@ vim.o.sidescroll = 1
 ---When using a slow terminal set it to a large number or 0.  Not used
 ---for "zh" and "zl" commands.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.sidescroll = 1
 
 ---The minimal number of screen columns to keep to the left and to the
@@ -10370,7 +10369,7 @@ vim.o.sidescrolloff = 0
 ---	 :set sidescrolloff=1
 ---```
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.sidescrolloff = 0
 
 ---When and how to draw the signcolumn. Valid values are:
@@ -10422,7 +10421,7 @@ vim.o.signcolumn = "auto"
 ---This is done in order for the signcolumn appearance not appear weird
 ---during line deletion.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.signcolumn = "auto"
 
 ---Override the 'ignorecase' option if the search pattern contains upper
@@ -10442,7 +10441,7 @@ vim.o.smartcase = false
 ---"*" and "#" you can make 'smartcase' used by doing a "/" command,
 ---recalling the search pattern from history and hitting <Enter>.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.smartcase = false
 
 ---Do smart autoindenting when starting a new line.  Works for C-like
@@ -10492,7 +10491,7 @@ vim.o.smartindent = false
 ---This option is reset when 'paste' is set and restored when 'paste' is
 ---reset.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.smartindent = false
 
 ---When on, a <Tab> in front of a line inserts blanks according to
@@ -10524,7 +10523,7 @@ vim.o.smarttab = true
 ---This option is reset when 'paste' is set and restored when 'paste' is
 ---reset.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.smarttab = true
 
 ---Number of spaces that a <Tab> counts for while performing editing
@@ -10566,7 +10565,7 @@ vim.o.softtabstop = 0
 ---The value of 'softtabstop' will be ignored if |'varsofttabstop'| is set
 ---to anything other than an empty string.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.softtabstop = 0
 
 ---When on spell checking will be done.  See |spell|.
@@ -10578,7 +10577,7 @@ vim.o.spell = false
 ---When on spell checking will be done.  See |spell|.
 ---The languages are specified with 'spelllang'.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.spell = false
 
 ---Pattern to locate the end of a sentence.  The following word will be
@@ -10604,7 +10603,7 @@ vim.o.spellcapcheck = "[.?!]\\_[\\])'\"\t ]\\+"
 ---To set this option automatically depending on the language, see
 ---|set-spc-auto|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.spellcapcheck = "[.?!]\\_[\\])'\"\t ]\\+"
 
 ---Name of the word list file where words are added for the |zg| and |zw|
@@ -10652,7 +10651,7 @@ vim.o.spellfile = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.spellfile = ""
 
 ---A comma-separated list of word list names.  When the 'spell' option is
@@ -10736,7 +10735,7 @@ vim.o.spelllang = "en"
 ---up to the first character that is not an ASCII letter or number and
 ---not a dash.  Also see |set-spc-auto|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.spelllang = "en"
 
 ---A comma-separated list of options for spell checking:
@@ -10754,7 +10753,7 @@ vim.o.spelloptions = ""
 ---		that comes after a lower case character indicates the
 ---		start of a new word.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.spelloptions = ""
 
 ---Methods used for spelling suggestions.  Both for the |z=| command and
@@ -10880,7 +10879,7 @@ vim.o.spellsuggest = "best"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.spellsuggest = "best"
 
 ---When on, splitting a window will put the new window below the current
@@ -10892,7 +10891,7 @@ vim.o.splitbelow = false
 ---When on, splitting a window will put the new window below the current
 ---one. |:split|
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.splitbelow = false
 
 ---When on, splitting a window will put the new window right of the
@@ -10904,7 +10903,7 @@ vim.o.splitright = false
 ---When on, splitting a window will put the new window right of the
 ---current one. |:vsplit|
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.splitright = false
 
 ---When "on" the commands listed below move the cursor to the first
@@ -10930,7 +10929,7 @@ vim.o.startofline = false
 ---In case of buffer changing commands the cursor is placed at the column
 ---where it was the last time the buffer was edited.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.startofline = false
 
 ---When non-empty, this option determines the content of the status line.
@@ -11370,7 +11369,7 @@ vim.o.statusline = ""
 ---  :endfunction
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.statusline = ""
 
 ---Files with these suffixes get a lower priority when multiple files
@@ -11398,7 +11397,7 @@ vim.o.suffixes = ".bak,~,.o,.h,.info,.swp,.obj"
 ---suffixes from the list.  This avoids problems when a future version
 ---uses another default.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.suffixes = ".bak,~,.o,.h,.info,.swp,.obj"
 
 ---Comma-separated list of suffixes, which are used when searching for a
@@ -11416,7 +11415,7 @@ vim.o.suffixesadd = ""
 ---	:set suffixesadd=.java
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.suffixesadd = ""
 
 ---Use a swapfile for the buffer.  This option can be reset when a
@@ -11460,7 +11459,7 @@ vim.o.swapfile = true
 ---This option is used together with 'bufhidden' and 'buftype' to
 ---specify special kinds of buffers.   See |special-buffers|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.swapfile = true
 
 ---This option controls the behavior when switching between buffers.
@@ -11514,7 +11513,7 @@ vim.o.switchbuf = "uselast"
 ---   uselast	If included, jump to the previously used window when
 ---		jumping to errors with |quickfix| commands.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.switchbuf = "uselast"
 
 ---Maximum column in which to search for syntax items.  In long lines the
@@ -11534,7 +11533,7 @@ vim.o.synmaxcol = 3000
 ---long line.
 ---Set to zero to remove the limit.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.synmaxcol = 3000
 
 ---When this option is set, the syntax with this name is loaded, unless
@@ -11596,7 +11595,7 @@ vim.o.syntax = ""
 ---'S' flag in 'cpoptions'.
 ---Only normal file name characters can be used, "/\*?[|<>" are illegal.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.syntax = ""
 
 ---When non-empty, this option determines the content of the tab pages
@@ -11644,7 +11643,7 @@ vim.o.tabline = ""
 ---Keep in mind that only one of the tab pages is the current one, others
 ---are invisible and you can't jump to their windows.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.tabline = ""
 
 ---Maximum number of tab pages to be opened by the |-p| command line
@@ -11656,7 +11655,7 @@ vim.o.tabpagemax = 50
 ---Maximum number of tab pages to be opened by the |-p| command line
 ---argument or the ":tab all" command. |tabpage|
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.tabpagemax = 50
 
 ---Number of spaces that a <Tab> in the file counts for.  Also see
@@ -11718,7 +11717,7 @@ vim.o.tabstop = 8
 ---The value of 'tabstop' will be ignored if |'vartabstop'| is set to
 ---anything other than an empty string.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.tabstop = 8
 
 ---When searching for a tag (e.g., for the |:ta| command), Vim can either
@@ -11826,7 +11825,7 @@ vim.o.tagbsearch = true
 ---This option doesn't affect commands that find all matching tags (e.g.,
 ---command-line completion and ":help").
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.tagbsearch = true
 
 ---This option specifies how case is handled when searching the tags
@@ -11848,7 +11847,7 @@ vim.o.tagcase = "followic"
 ---   match	Match case
 ---   smart	Ignore case unless an upper case letter is used
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.tagcase = "followic"
 
 ---This option specifies a function to be used to perform tag searches.
@@ -11864,7 +11863,7 @@ vim.o.tagfunc = ""
 ---tags.  See |tag-function| for an explanation of how to write the
 ---function and an example.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.tagfunc = ""
 
 ---If non-zero, tags are significant up to this number of characters.
@@ -11874,7 +11873,7 @@ vim.o.taglength = 0
 
 ---If non-zero, tags are significant up to this number of characters.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.taglength = 0
 
 ---If on and using a tags file in another directory, file names in that
@@ -11886,7 +11885,7 @@ vim.o.tagrelative = true
 ---If on and using a tags file in another directory, file names in that
 ---tags file are relative to the directory where the tags file is.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.tagrelative = true
 
 ---Filenames for the tag command, separated by spaces or commas.  To
@@ -11928,7 +11927,7 @@ vim.o.tags = "./tags;,tags"
 ---file names from the list.  This avoids problems when a future version
 ---uses another default.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.tags = "./tags;,tags"
 
 ---When on, the |tagstack| is used normally.  When off, a ":tag" or
@@ -11950,7 +11949,7 @@ vim.o.tagstack = true
 ---Resetting this option is useful when using a ":tag" command in a
 ---mapping which should not change the tagstack.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.tagstack = true
 
 ---The terminal is in charge of Bi-directionality of text (as specified
@@ -11974,13 +11973,13 @@ vim.o.termbidi = false
 ---'arabicshape' is ignored, but 'rightleft' isn't changed automatically.
 ---For further details see |arabic.txt|.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.termbidi = false
 
 ---@type string
 vim.o.termencoding = ""
 
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.termencoding = ""
 
 ---Enables 24-bit RGB color in the |TUI|.  Uses "gui" |:highlight|
@@ -11994,7 +11993,7 @@ vim.o.termguicolors = false
 ---attributes instead of "cterm" attributes. |highlight-guifg|
 ---Requires an ISO-8613-3 compatible terminal.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.termguicolors = false
 
 ---A comma-separated list of options for specifying control characters
@@ -12038,13 +12037,13 @@ vim.o.termpastefilter = "BS,HT,ESC,DEL"
 ---
 ---   C1	    Control characters 0x80...0x9F
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.termpastefilter = "BS,HT,ESC,DEL"
 
 ---@type boolean
 vim.o.terse = false
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.terse = false
 
 ---Maximum width of text that is being inserted.  A longer line will be
@@ -12068,7 +12067,7 @@ vim.o.textwidth = 0
 ---'formatoptions' and |ins-textwidth|.
 ---When 'formatexpr' is set it will be used to break the line.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.textwidth = 0
 
 ---List of file names, separated by commas, that are used to lookup words
@@ -12104,7 +12103,7 @@ vim.o.thesaurus = ""
 ---another default.  Backticks cannot be used in this option for security
 ---reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.thesaurus = ""
 
 ---This option specifies a function to be used for thesaurus completion
@@ -12122,7 +12121,7 @@ vim.o.thesaurusfunc = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.thesaurusfunc = ""
 
 ---When on: The tilde command "~" behaves like an operator.
@@ -12132,7 +12131,7 @@ vim.o.tildeop = false
 
 ---When on: The tilde command "~" behaves like an operator.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.tildeop = false
 
 ---This option and 'timeoutlen' determine the behavior when part of a
@@ -12148,7 +12147,7 @@ vim.o.timeout = true
 ---pressed and 'timeout' is set, Nvim will wait 'timeoutlen' milliseconds
 ---for any key that can follow <c-f> in a mapping.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.timeout = true
 
 ---Time in milliseconds to wait for a mapped sequence to complete.
@@ -12158,7 +12157,7 @@ vim.o.timeoutlen = 1000
 
 ---Time in milliseconds to wait for a mapped sequence to complete.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.timeoutlen = 1000
 
 ---When on, the title of the window will be set to the value of
@@ -12188,7 +12187,7 @@ vim.o.title = false
 ---	(path)		is the path of the file being edited
 ---	- NVIM		the server name |v:servername| or "NVIM"
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.title = false
 
 ---Gives the percentage of 'columns' to use for the length of the window
@@ -12214,7 +12213,7 @@ vim.o.titlelen = 85
 ---values from 1 to 30000 percent can be used.
 ---'titlelen' is also used for the 'titlestring' option.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.titlelen = 85
 
 ---If not empty, this option will be used to set the window title when
@@ -12230,7 +12229,7 @@ vim.o.titleold = ""
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.titleold = ""
 
 ---When this option is not empty, it will be used for the title of the
@@ -12284,7 +12283,7 @@ vim.o.titlestring = ""
 ---NOTE: Use of special characters in 'titlestring' may cause the display
 ---to be garbled (e.g., when it contains a CR or NL character).
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.titlestring = ""
 
 ---This option and 'ttimeoutlen' determine the behavior when part of a
@@ -12314,7 +12313,7 @@ vim.o.ttimeout = true
 ---sometimes.  If you discover this problem you can ":set ttimeoutlen=9999".
 ---Nvim will wait for the next character to arrive after an <Esc>.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.ttimeout = true
 
 ---Time in milliseconds to wait for a key code sequence to complete. Also
@@ -12328,13 +12327,13 @@ vim.o.ttimeoutlen = 50
 ---used for CTRL-\ CTRL-N and CTRL-\ CTRL-G when part of a command has
 ---been typed.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.ttimeoutlen = 50
 
 ---@type boolean
 vim.o.ttyfast = true
 
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.ttyfast = true
 
 ---List of directory names for undo files, separated with commas.
@@ -12382,7 +12381,7 @@ vim.o.undodir = "/home/ms/.local/var/nvim/undo//"
 ---though the trailing slashes are present (see 'backupdir' for what this
 ---means).
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.undodir = "/home/ms/.local/var/nvim/undo//"
 
 ---When on, Vim automatically saves undo history to an undo file when
@@ -12406,7 +12405,7 @@ vim.o.undofile = false
 ---before a reload to be saved for undo.
 ---When 'undofile' is turned off the undo file is NOT deleted.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.undofile = false
 
 ---Maximum number of changes that can be undone.  Since undo information
@@ -12456,7 +12455,7 @@ vim.o.undolevels = 1000
 ---
 ---Also see |clear-undo|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.undolevels = 1000
 
 ---Save the whole buffer for undo when reloading it.  This applies to the
@@ -12486,7 +12485,7 @@ vim.o.undoreload = 10000
 ---Note that this causes the whole buffer to be stored in memory.  Set
 ---this option to a lower value if you run out of memory.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.undoreload = 10000
 
 ---After typing this many characters the swap file will be written to
@@ -12516,7 +12515,7 @@ vim.o.updatecount = 200
 ---This option has no meaning in buffers where |'buftype'| is "nofile"
 ---or "nowrite".
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.updatecount = 200
 
 ---If this many milliseconds nothing is typed the swap file will be
@@ -12530,7 +12529,7 @@ vim.o.updatetime = 4000
 ---written to disk (see |crash-recovery|).  Also used for the
 ---|CursorHold| autocommand event.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.updatetime = 4000
 
 ---A list of the number of spaces that a <Tab> counts for while editing,
@@ -12572,7 +12571,7 @@ vim.o.varsofttabstop = ""
 ---Note that the value of |'softtabstop'| will be ignored while
 ---'varsofttabstop' is set.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.varsofttabstop = ""
 
 ---A list of the number of spaces that a <Tab> in the file counts for,
@@ -12602,7 +12601,7 @@ vim.o.vartabstop = ""
 ---Note that the value of |'tabstop'| will be ignored while 'vartabstop'
 ---is set.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.vartabstop = ""
 
 ---When bigger than zero, Vim will give messages about what it is doing.
@@ -12654,7 +12653,7 @@ vim.o.verbose = 0
 ---When the 'verbosefile' option is set then the verbose messages are not
 ---displayed.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.verbose = 0
 
 ---When not empty all messages are written in a file with this name.
@@ -12676,7 +12675,7 @@ vim.o.verbosefile = ""
 ---The difference with |:redir| is that verbose messages are not
 ---displayed when 'verbosefile' is set.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.verbosefile = ""
 
 ---Name of the directory where to store files for |:mkview|.
@@ -12690,7 +12689,7 @@ vim.o.viewdir = "/home/ms/.local/var/nvim/view//"
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.viewdir = "/home/ms/.local/var/nvim/view//"
 
 ---Changes the effect of the |:mkview| command.  It is a comma-separated
@@ -12722,19 +12721,19 @@ vim.o.viewoptions = "folds,cursor,curdir"
 ---   slash	|deprecated| Always enabled. Uses "/" in filenames.
 ---   unix		|deprecated| Always enabled. Uses "\n" line endings.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.viewoptions = "folds,cursor,curdir"
 
 ---@type string
 vim.o.viminfo = ""
 
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.viminfo = ""
 
 ---@type string
 vim.o.viminfofile = ""
 
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.viminfofile = ""
 
 ---A comma-separated list of these words:
@@ -12794,7 +12793,7 @@ vim.o.virtualedit = ""
 ---not get a warning for it.
 ---When combined with other words, "none" is ignored.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.virtualedit = ""
 
 ---Use visual bell instead of beeping.  Also see 'errorbells'.
@@ -12804,7 +12803,7 @@ vim.o.visualbell = false
 
 ---Use visual bell instead of beeping.  Also see 'errorbells'.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.visualbell = false
 
 ---Give a warning message when a shell command is used while the buffer
@@ -12816,7 +12815,7 @@ vim.o.warn = true
 ---Give a warning message when a shell command is used while the buffer
 ---has been changed.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.warn = true
 
 ---Allow specified keys that move the cursor left/right to move to the
@@ -12880,7 +12879,7 @@ vim.o.whichwrap = "b,s"
 ---line (not an empty line) then it will not move to the next line.  This
 ---makes "dl", "cl", "yl" etc. work normally.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.whichwrap = "b,s"
 
 ---Character you have to type to start wildcard expansion in the
@@ -12908,7 +12907,7 @@ vim.o.wildchar = 9
 ---	:set wc=<Tab>
 ---```
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.wildchar = 9
 
 ---'wildcharm' works exactly like 'wildchar', except that it is
@@ -12936,7 +12935,7 @@ vim.o.wildcharm = 0
 ---```
 ---Then after typing :ss you can use CTRL-P & CTRL-N.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.wildcharm = 0
 
 ---A list of file patterns.  A file that matches with one of these
@@ -12970,7 +12969,7 @@ vim.o.wildignore = ""
 ---a pattern from the list.  This avoids problems when a future version
 ---uses another default.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.wildignore = ""
 
 ---When set case is ignored when completing file names and directories.
@@ -12986,7 +12985,7 @@ vim.o.wildignorecase = false
 ---Does not apply when the shell is used to expand wildcards, which
 ---happens when there are special characters.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.wildignorecase = false
 
 ---Enables "enhanced mode" of command-line completion. When user hits
@@ -13058,7 +13057,7 @@ vim.o.wildmenu = true
 ---```
 ---|hl-WildMenu| highlights the current match.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.wildmenu = true
 
 ---Completion mode that is used for the character specified with
@@ -13164,7 +13163,7 @@ vim.o.wildmode = "full"
 ---Complete longest common string, then list alternatives.
 ---More info here: |cmdline-completion|.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.wildmode = "full"
 
 ---List of words that change how |cmdline-completion| is done.
@@ -13188,7 +13187,7 @@ vim.o.wildoptions = "pum,tagfile"
 ---			d	#define
 ---			f	function
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.wildoptions = "pum,tagfile"
 
 ---		{only used in Win32}
@@ -13226,7 +13225,7 @@ vim.o.winaltkeys = "menu"
 ---key is never used for the menu.
 ---This option is not used for <F10>; on Win32.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.winaltkeys = "menu"
 
 ---When non-empty, this option enables the window bar and determines its
@@ -13260,7 +13259,7 @@ vim.o.winbar = ""
 ---
 ---This option cannot be set in a modeline when 'modelineexpr' is off.
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.winbar = ""
 
 ---Enables pseudo-transparency for a floating window. Valid values are in
@@ -13278,7 +13277,7 @@ vim.o.winblend = 0
 ---
 ---UI-dependent. Works best with RGB colors. 'termguicolors'
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.winblend = 0
 
 ---Window height used for |CTRL-F| and |CTRL-B| when there is only one
@@ -13304,7 +13303,7 @@ vim.o.window = 23
 ---Note: Do not confuse this with the height of the Vim window, use
 ---'lines' for that.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.window = 23
 
 ---Keep the window height when windows are opened or closed and
@@ -13320,7 +13319,7 @@ vim.o.winfixheight = false
 ---|preview-window| and |quickfix-window|.
 ---The height may be changed anyway when running out of room.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.winfixheight = false
 
 ---Keep the window width when windows are opened or closed and
@@ -13334,7 +13333,7 @@ vim.o.winfixwidth = false
 ---'equalalways' is set.  Also for |CTRL-W_=|.
 ---The width may be changed anyway when running out of room.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.winfixwidth = false
 
 ---Minimal number of lines for the current window.  This is not a hard
@@ -13378,7 +13377,7 @@ vim.o.winheight = 1
 ---'winheight' applies to the current window.  Use 'winminheight' to set
 ---the minimal height for other windows.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.winheight = 1
 
 ---Window-local highlights.  Comma-delimited list of highlight
@@ -13418,7 +13417,7 @@ vim.o.winhighlight = ""
 ---	set winhighlight=Normal:MyNormal,NormalNC:MyNormalNC
 ---```
 ---
----@type vim.opt.Opt<string>
+---@type vim.opt.Opt
 vim.opt.winhighlight = ""
 
 ---The minimal height of a window, when it's not the current window.
@@ -13444,7 +13443,7 @@ vim.o.winminheight = 1
 ---large number, it will cause errors when opening more than a few
 ---windows.  A value of 0 to 3 is reasonable.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.winminheight = 1
 
 ---The minimal width of a window, when it's not the current window.
@@ -13472,7 +13471,7 @@ vim.o.winminwidth = 1
 ---large number, it will cause errors when opening more than a few
 ---windows.  A value of 0 to 12 is reasonable.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.winminwidth = 1
 
 ---Minimal number of columns for the current window.  This is not a hard
@@ -13498,7 +13497,7 @@ vim.o.winwidth = 20
 ---'winwidth' applies to the current window.  Use 'winminwidth' to set
 ---the minimal width for other windows.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.winwidth = 20
 
 ---This option changes how text is displayed.  It doesn't change the text
@@ -13540,7 +13539,7 @@ vim.o.wrap = true
 ---This option can't be set from a |modeline| when the 'diff' option is
 ---on.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.wrap = true
 
 ---Number of characters from the right window border where wrapping
@@ -13562,7 +13561,7 @@ vim.o.wrapmargin = 0
 ---When 'textwidth' is non-zero, this option is not used.
 ---See also 'formatoptions' and |ins-textwidth|.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.wrapmargin = 0
 
 ---Searches wrap around the end of the file.  Also applies to |]s| and
@@ -13574,7 +13573,7 @@ vim.o.wrapscan = true
 ---Searches wrap around the end of the file.  Also applies to |]s| and
 ---|[s|, searching for spelling mistakes.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.wrapscan = true
 
 ---Allows writing files.  When not set, writing a file is not allowed.
@@ -13592,7 +13591,7 @@ vim.o.write = true
 ---argument.  Filtering text is still possible, even though this requires
 ---writing a temporary file.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.write = true
 
 ---Allows writing to any file with no need for "!" override.
@@ -13602,7 +13601,7 @@ vim.o.writeany = false
 
 ---Allows writing to any file with no need for "!" override.
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.writeany = false
 
 ---Make a backup before overwriting a file.  The backup is removed after
@@ -13634,7 +13633,7 @@ vim.o.writebackup = true
 ---Depending on 'backupcopy' the backup is a new file or the original
 ---file renamed (and a new file is written).
 ---
----@type vim.opt.Opt<boolean>
+---@type vim.opt.Opt
 vim.opt.writebackup = true
 
 ---The number of milliseconds to wait for each character sent to the
@@ -13648,7 +13647,7 @@ vim.o.writedelay = 0
 ---screen.  When positive, characters are sent to the UI one by one.
 ---See 'redrawdebug' for more options.  For debugging purposes.
 ---
----@type vim.opt.Opt<number>
+---@type vim.opt.Opt
 vim.opt.writedelay = 0
 
 vim.opt_local = vim.opt
