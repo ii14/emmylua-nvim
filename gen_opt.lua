@@ -32,10 +32,24 @@ for opt in pairs(opt_keys) do
 end
 table.sort(opts)
 
+local IGNORED_DEFAULTS = {
+  runtimepath = true,
+  packpath = true,
+  helpfile = true,
+  backupdir = true,
+  directory = true,
+  shell = true,
+  undodir = true,
+  viewdir = true,
+}
+
 for _, key in ipairs(opts) do
   local opt = opt_keys[key]
   local doc = docs[key]
   local default = inspect(opt.default)
+  if IGNORED_DEFAULTS[opt.name] then
+    default = '""'
+  end
 
   if doc then
     for i, line in ipairs(doc) do

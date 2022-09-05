@@ -62,7 +62,11 @@ vim.opt.allowrevins = false
 ---"double":	Use twice the width of ASCII characters.
 ---						*E834* *E835*
 ---The value "double" cannot be used if 'listchars' or 'fillchars'
----contains a character that would be double width.
+---contains a character that would be double width.  These errors may
+---also be given when calling setcellwidths().
+---
+---The values are overruled for characters specified with
+---|setcellwidths()|.
 ---
 ---There are a number of CJK fonts for which the width of glyphs for
 ---those characters are solely based on how many octets they take in
@@ -92,7 +96,11 @@ vim.o.ambiwidth = "single"
 ---"double":	Use twice the width of ASCII characters.
 ---						*E834* *E835*
 ---The value "double" cannot be used if 'listchars' or 'fillchars'
----contains a character that would be double width.
+---contains a character that would be double width.  These errors may
+---also be given when calling setcellwidths().
+---
+---The values are overruled for characters specified with
+---|setcellwidths()|.
 ---
 ---There are a number of CJK fonts for which the width of glyphs for
 ---those characters are solely based on how many octets they take in
@@ -183,7 +191,8 @@ vim.opt.arabicshape = true
 ---When on, Vim will change the current working directory whenever you
 ---open a file, switch buffers, delete a buffer or open/close a window.
 ---It will change to the directory containing the file which was opened
----or selected.
+---or selected.  When a buffer has no name it also has no directory, thus
+---the current directory won't change when navigating to it.
 ---Note: When this option is on some plugins may not work.
 ---
 ---@type boolean
@@ -192,7 +201,8 @@ vim.o.autochdir = false
 ---When on, Vim will change the current working directory whenever you
 ---open a file, switch buffers, delete a buffer or open/close a window.
 ---It will change to the directory containing the file which was opened
----or selected.
+---or selected.  When a buffer has no name it also has no directory, thus
+---the current directory won't change when navigating to it.
 ---Note: When this option is on some plugins may not work.
 ---
 ---@type vim.opt.Opt
@@ -629,7 +639,7 @@ vim.opt.backupcopy = "auto"
 ---security reasons.
 ---
 ---@type string
-vim.o.backupdir = ".,/home/ms/.local/var/nvim/backup//"
+vim.o.backupdir = ""
 
 ---List of directories for the backup file, separated with commas.
 ---- The backup file will be created in the first directory in the list
@@ -678,7 +688,7 @@ vim.o.backupdir = ".,/home/ms/.local/var/nvim/backup//"
 ---security reasons.
 ---
 ---@type vim.opt.Opt
-vim.opt.backupdir = ".,/home/ms/.local/var/nvim/backup//"
+vim.opt.backupdir = ""
 
 ---String which is appended to a file name to make the name of the
 ---backup file.  The default is quite unusual, because this avoids
@@ -1563,6 +1573,11 @@ vim.opt.clipboard = ""
 ---The value of this option is stored with the tab page, so that each tab
 ---page can have a different value.
 ---
+---When 'cmdheight' is zero, there is no command-line unless it is being
+---used.  Some informative messages will not be displayed, any other
+---messages will cause the |hit-enter| prompt.  Expect some other
+---unexpected behavior too.
+---
 ---@type number
 vim.o.cmdheight = 1
 
@@ -1570,6 +1585,11 @@ vim.o.cmdheight = 1
 ---|hit-enter| prompts.
 ---The value of this option is stored with the tab page, so that each tab
 ---page can have a different value.
+---
+---When 'cmdheight' is zero, there is no command-line unless it is being
+---used.  Some informative messages will not be displayed, any other
+---messages will cause the |hit-enter| prompt.  Expect some other
+---unexpected behavior too.
 ---
 ---@type vim.opt.Opt
 vim.opt.cmdheight = 1
@@ -3112,7 +3132,7 @@ vim.opt.digraph = false
 ---security reasons.
 ---
 ---@type string
-vim.o.directory = "/home/ms/.local/var/nvim/swap//"
+vim.o.directory = ""
 
 ---List of directory names for the swap file, separated with commas.
 ---
@@ -3166,7 +3186,7 @@ vim.o.directory = "/home/ms/.local/var/nvim/swap//"
 ---security reasons.
 ---
 ---@type vim.opt.Opt
-vim.opt.directory = "/home/ms/.local/var/nvim/swap//"
+vim.opt.directory = ""
 
 ---Change the way text is displayed.  This is comma-separated list of
 ---flags:
@@ -3235,7 +3255,8 @@ vim.opt.edcompatible = false
 ---When on all Unicode emoji characters are considered to be full width.
 ---This excludes "text emoji" characters, which are normally displayed as
 ---single width.  Unfortunately there is no good specification for this
----and it has been determined on trial-and-error basis.
+---and it has been determined on trial-and-error basis.  Use the
+---|setcellwidths()| function to change the behavior.
 ---
 ---@type boolean
 vim.o.emoji = true
@@ -3243,7 +3264,8 @@ vim.o.emoji = true
 ---When on all Unicode emoji characters are considered to be full width.
 ---This excludes "text emoji" characters, which are normally displayed as
 ---single width.  Unfortunately there is no good specification for this
----and it has been determined on trial-and-error basis.
+---and it has been determined on trial-and-error basis.  Use the
+---|setcellwidths()| function to change the behavior.
 ---
 ---@type vim.opt.Opt
 vim.opt.emoji = true
@@ -3842,28 +3864,30 @@ vim.o.filetype = ""
 ---@type vim.opt.Opt
 vim.opt.filetype = ""
 
----Characters to fill the statuslines and vertical separators.
----It is a comma-separated list of items:
+---Characters to fill the statuslines, vertical separators and special
+---lines in the window.
+---It is a comma-separated list of items.  Each item has a name, a colon
+---and the value of that item:
 ---
 ---  item		default		Used for ~
----  stl:c		' ' or '^'	statusline of the current window
----  stlnc:c	' ' or '='	statusline of the non-current windows
----  wbr:c		' '		window bar
----  horiz:c	'─' or '-'	horizontal separators |:split|
----  horizup:c	'┴' or '-'	upwards facing horizontal separator
----  horizdown:c	'┬' or '-'	downwards facing horizontal separator
----  vert:c	'│' or '|'	vertical separators |:vsplit|
----  vertleft:c	'┤' or '|'	left facing vertical separator
----  vertright:c	'├' or '|'	right facing vertical separator
----  verthoriz:c	'┼' or '+'	overlapping vertical and horizontal
+---  stl		' ' or '^'	statusline of the current window
+---  stlnc		' ' or '='	statusline of the non-current windows
+---  wbr		' '		window bar
+---  horiz		'─' or '-'	horizontal separators |:split|
+---  horizup	'┴' or '-'	upwards facing horizontal separator
+---  horizdown	'┬' or '-'	downwards facing horizontal separator
+---  vert		'│' or '|'	vertical separators |:vsplit|
+---  vertleft	'┤' or '|'	left facing vertical separator
+---  vertright	'├' or '|'	right facing vertical separator
+---  verthoriz	'┼' or '+'	overlapping vertical and horizontal
 ---				separator
----  fold:c	'·' or '-'	filling 'foldtext'
----  foldopen:c	'-'		mark the beginning of a fold
----  foldclose:c	'+'		show a closed fold
----  foldsep:c	'│' or '|'      open fold middle marker
----  diff:c	'-'		deleted lines of the 'diff' option
----  msgsep:c	' '		message separator 'display'
----  eob:c		'~'		empty lines at the end of a buffer
+---  fold		'·' or '-'	filling 'foldtext'
+---  foldopen	'-'		mark the beginning of a fold
+---  foldclose	'+'		show a closed fold
+---  foldsep	'│' or '|'      open fold middle marker
+---  diff		'-'		deleted lines of the 'diff' option
+---  msgsep	' '		message separator 'display'
+---  eob		'~'		empty lines at the end of a buffer
 ---
 ---Any one that is omitted will fall back to the default.  For "stl" and
 ---"stlnc" the space will be used when there is highlighting, '^' or '='
@@ -3884,50 +3908,53 @@ vim.opt.filetype = ""
 ---This is similar to the default, except that these characters will also
 ---be used when there is highlighting.
 ---
----For "stl" and "stlnc" single-byte and multibyte characters are
----supported.  But double-width characters are not supported.
+---For the "stl", "stlnc", "foldopen", "foldclose" and "foldsep" items
+---single-byte and multibyte characters are supported.  But double-width
+---characters are not supported.
 ---
 ---The highlighting used for these items:
 ---  item		highlight group ~
----  stl:c		StatusLine		|hl-StatusLine|
----  stlnc:c	StatusLineNC		|hl-StatusLineNC|
----  wbr:c		WinBar			|hl-WinBar| or |hl-WinBarNC|
----  horiz:c	WinSeparator		|hl-WinSeparator|
----  horizup:c	WinSeparator		|hl-WinSeparator|
----  horizdown:c	WinSeparator		|hl-WinSeparator|
----  vert:c	WinSeparator		|hl-WinSeparator|
----  vertleft:c	WinSeparator		|hl-WinSeparator|
----  vertright:c	WinSeparator		|hl-WinSeparator|
----  verthoriz:c	WinSeparator		|hl-WinSeparator|
----  fold:c	Folded			|hl-Folded|
----  diff:c	DiffDelete		|hl-DiffDelete|
----  eob:c		EndOfBuffer		|hl-EndOfBuffer|
+---  stl		StatusLine		|hl-StatusLine|
+---  stlnc		StatusLineNC		|hl-StatusLineNC|
+---  wbr		WinBar			|hl-WinBar| or |hl-WinBarNC|
+---  horiz		WinSeparator		|hl-WinSeparator|
+---  horizup	WinSeparator		|hl-WinSeparator|
+---  horizdown	WinSeparator		|hl-WinSeparator|
+---  vert		WinSeparator		|hl-WinSeparator|
+---  vertleft	WinSeparator		|hl-WinSeparator|
+---  vertright	WinSeparator		|hl-WinSeparator|
+---  verthoriz	WinSeparator		|hl-WinSeparator|
+---  fold		Folded			|hl-Folded|
+---  diff		DiffDelete		|hl-DiffDelete|
+---  eob		EndOfBuffer		|hl-EndOfBuffer|
 ---
 ---@type string
 vim.o.fillchars = ""
 
----Characters to fill the statuslines and vertical separators.
----It is a comma-separated list of items:
+---Characters to fill the statuslines, vertical separators and special
+---lines in the window.
+---It is a comma-separated list of items.  Each item has a name, a colon
+---and the value of that item:
 ---
 ---  item		default		Used for ~
----  stl:c		' ' or '^'	statusline of the current window
----  stlnc:c	' ' or '='	statusline of the non-current windows
----  wbr:c		' '		window bar
----  horiz:c	'─' or '-'	horizontal separators |:split|
----  horizup:c	'┴' or '-'	upwards facing horizontal separator
----  horizdown:c	'┬' or '-'	downwards facing horizontal separator
----  vert:c	'│' or '|'	vertical separators |:vsplit|
----  vertleft:c	'┤' or '|'	left facing vertical separator
----  vertright:c	'├' or '|'	right facing vertical separator
----  verthoriz:c	'┼' or '+'	overlapping vertical and horizontal
+---  stl		' ' or '^'	statusline of the current window
+---  stlnc		' ' or '='	statusline of the non-current windows
+---  wbr		' '		window bar
+---  horiz		'─' or '-'	horizontal separators |:split|
+---  horizup	'┴' or '-'	upwards facing horizontal separator
+---  horizdown	'┬' or '-'	downwards facing horizontal separator
+---  vert		'│' or '|'	vertical separators |:vsplit|
+---  vertleft	'┤' or '|'	left facing vertical separator
+---  vertright	'├' or '|'	right facing vertical separator
+---  verthoriz	'┼' or '+'	overlapping vertical and horizontal
 ---				separator
----  fold:c	'·' or '-'	filling 'foldtext'
----  foldopen:c	'-'		mark the beginning of a fold
----  foldclose:c	'+'		show a closed fold
----  foldsep:c	'│' or '|'      open fold middle marker
----  diff:c	'-'		deleted lines of the 'diff' option
----  msgsep:c	' '		message separator 'display'
----  eob:c		'~'		empty lines at the end of a buffer
+---  fold		'·' or '-'	filling 'foldtext'
+---  foldopen	'-'		mark the beginning of a fold
+---  foldclose	'+'		show a closed fold
+---  foldsep	'│' or '|'      open fold middle marker
+---  diff		'-'		deleted lines of the 'diff' option
+---  msgsep	' '		message separator 'display'
+---  eob		'~'		empty lines at the end of a buffer
 ---
 ---Any one that is omitted will fall back to the default.  For "stl" and
 ---"stlnc" the space will be used when there is highlighting, '^' or '='
@@ -3948,24 +3975,25 @@ vim.o.fillchars = ""
 ---This is similar to the default, except that these characters will also
 ---be used when there is highlighting.
 ---
----For "stl" and "stlnc" single-byte and multibyte characters are
----supported.  But double-width characters are not supported.
+---For the "stl", "stlnc", "foldopen", "foldclose" and "foldsep" items
+---single-byte and multibyte characters are supported.  But double-width
+---characters are not supported.
 ---
 ---The highlighting used for these items:
 ---  item		highlight group ~
----  stl:c		StatusLine		|hl-StatusLine|
----  stlnc:c	StatusLineNC		|hl-StatusLineNC|
----  wbr:c		WinBar			|hl-WinBar| or |hl-WinBarNC|
----  horiz:c	WinSeparator		|hl-WinSeparator|
----  horizup:c	WinSeparator		|hl-WinSeparator|
----  horizdown:c	WinSeparator		|hl-WinSeparator|
----  vert:c	WinSeparator		|hl-WinSeparator|
----  vertleft:c	WinSeparator		|hl-WinSeparator|
----  vertright:c	WinSeparator		|hl-WinSeparator|
----  verthoriz:c	WinSeparator		|hl-WinSeparator|
----  fold:c	Folded			|hl-Folded|
----  diff:c	DiffDelete		|hl-DiffDelete|
----  eob:c		EndOfBuffer		|hl-EndOfBuffer|
+---  stl		StatusLine		|hl-StatusLine|
+---  stlnc		StatusLineNC		|hl-StatusLineNC|
+---  wbr		WinBar			|hl-WinBar| or |hl-WinBarNC|
+---  horiz		WinSeparator		|hl-WinSeparator|
+---  horizup	WinSeparator		|hl-WinSeparator|
+---  horizdown	WinSeparator		|hl-WinSeparator|
+---  vert		WinSeparator		|hl-WinSeparator|
+---  vertleft	WinSeparator		|hl-WinSeparator|
+---  vertright	WinSeparator		|hl-WinSeparator|
+---  verthoriz	WinSeparator		|hl-WinSeparator|
+---  fold		Folded			|hl-Folded|
+---  diff		DiffDelete		|hl-DiffDelete|
+---  eob		EndOfBuffer		|hl-EndOfBuffer|
 ---
 ---@type vim.opt.Opt
 vim.opt.fillchars = ""
@@ -5161,7 +5189,7 @@ vim.opt.guitabtooltip = ""
 ---security reasons.
 ---
 ---@type string
-vim.o.helpfile = "/usr/share/nvim/runtime/doc/help.txt"
+vim.o.helpfile = ""
 
 ---Name of the main help file.  All distributed help files should be
 ---placed together in one directory.  Additionally, all "doc" directories
@@ -5174,7 +5202,7 @@ vim.o.helpfile = "/usr/share/nvim/runtime/doc/help.txt"
 ---security reasons.
 ---
 ---@type vim.opt.Opt
-vim.opt.helpfile = "/usr/share/nvim/runtime/doc/help.txt"
+vim.opt.helpfile = ""
 
 ---Minimal initial height of the help window when it is opened with the
 ---":help" command.  The initial height of the help window is half of the
@@ -6056,6 +6084,10 @@ vim.opt.joinspaces = false
 ---		jumplist and then jumping to a location.
 ---		|jumplist-stack|
 ---
+---  view          When moving through the jumplist, |changelist|,
+---		|alternate-file| or using |mark-motions| try to
+---		restore the |mark-view| in which the action occurred.
+---
 ---@type string
 vim.o.jumpoptions = ""
 
@@ -6066,6 +6098,10 @@ vim.o.jumpoptions = ""
 ---		subsequent entries when navigating backwards in the
 ---		jumplist and then jumping to a location.
 ---		|jumplist-stack|
+---
+---  view          When moving through the jumplist, |changelist|,
+---		|alternate-file| or using |mark-motions| try to
+---		restore the |mark-view| in which the action occurred.
 ---
 ---@type vim.opt.Opt
 vim.opt.jumpoptions = ""
@@ -6119,7 +6155,7 @@ vim.opt.keymodel = ""
 ---help.  (Note that previously setting the global option to the empty
 ---value did this, which is now deprecated.)
 ---When the first character is ":", the command is invoked as a Vim
----command prefixed with [count].
+---Ex command prefixed with [count].
 ---When "man" or "man -s" is used, Vim will automatically translate
 ---a [count] for the "K" command to a section number.
 ---See |option-backslash| about including spaces and backslashes.
@@ -6139,7 +6175,7 @@ vim.o.keywordprg = ":Man"
 ---help.  (Note that previously setting the global option to the empty
 ---value did this, which is now deprecated.)
 ---When the first character is ":", the command is invoked as a Vim
----command prefixed with [count].
+---Ex command prefixed with [count].
 ---When "man" or "man -s" is used, Vim will automatically translate
 ---a [count] for the "K" command to a section number.
 ---See |option-backslash| about including spaces and backslashes.
@@ -6352,6 +6388,9 @@ vim.opt.laststatus = 2
 ---executing macros, registers and other commands that have not been
 ---typed.  Also, updating the window title is postponed.  To force an
 ---update use |:redraw|.
+---This may occasionally cause display errors.  It is only meant to be set
+---temporarily when performing an operation where redrawing may cause
+---flickering or cause a slow down.
 ---
 ---@type boolean
 vim.o.lazyredraw = false
@@ -6360,6 +6399,9 @@ vim.o.lazyredraw = false
 ---executing macros, registers and other commands that have not been
 ---typed.  Also, updating the window title is postponed.  To force an
 ---update use |:redraw|.
+---This may occasionally cause display errors.  It is only meant to be set
+---temporarily when performing an operation where redrawing may cause
+---flickering or cause a slow down.
 ---
 ---@type vim.opt.Opt
 vim.opt.lazyredraw = false
@@ -6472,14 +6514,14 @@ vim.o.lisp = false
 ---@type vim.opt.Opt
 vim.opt.lisp = false
 
----Comma-separated list of words that influence the Lisp indenting.
----|'lisp'|
+---Comma-separated list of words that influence the Lisp indenting when
+---enabled with the |'lisp'| option.
 ---
 ---@type string
 vim.o.lispwords = "defun,define,defmacro,set!,lambda,if,case,let,flet,let*,letrec,do,do*,define-syntax,let-syntax,letrec-syntax,destructuring-bind,defpackage,defparameter,defstruct,deftype,defvar,do-all-symbols,do-external-symbols,do-symbols,dolist,dotimes,ecase,etypecase,eval-when,labels,macrolet,multiple-value-bind,multiple-value-call,multiple-value-prog1,multiple-value-setq,prog1,progv,typecase,unless,unwind-protect,when,with-input-from-string,with-open-file,with-open-stream,with-output-to-string,with-package-iterator,define-condition,handler-bind,handler-case,restart-bind,restart-case,with-simple-restart,store-value,use-value,muffle-warning,abort,continue,with-slots,with-slots*,with-accessors,with-accessors*,defclass,defmethod,print-unreadable-object"
 
----Comma-separated list of words that influence the Lisp indenting.
----|'lisp'|
+---Comma-separated list of words that influence the Lisp indenting when
+---enabled with the |'lisp'| option.
 ---
 ---@type vim.opt.Opt
 vim.opt.lispwords = "defun,define,defmacro,set!,lambda,if,case,let,flet,let*,letrec,do,do*,define-syntax,let-syntax,letrec-syntax,destructuring-bind,defpackage,defparameter,defstruct,deftype,defvar,do-all-symbols,do-external-symbols,do-symbols,dolist,dotimes,ecase,etypecase,eval-when,labels,macrolet,multiple-value-bind,multiple-value-call,multiple-value-prog1,multiple-value-setq,prog1,progv,typecase,unless,unwind-protect,when,with-input-from-string,with-open-file,with-open-stream,with-output-to-string,with-package-iterator,define-condition,handler-bind,handler-case,restart-bind,restart-case,with-simple-restart,store-value,use-value,muffle-warning,abort,continue,with-slots,with-slots*,with-accessors,with-accessors*,defclass,defmethod,print-unreadable-object"
@@ -6570,10 +6612,11 @@ vim.opt.list = false
 ---```
 ---						*lcs-leadmultispace*
 ---  leadmultispace:c...
----		Like multispace value, but only for leading whitespace
----		Overrides |lcs-lead| for leading multiple spaces.
----		`:set listchars=leadmultispace:---+` shows ten consecutive
----		leading spaces as:
+---		Like the |lcs-multispace| value, but for leading
+---		spaces only.  Also overrides |lcs-lead| for leading
+---		multiple spaces.
+---		`:set listchars=leadmultispace:---+` shows ten
+---		consecutive leading spaces as:
 ---			---+---+--XXX ~
 ---		Where "XXX" denotes the first non-blank characters in
 ---		the line.
@@ -6672,10 +6715,11 @@ vim.o.listchars = "tab:> ,trail:-,nbsp:+"
 ---```
 ---						*lcs-leadmultispace*
 ---  leadmultispace:c...
----		Like multispace value, but only for leading whitespace
----		Overrides |lcs-lead| for leading multiple spaces.
----		`:set listchars=leadmultispace:---+` shows ten consecutive
----		leading spaces as:
+---		Like the |lcs-multispace| value, but for leading
+---		spaces only.  Also overrides |lcs-lead| for leading
+---		multiple spaces.
+---		`:set listchars=leadmultispace:---+` shows ten
+---		consecutive leading spaces as:
 ---			---+---+--XXX ~
 ---		Where "XXX" denotes the first non-blank characters in
 ---		the line.
@@ -7281,7 +7325,7 @@ vim.opt.more = true
 ---			'selection'	"exclusive"		"inclusive"
 ---
 ---@type string
-vim.o.mouse = ""
+vim.o.mouse = "nvi"
 
 ---Enables mouse support. For example, to enable the mouse in Normal mode
 ---and Visual mode:
@@ -7336,7 +7380,7 @@ vim.o.mouse = ""
 ---			'selection'	"exclusive"		"inclusive"
 ---
 ---@type vim.opt.Opt
-vim.opt.mouse = ""
+vim.opt.mouse = "nvi"
 
 ---The window that the mouse pointer is on is automatically activated.
 ---When changing the window layout or window focus in another way, the
@@ -7394,7 +7438,7 @@ vim.opt.mousehide = true
 ---middle click	    paste		paste
 ---
 ---In the "popup" model the right mouse button produces a pop-up menu.
----You need to define this first, see |popup-menu|.
+---Nvim creates a default |popup-menu| but you can redefine it.
 ---
 ---Note that you can further refine the meaning of buttons with mappings.
 ---See |mouse-overview|.  But mappings are NOT used for modeless selection.
@@ -7422,7 +7466,7 @@ vim.opt.mousehide = true
 ---The 'mousemodel' option is set by the |:behave| command.
 ---
 ---@type string
-vim.o.mousemodel = "extend"
+vim.o.mousemodel = "popup_setpos"
 
 ---Sets the model to use for the mouse.  The name mostly specifies what
 ---the right mouse button is used for:
@@ -7448,7 +7492,7 @@ vim.o.mousemodel = "extend"
 ---middle click	    paste		paste
 ---
 ---In the "popup" model the right mouse button produces a pop-up menu.
----You need to define this first, see |popup-menu|.
+---Nvim creates a default |popup-menu| but you can redefine it.
 ---
 ---Note that you can further refine the meaning of buttons with mappings.
 ---See |mouse-overview|.  But mappings are NOT used for modeless selection.
@@ -7476,7 +7520,69 @@ vim.o.mousemodel = "extend"
 ---The 'mousemodel' option is set by the |:behave| command.
 ---
 ---@type vim.opt.Opt
-vim.opt.mousemodel = "extend"
+vim.opt.mousemodel = "popup_setpos"
+
+---When on, mouse move events are delivered to the input queue and are
+---available for mapping. The default, off, avoids the mouse movement
+---overhead except when needed.
+---Warning: Setting this option can make pending mappings to be aborted
+---when the mouse is moved.
+---
+---@type boolean
+vim.o.mousemoveevent = false
+
+---When on, mouse move events are delivered to the input queue and are
+---available for mapping. The default, off, avoids the mouse movement
+---overhead except when needed.
+---Warning: Setting this option can make pending mappings to be aborted
+---when the mouse is moved.
+---
+---@type vim.opt.Opt
+vim.opt.mousemoveevent = false
+
+---This option controls the number of lines / columns to scroll by when
+---scrolling with a mouse. The option is a comma separated list of parts.
+---Each part consists of a direction and a count as follows:
+---	direction:count,direction:count
+---Direction is one of either "hor" or "ver". "hor" controls horizontal
+---scrolling and "ver" controls vertical scrolling. Count sets the amount
+---to scroll by for the given direction, it should be a non negative
+---integer. Each direction should be set at most once. If a direction
+---is omitted, a default value is used (6 for horizontal scrolling and 3
+---for vertical scrolling). You can disable mouse scrolling by using
+---a count of 0.
+---
+---Example:
+---```
+---	:set mousescroll=ver:5,hor:2
+---```
+---Will make Nvim scroll 5 lines at a time when scrolling vertically, and
+---scroll 2 columns at a time when scrolling horizontally.
+---
+---@type string
+vim.o.mousescroll = "ver:3,hor:6"
+
+---This option controls the number of lines / columns to scroll by when
+---scrolling with a mouse. The option is a comma separated list of parts.
+---Each part consists of a direction and a count as follows:
+---	direction:count,direction:count
+---Direction is one of either "hor" or "ver". "hor" controls horizontal
+---scrolling and "ver" controls vertical scrolling. Count sets the amount
+---to scroll by for the given direction, it should be a non negative
+---integer. Each direction should be set at most once. If a direction
+---is omitted, a default value is used (6 for horizontal scrolling and 3
+---for vertical scrolling). You can disable mouse scrolling by using
+---a count of 0.
+---
+---Example:
+---```
+---	:set mousescroll=ver:5,hor:2
+---```
+---Will make Nvim scroll 5 lines at a time when scrolling vertically, and
+---scroll 2 columns at a time when scrolling horizontally.
+---
+---@type vim.opt.Opt
+vim.opt.mousescroll = "ver:3,hor:6"
 
 ---This option tells Vim what the mouse pointer should look like in
 ---different modes.  The option is a comma-separated list of parts, much
@@ -7799,7 +7905,9 @@ vim.o.opendevice = false
 vim.opt.opendevice = false
 
 ---This option specifies a function to be called by the |g@| operator.
----See |:map-operator| for more info and an example.
+---See |:map-operator| for more info and an example.  The value can be
+---the name of a function, a |lambda| or a |Funcref|. See
+---|option-value-function| for more information.
 ---
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
@@ -7808,7 +7916,9 @@ vim.opt.opendevice = false
 vim.o.operatorfunc = ""
 
 ---This option specifies a function to be called by the |g@| operator.
----See |:map-operator| for more info and an example.
+---See |:map-operator| for more info and an example.  The value can be
+---the name of a function, a |lambda| or a |Funcref|. See
+---|option-value-function| for more information.
 ---
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
@@ -7819,12 +7929,12 @@ vim.opt.operatorfunc = ""
 ---Directories used to find packages.  See |packages| and |rtp-packages|.
 ---
 ---@type string
-vim.o.packpath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/usr/share/kubuntu-default-settings/kf5-settings/nvim,/home/ms/.local/share/nvim/site,/usr/share/i3/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/usr/share/nvim/runtime,/usr/lib/x86_64-linux-gnu/nvim,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/usr/share/i3/nvim/site/after,/home/ms/.local/share/nvim/site/after,/usr/share/kubuntu-default-settings/kf5-settings/nvim/after,/etc/xdg/nvim/after,/etc/xdg/xdg-i3/nvim/after,/home/ms/.config/nvim/after"
+vim.o.packpath = ""
 
 ---Directories used to find packages.  See |packages| and |rtp-packages|.
 ---
 ---@type vim.opt.Opt
-vim.opt.packpath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/usr/share/kubuntu-default-settings/kf5-settings/nvim,/home/ms/.local/share/nvim/site,/usr/share/i3/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/usr/share/nvim/runtime,/usr/lib/x86_64-linux-gnu/nvim,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/usr/share/i3/nvim/site/after,/home/ms/.local/share/nvim/site/after,/usr/share/kubuntu-default-settings/kf5-settings/nvim/after,/etc/xdg/nvim/after,/etc/xdg/xdg-i3/nvim/after,/home/ms/.config/nvim/after"
+vim.opt.packpath = ""
 
 ---Specifies the nroff macros that separate paragraphs.  These are pairs
 ---of two letters (see |object-motions|).
@@ -8429,8 +8539,9 @@ vim.opt.pyxversion = 3
 ---customize the information displayed in the quickfix or location window
 ---for each entry in the corresponding quickfix or location list.  See
 ---|quickfix-window-function| for an explanation of how to write the
----function and an example. The value can be the name of a function or a
----lambda.
+---function and an example.  The value can be the name of a function, a
+---|lambda| or a |Funcref|. See |option-value-function| for more
+---information.
 ---
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
@@ -8443,8 +8554,9 @@ vim.o.quickfixtextfunc = ""
 ---customize the information displayed in the quickfix or location window
 ---for each entry in the corresponding quickfix or location list.  See
 ---|quickfix-window-function| for an explanation of how to write the
----function and an example. The value can be the name of a function or a
----lambda.
+---function and an example.  The value can be the name of a function, a
+---|lambda| or a |Funcref|. See |option-value-function| for more
+---information.
 ---
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
@@ -8475,8 +8587,8 @@ vim.opt.quoteescape = "\\"
 ---in read-only mode ("vim -R") or when the executable is called "view".
 ---When using ":w!" the 'readonly' option is reset for the current
 ---buffer, unless the 'Z' flag is in 'cpoptions'.
----When using the ":view" command the 'readonly' option is
----set for the newly edited buffer.
+---When using the ":view" command the 'readonly' option is set for the
+---newly edited buffer.
 ---See 'modifiable' for disallowing changes to the buffer.
 ---
 ---@type boolean
@@ -8487,8 +8599,8 @@ vim.o.readonly = false
 ---in read-only mode ("vim -R") or when the executable is called "view".
 ---When using ":w!" the 'readonly' option is reset for the current
 ---buffer, unless the 'Z' flag is in 'cpoptions'.
----When using the ":view" command the 'readonly' option is
----set for the newly edited buffer.
+---When using the ":view" command the 'readonly' option is set for the
+---newly edited buffer.
 ---See 'modifiable' for disallowing changes to the buffer.
 ---
 ---@type vim.opt.Opt
@@ -8725,7 +8837,7 @@ vim.opt.rightleft = false
 ---
 ---	search		"/" and "?" commands
 ---
----This is useful for languages such as Hebrew and Arabic.
+---This is useful for languages such as Hebrew, Arabic and Farsi.
 ---The 'rightleft' option must be set for 'rightleftcmd' to take effect.
 ---
 ---@type string
@@ -8736,7 +8848,7 @@ vim.o.rightleftcmd = "search"
 ---
 ---	search		"/" and "?" commands
 ---
----This is useful for languages such as Hebrew and Arabic.
+---This is useful for languages such as Hebrew, Arabic and Farsi.
 ---The 'rightleft' option must be set for 'rightleftcmd' to take effect.
 ---
 ---@type vim.opt.Opt
@@ -8751,9 +8863,11 @@ vim.opt.rightleftcmd = "search"
 ---	45%	relative position in the file
 ---If 'rulerformat' is set, it will determine the contents of the ruler.
 ---Each window has its own ruler.  If a window has a status line, the
----ruler is shown there.  Otherwise it is shown in the last line of the
----screen.  If the statusline is given by 'statusline' (i.e. not empty),
----this option takes precedence over 'ruler' and 'rulerformat'
+---ruler is shown there.  If a window doesn't have a status line and
+---'cmdheight' is zero, the ruler is not shown.  Otherwise it is shown in
+---the last line of the screen.  If the statusline is given by
+---'statusline' (i.e. not empty), this option takes precedence over
+---'ruler' and 'rulerformat'.
 ---If the number of characters displayed is different from the number of
 ---bytes in the text (e.g., for a TAB or a multibyte character), both
 ---the text column (byte number) and the screen column are shown,
@@ -8777,9 +8891,11 @@ vim.o.ruler = true
 ---	45%	relative position in the file
 ---If 'rulerformat' is set, it will determine the contents of the ruler.
 ---Each window has its own ruler.  If a window has a status line, the
----ruler is shown there.  Otherwise it is shown in the last line of the
----screen.  If the statusline is given by 'statusline' (i.e. not empty),
----this option takes precedence over 'ruler' and 'rulerformat'
+---ruler is shown there.  If a window doesn't have a status line and
+---'cmdheight' is zero, the ruler is not shown.  Otherwise it is shown in
+---the last line of the screen.  If the statusline is given by
+---'statusline' (i.e. not empty), this option takes precedence over
+---'ruler' and 'rulerformat'.
 ---If the number of characters displayed is different from the number of
 ---bytes in the text (e.g., for a TAB or a multibyte character), both
 ---the text column (byte number) and the screen column are shown,
@@ -8898,7 +9014,7 @@ vim.opt.rulerformat = ""
 ---security reasons.
 ---
 ---@type string
-vim.o.runtimepath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/usr/share/kubuntu-default-settings/kf5-settings/nvim,/home/ms/.local/share/nvim/site,/usr/share/i3/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/usr/share/nvim/runtime,/usr/lib/x86_64-linux-gnu/nvim,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/usr/share/i3/nvim/site/after,/home/ms/.local/share/nvim/site/after,/usr/share/kubuntu-default-settings/kf5-settings/nvim/after,/etc/xdg/nvim/after,/etc/xdg/xdg-i3/nvim/after,/home/ms/.config/nvim/after"
+vim.o.runtimepath = ""
 
 ---List of directories to be searched for these runtime files:
 ---  filetype.vim	filetypes by file name |new-filetype|
@@ -8974,7 +9090,7 @@ vim.o.runtimepath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/u
 ---security reasons.
 ---
 ---@type vim.opt.Opt
-vim.opt.runtimepath = "/home/ms/.config/nvim,/etc/xdg/xdg-i3/nvim,/etc/xdg/nvim,/usr/share/kubuntu-default-settings/kf5-settings/nvim,/home/ms/.local/share/nvim/site,/usr/share/i3/nvim/site,/usr/local/share/nvim/site,/usr/share/nvim/site,/usr/share/nvim/runtime,/usr/lib/x86_64-linux-gnu/nvim,/usr/share/nvim/site/after,/usr/local/share/nvim/site/after,/usr/share/i3/nvim/site/after,/home/ms/.local/share/nvim/site/after,/usr/share/kubuntu-default-settings/kf5-settings/nvim/after,/etc/xdg/nvim/after,/etc/xdg/xdg-i3/nvim/after,/home/ms/.config/nvim/after"
+vim.opt.runtimepath = ""
 
 ---Number of lines to scroll with CTRL-U and CTRL-D commands.  Will be
 ---set to half the number of lines in the window when the window size
@@ -9303,7 +9419,7 @@ vim.opt.selectmode = ""
 ---the session.
 ---
 ---@type string
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,terminal"
 
 ---Changes the effect of the |:mksession| command.  It is a comma-
 ---separated list of words.  Each word enables saving and restoring
@@ -9344,7 +9460,7 @@ vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
 ---the session.
 ---
 ---@type vim.opt.Opt
-vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize"
+vim.opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,terminal"
 
 ---When non-empty, the shada file is read upon startup and written
 ---when exiting Vim (see |shada-file|).  The string should be a comma-
@@ -9638,9 +9754,9 @@ vim.opt.shadafile = ""
 ---						*shell-powershell*
 ---To use PowerShell:
 ---```
----	let &shell = has('win32') ? 'powershell' : 'pwsh'
+---	let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
 ---	let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
----	let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+---	let &shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait'
 ---	let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 ---	set shellquote= shellxquote=
 ---
@@ -9649,7 +9765,7 @@ vim.opt.shadafile = ""
 ---security reasons.
 ---
 ---@type string
-vim.o.shell = "/usr/bin/zsh"
+vim.o.shell = ""
 
 ---Name of the shell to use for ! and :! commands.  When changing the
 ---value also check these options: 'shellpipe', 'shellslash'
@@ -9693,9 +9809,9 @@ vim.o.shell = "/usr/bin/zsh"
 ---						*shell-powershell*
 ---To use PowerShell:
 ---```
----	let &shell = has('win32') ? 'powershell' : 'pwsh'
+---	let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
 ---	let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
----	let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+---	let &shellredir = '-RedirectStandardOutput %s -NoNewWindow -Wait'
 ---	let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 ---	set shellquote= shellxquote=
 ---
@@ -9704,7 +9820,7 @@ vim.o.shell = "/usr/bin/zsh"
 ---security reasons.
 ---
 ---@type vim.opt.Opt
-vim.opt.shell = "/usr/bin/zsh"
+vim.opt.shell = ""
 
 ---Flag passed to the shell to execute "!" and ":!" commands; e.g.,
 ---`bash.exe -c ls` or `cmd.exe /s /c "dir"`.  For MS-Windows, the
@@ -10176,6 +10292,7 @@ vim.opt.showbreak = ""
 
 ---Show (partial) command in the last line of the screen.  Set this
 ---option off if your terminal is slow.
+---The option has no effect when 'cmdheight' is zero.
 ---In Visual mode the size of the selected area is shown:
 ---- When selecting characters within a line, the number of characters.
 ---  If the number of bytes is different it is also displayed: "2-6"
@@ -10189,6 +10306,7 @@ vim.o.showcmd = true
 
 ---Show (partial) command in the last line of the screen.  Set this
 ---option off if your terminal is slow.
+---The option has no effect when 'cmdheight' is zero.
 ---In Visual mode the size of the selected area is shown:
 ---- When selecting characters within a line, the number of characters.
 ---  If the number of bytes is different it is also displayed: "2-6"
@@ -10268,12 +10386,14 @@ vim.opt.showmatch = false
 
 ---If in Insert, Replace or Visual mode put a message on the last line.
 ---The |hl-ModeMsg| highlight group determines the highlighting.
+---The option has no effect when 'cmdheight' is zero.
 ---
 ---@type boolean
 vim.o.showmode = true
 
 ---If in Insert, Replace or Visual mode put a message on the last line.
 ---The |hl-ModeMsg| highlight group determines the highlighting.
+---The option has no effect when 'cmdheight' is zero.
 ---
 ---@type vim.opt.Opt
 vim.opt.showmode = true
@@ -10780,6 +10900,11 @@ vim.opt.spelloptions = ""
 ---		suggestions is never more than the value of 'lines'
 ---		minus two.
 ---
+---timeout:{millisec}   Limit the time searching for suggestions to
+---		{millisec} milli seconds.  Applies to the following
+---		methods.  When omitted the limit is 5000. When
+---		negative there is no limit.
+---
 ---file:{filename} Read file {filename}, which must have two columns,
 ---		separated by a slash.  The first column contains the
 ---		bad word, the second column the suggested good word.
@@ -10842,6 +10967,11 @@ vim.o.spellsuggest = "best"
 ---		Not used for |spellsuggest()|.  The number of
 ---		suggestions is never more than the value of 'lines'
 ---		minus two.
+---
+---timeout:{millisec}   Limit the time searching for suggestions to
+---		{millisec} milli seconds.  Applies to the following
+---		methods.  When omitted the limit is 5000. When
+---		negative there is no limit.
 ---
 ---file:{filename} Read file {filename}, which must have two columns,
 ---		separated by a slash.  The first column contains the
@@ -11464,7 +11594,7 @@ vim.opt.swapfile = true
 
 ---This option controls the behavior when switching between buffers.
 ---Mostly for |quickfix| commands some values are also used for other
---- 	commands, as mentioned below.
+---commands, as mentioned below.
 ---Possible values (comma-separated list):
 ---   useopen	If included, jump to the first open window that
 ---		contains the specified buffer (if there is one).
@@ -11491,7 +11621,7 @@ vim.o.switchbuf = "uselast"
 
 ---This option controls the behavior when switching between buffers.
 ---Mostly for |quickfix| commands some values are also used for other
---- 	commands, as mentioned below.
+---commands, as mentioned below.
 ---Possible values (comma-separated list):
 ---   useopen	If included, jump to the first open window that
 ---		contains the specified buffer (if there is one).
@@ -12358,7 +12488,7 @@ vim.opt.ttyfast = true
 ---means).
 ---
 ---@type string
-vim.o.undodir = "/home/ms/.local/var/nvim/undo//"
+vim.o.undodir = ""
 
 ---List of directory names for undo files, separated with commas.
 ---See 'backupdir' for details of the format.
@@ -12382,7 +12512,7 @@ vim.o.undodir = "/home/ms/.local/var/nvim/undo//"
 ---means).
 ---
 ---@type vim.opt.Opt
-vim.opt.undodir = "/home/ms/.local/var/nvim/undo//"
+vim.opt.undodir = ""
 
 ---When on, Vim automatically saves undo history to an undo file when
 ---writing a buffer to a file, and restores undo history from the same
@@ -12683,14 +12813,14 @@ vim.opt.verbosefile = ""
 ---security reasons.
 ---
 ---@type string
-vim.o.viewdir = "/home/ms/.local/var/nvim/view//"
+vim.o.viewdir = ""
 
 ---Name of the directory where to store files for |:mkview|.
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
 ---@type vim.opt.Opt
-vim.opt.viewdir = "/home/ms/.local/var/nvim/view//"
+vim.opt.viewdir = ""
 
 ---Changes the effect of the |:mkview| command.  It is a comma-separated
 ---list of words.  Each word enables saving and restoring something:
@@ -12988,15 +13118,18 @@ vim.o.wildignorecase = false
 ---@type vim.opt.Opt
 vim.opt.wildignorecase = false
 
----Enables "enhanced mode" of command-line completion. When user hits
----<Tab> (or 'wildchar') to invoke completion, the possible matches are
----shown in a menu just above the command-line (see 'wildoptions'), with
----the first match highlighted (overwriting the statusline).  Keys that
----show the previous/next match (<Tab>/CTRL-P/CTRL-N) highlight the
----match.
+---When 'wildmenu' is on, command-line completion operates in an enhanced
+---mode.  On pressing 'wildchar' (usually <Tab>) to invoke completion,
+---the possible matches are shown.
+---When 'wildoptions' contains "pum", then the completion matches are
+---shown in a popup menu.  Otherwise they are displayed just above the
+---command line, with the first match highlighted (overwriting the status
+---line, if there is one).
+---Keys that show the previous/next match, such as <Tab> or
+---CTRL-P/CTRL-N, cause the highlight to move to the appropriate match.
 ---'wildmode' must specify "full": "longest" and "list" do not start
 ---'wildmenu' mode. You can check the current mode with |wildmenumode()|.
----The menu is canceled when a key is hit that is not used for selecting
+---The menu is cancelled when a key is hit that is not used for selecting
 ---a completion.
 ---
 ---While the menu is active these keys have special meanings:
@@ -13024,15 +13157,18 @@ vim.opt.wildignorecase = false
 ---@type boolean
 vim.o.wildmenu = true
 
----Enables "enhanced mode" of command-line completion. When user hits
----<Tab> (or 'wildchar') to invoke completion, the possible matches are
----shown in a menu just above the command-line (see 'wildoptions'), with
----the first match highlighted (overwriting the statusline).  Keys that
----show the previous/next match (<Tab>/CTRL-P/CTRL-N) highlight the
----match.
+---When 'wildmenu' is on, command-line completion operates in an enhanced
+---mode.  On pressing 'wildchar' (usually <Tab>) to invoke completion,
+---the possible matches are shown.
+---When 'wildoptions' contains "pum", then the completion matches are
+---shown in a popup menu.  Otherwise they are displayed just above the
+---command line, with the first match highlighted (overwriting the status
+---line, if there is one).
+---Keys that show the previous/next match, such as <Tab> or
+---CTRL-P/CTRL-N, cause the highlight to move to the appropriate match.
 ---'wildmode' must specify "full": "longest" and "list" do not start
 ---'wildmenu' mode. You can check the current mode with |wildmenumode()|.
----The menu is canceled when a key is hit that is not used for selecting
+---The menu is cancelled when a key is hit that is not used for selecting
 ---a completion.
 ---
 ---While the menu is active these keys have special meanings:
@@ -13166,8 +13302,9 @@ vim.o.wildmode = "full"
 ---@type vim.opt.Opt
 vim.opt.wildmode = "full"
 
----List of words that change how |cmdline-completion| is done.
----  pum		Display the completion matches using the popupmenu
+---A list of words that change how |cmdline-completion| is done.
+---The following values are supported:
+---  pum		Display the completion matches using the popup menu
 ---		in the same style as the |ins-completion-menu|.
 ---  tagfile	When using CTRL-D to list matching tags, the kind of
 ---		tag and the file of the tag is listed.	Only one match
@@ -13178,8 +13315,9 @@ vim.opt.wildmode = "full"
 ---@type string
 vim.o.wildoptions = "pum,tagfile"
 
----List of words that change how |cmdline-completion| is done.
----  pum		Display the completion matches using the popupmenu
+---A list of words that change how |cmdline-completion| is done.
+---The following values are supported:
+---  pum		Display the completion matches using the popup menu
 ---		in the same style as the |ins-completion-menu|.
 ---  tagfile	When using CTRL-D to list matching tags, the kind of
 ---		tag and the file of the tag is listed.	Only one match
@@ -13381,10 +13519,12 @@ vim.o.winheight = 1
 vim.opt.winheight = 1
 
 ---Window-local highlights.  Comma-delimited list of highlight
----|group-name| pairs "{hl-builtin}:{hl},..." where each {hl-builtin} is
----a built-in |highlight-groups| item to be overridden by {hl} group in
----the window.  Only built-in |highlight-groups| are supported, not
----syntax highlighting (use |:ownsyntax| for that).
+---|group-name| pairs "{hl-from}:{hl-to},..." where each {hl-from} is
+---a |highlight-groups| item to be overridden by {hl-to} group in
+---the window.
+---
+---Note: highlight namespaces take precedence over 'winhighlight'.
+---See |nvim_win_set_hl_ns| and |nvim_set_hl|.
 ---
 ---Highlights of vertical separators are determined by the window to the
 ---left of the separator.  The 'tabline' highlight of a tabpage is
@@ -13401,10 +13541,12 @@ vim.opt.winheight = 1
 vim.o.winhighlight = ""
 
 ---Window-local highlights.  Comma-delimited list of highlight
----|group-name| pairs "{hl-builtin}:{hl},..." where each {hl-builtin} is
----a built-in |highlight-groups| item to be overridden by {hl} group in
----the window.  Only built-in |highlight-groups| are supported, not
----syntax highlighting (use |:ownsyntax| for that).
+---|group-name| pairs "{hl-from}:{hl-to},..." where each {hl-from} is
+---a |highlight-groups| item to be overridden by {hl-to} group in
+---the window.
+---
+---Note: highlight namespaces take precedence over 'winhighlight'.
+---See |nvim_win_set_hl_ns| and |nvim_set_hl|.
 ---
 ---Highlights of vertical separators are determined by the window to the
 ---left of the separator.  The 'tabline' highlight of a tabpage is

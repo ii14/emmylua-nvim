@@ -1,5 +1,7 @@
+NVIM := nvim
+
 gen:
-	nvim --headless \
+	$(NVIM) --clean --headless \
 		-c 'so gen_vim.lua' \
 		-c 'so gen_api.lua' \
 		-c 'so gen_fn.lua' \

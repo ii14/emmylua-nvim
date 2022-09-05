@@ -298,7 +298,7 @@ function vim.list_slice(list, start, finish) end
 ---@return string String with whitespace removed from its beginning and end
 function vim.trim(s) end
 
---- Escapes magic chars in a Lua pattern.
+--- Escapes magic chars in |lua-patterns|.
 ---
 ---@see https://github.com/rxi/lume
 ---@param s string String to escape
@@ -425,6 +425,9 @@ function vim.schedule_wrap(cb) end
 
 --- Execute Vim script commands.
 ---
+--- Note that `vim.cmd` can be indexed with a command name to return a callable function to the
+--- command.
+---
 --- Example:
 --- <pre>
 ---   vim.cmd('echo 42')
@@ -434,7 +437,23 @@ function vim.schedule_wrap(cb) end
 ---       autocmd FileType c setlocal cindent
 ---     augroup END
 ---   ]])
----   vim.cmd({ cmd = 'echo', args = { '"foo"' } })
+---
+---   -- Ex command :echo "foo"
+---   -- Note string literals need to be double quoted.
+---   vim.cmd('echo "foo"')
+---   vim.cmd { cmd = 'echo', args = { '"foo"' } }
+---   vim.cmd.echo({ args = { '"foo"' } })
+---   vim.cmd.echo('"foo"')
+---
+---   -- Ex command :write! myfile.txt
+---   vim.cmd('write! myfile.txt')
+---   vim.cmd { cmd = 'write', args = { "myfile.txt" }, bang = true }
+---   vim.cmd.write { args = { "myfile.txt" }, bang = true }
+---   vim.cmd.write { "myfile.txt", bang = true }
+---
+---   -- Ex command :colorscheme blue
+---   vim.cmd('colorscheme blue')
+---   vim.cmd.colorscheme('blue')
 --- </pre>
 ---
 ---@param command string|table Command(s) to execute.
@@ -545,3 +564,7 @@ function vim._cs_remote(rcid, server_addr, connect_error, args) end
 ---                              from. Defaults to "Nvim".
 ---@param backtrace   boolean|nil Prints backtrace. Defaults to true.
 function vim.deprecate(name, alternative, version, plugin, backtrace) end
+
+--- Create builtin mappings (incl. menus).
+--- Called once on startup.
+function vim._init_default_mappings() end

@@ -1,4 +1,7 @@
 local functions = vim.fn.api_info().functions
+table.sort(functions, function(a, b)
+  return a.name < b.name
+end)
 
 local types = {}
 
