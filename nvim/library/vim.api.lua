@@ -657,6 +657,9 @@ function vim.api.nvim_ui_pum_set_bounds(width, height, row, col) end
 ---@param height integer
 function vim.api.nvim_ui_pum_set_height(height) end
 
+---@param gained boolean
+function vim.api.nvim_ui_set_focus(gained) end
+
 ---@param name string
 ---@param value any
 function vim.api.nvim_ui_set_option(name, value) end

@@ -100,29 +100,31 @@ function vim.wait(time, callback, interval, fast_only) end
 --- same functions as those in the input table. Userdata and threads are not
 --- copied and will throw an error.
 ---
----@param orig table Table to copy
----@return table Table of copied keys and (nested) values.
+---@generic T: table
+---@param orig T Table to copy
+---@return T Table of copied keys and (nested) values.
 function vim.deepcopy(orig) end
 
 --- Splits a string at each instance of a separator.
 ---
 ---@see |vim.split()|
+---@see |luaref-patterns|
 ---@see https://www.lua.org/pil/20.2.html
 ---@see http://lua-users.org/wiki/StringLibraryTutorial
 ---
 ---@param s string String to split
 ---@param sep string Separator or pattern
----@param plain boolean If `true` use `sep` literally (passed to string.find)
----@return function Iterator over the split components
+---@param plain (boolean|nil) If `true` use `sep` literally (passed to string.find)
+---@return fun():string (function) Iterator over the split components
 function vim.gsplit(s, sep, plain) end
 
 --- Splits a string at each instance of a separator.
 ---
 --- Examples:
---- <pre>
----  split(":aa::b:", ":")     --> {'','aa','','b',''}
----  split("axaby", "ab?")     --> {'','x','y'}
----  split("x*yz*o", "*", {plain=true})  --> {'x','yz','o'}
+--- <pre>lua
+---  split(":aa::b:", ":")                   --> {'','aa','','b',''}
+---  split("axaby", "ab?")                   --> {'','x','y'}
+---  split("x*yz*o", "*", {plain=true})      --> {'x','yz','o'}
 ---  split("|x|y|z|", "|", {trimempty=true}) --> {'x', 'y', 'z'}
 --- </pre>
 ---
@@ -130,11 +132,11 @@ function vim.gsplit(s, sep, plain) end
 ---
 ---@param s string String to split
 ---@param sep string Separator or pattern
----@param kwargs table Keyword arguments:
+---@param kwargs (table|nil) Keyword arguments:
 ---       - plain: (boolean) If `true` use `sep` literally (passed to string.find)
 ---       - trimempty: (boolean) If `true` remove empty items from the front
 ---         and back of the list
----@return table List of split components
+---@return string[] List of split components
 function vim.split(s, sep, kwargs) end
 
 --- Return a list of all keys used in a table.
@@ -142,29 +144,33 @@ function vim.split(s, sep, kwargs) end
 ---
 ---@see From https://github.com/premake/premake-core/blob/master/src/base/table.lua
 ---
----@param t table Table
----@return table List of keys
+---@generic T: table
+---@param t table<T, any> (table) Table
+---@return T[] (list) List of keys
 function vim.tbl_keys(t) end
 
 --- Return a list of all values used in a table.
 --- However, the order of the return table of values is not guaranteed.
 ---
----@param t table Table
----@return table List of values
+---@generic T
+---@param t table<any, T> (table) Table
+---@return T[] (list) List of values
 function vim.tbl_values(t) end
 
 --- Apply a function to all values of a table.
 ---
----@param func function|table Function or callable table
----@param t table Table
+---@generic T
+---@param func fun(value: T): any (function) Function
+---@param t table<any, T> (table) Table
 ---@return table Table of transformed values
 function vim.tbl_map(func, t) end
 
 --- Filter a table using a predicate function
 ---
----@param func function|table Function or callable table
----@param t table Table
----@return table Table of filtered values
+---@generic T
+---@param func fun(value: T): boolean (function) Function
+---@param t table<any, T> (table) Table
+---@return T[] (table) Table of filtered values
 function vim.tbl_filter(func, t) end
 
 --- Checks if a list-like (vector) table contains `value`.
@@ -196,14 +202,16 @@ function vim.tbl_extend(behavior, ...) end
 
 --- Merges recursively two or more map-like tables.
 ---
----@see |tbl_extend()|
+---@see |vim.tbl_extend()|
 ---
----@param behavior string Decides what to do if a key is found in more than one map:
+---@generic T1: table
+---@generic T2: table
+---@param behavior "error"|"keep"|"force" (string) Decides what to do if a key is found in more than one map:
 ---      - "error": raise an error
 ---      - "keep":  use value from the leftmost map
 ---      - "force": use value from the rightmost map
----@param ... table Two or more map-like tables
----@return table Merged table
+---@param ... T2 Two or more map-like tables
+---@return T1|T2 (table) Merged table
 function vim.tbl_deep_extend(behavior, ...) end
 
 --- Deep compare values for equality
@@ -228,7 +236,7 @@ function vim.tbl_add_reverse_lookup(o) end
 --- Return `nil` if the key does not exist.
 ---
 --- Examples:
---- <pre>
+--- <pre>lua
 ---  vim.tbl_get({ key = { nested_key = true }}, 'key', 'nested_key') == true
 ---  vim.tbl_get({ key = {}}, 'key', 'nested_key') == nil
 --- </pre>
@@ -245,11 +253,12 @@ function vim.tbl_get(o, ...) end
 ---
 ---@see |vim.tbl_extend()|
 ---
----@param dst table List which will be modified and appended to
+---@generic T: table
+---@param dst T List which will be modified and appended to
 ---@param src table List from which values will be inserted
----@param start number Start index on src. Defaults to 1
----@param finish number Final index on src. Defaults to `#src`
----@return table dst
+---@param start (number|nil) Start index on src. Defaults to 1
+---@param finish (number|nil) Final index on src. Defaults to `#src`
+---@return T dst
 function vim.list_extend(dst, src, start, finish) end
 
 --- Creates a copy of a list-like table such that any nested tables are
@@ -273,9 +282,9 @@ function vim.tbl_islist(t) end
 
 --- Counts the number of non-nil values in table `t`.
 ---
---- <pre>
---- vim.tbl_count({ a=1, b=2 }) => 2
---- vim.tbl_count({ 1, 2 }) => 2
+--- <pre>lua
+--- vim.tbl_count({ a=1, b=2 })  --> 2
+--- vim.tbl_count({ 1, 2 })      --> 2
 --- </pre>
 ---
 ---@see https://github.com/Tieske/Penlight/blob/master/lua/pl/tablex.lua
@@ -285,14 +294,16 @@ function vim.tbl_count(t) end
 
 --- Creates a copy of a table containing only elements from start to end (inclusive)
 ---
----@param list table Table
----@param start number Start range of slice
----@param finish number End range of slice
----@return table Copy of table sliced from start to finish (inclusive)
+---@generic T
+---@param list T[] (list) Table
+---@param start number|nil Start range of slice
+---@param finish number|nil End range of slice
+---@return T[] (list) Copy of table sliced from start to finish (inclusive)
 function vim.list_slice(list, start, finish) end
 
 --- Trim whitespace (Lua pattern "%s") from both sides of a string.
 ---
+---@see |luaref-patterns|
 ---@see https://www.lua.org/pil/20.2.html
 ---@param s string String to trim
 ---@return string String with whitespace removed from its beginning and end
@@ -322,7 +333,7 @@ function vim.endswith(s, suffix) end
 --- Validates a parameter specification (types and values).
 ---
 --- Usage example:
---- <pre>
+--- <pre>lua
 ---  function user.new(name, age, hobbies)
 ---    vim.validate{
 ---      name={name, 'string'},
@@ -334,24 +345,24 @@ function vim.endswith(s, suffix) end
 --- </pre>
 ---
 --- Examples with explicit argument values (can be run directly):
---- <pre>
+--- <pre>lua
 ---  vim.validate{arg1={{'foo'}, 'table'}, arg2={'foo', 'string'}}
----     => NOP (success)
+---     --> NOP (success)
 ---
 ---  vim.validate{arg1={1, 'table'}}
----     => error('arg1: expected table, got number')
+---     --> error('arg1: expected table, got number')
 ---
 ---  vim.validate{arg1={3, function(a) return (a % 2) == 0 end, 'even number'}}
----     => error('arg1: expected even number, got 3')
+---     --> error('arg1: expected even number, got 3')
 --- </pre>
 ---
 --- If multiple types are valid they can be given as a list.
---- <pre>
+--- <pre>lua
 ---  vim.validate{arg1={{'foo'}, {'table', 'string'}}, arg2={'foo', {'table', 'string'}}}
----     => NOP (success)
+---     --> NOP (success)
 ---
 ---  vim.validate{arg1={1, {'string', table'}}}
----     => error('arg1: expected string|table, got number')
+---     --> error('arg1: expected string|table, got number')
 ---
 --- </pre>
 ---
@@ -380,6 +391,23 @@ function vim.validate(opt) end
 ---@return boolean `true` if `f` is callable, else `false`
 function vim.is_callable(f) end
 
+--- Creates a table whose members are automatically created when accessed, if they don't already
+--- exist.
+---
+--- They mimic defaultdict in python.
+---
+--- If {create} is `nil`, this will create a defaulttable whose constructor function is
+--- this function, effectively allowing to create nested tables on the fly:
+---
+--- <pre>lua
+--- local a = vim.defaulttable()
+--- a.b.c = 1
+--- </pre>
+---
+---@param create function|nil The function called to create a missing value.
+---@return table Empty table with metamethod
+function vim.defaulttable(create) end
+
 
 function vim._system(cmd) end
 
@@ -393,7 +421,7 @@ function vim._os_proc_children(ppid) end
 --- (such as the |TUI|) pastes text into the editor.
 ---
 --- Example: To remove ANSI color codes when pasting:
---- <pre>
+--- <pre>lua
 --- vim.paste = (function(overridden)
 ---   return function(lines, phase)
 ---     for i,line in ipairs(lines) do
@@ -406,14 +434,15 @@ function vim._os_proc_children(ppid) end
 --- </pre>
 ---
 ---@see |paste|
+---@alias paste_phase -1 | 1 | 2 | 3
 ---
----@param lines  |readfile()|-style list of lines to paste. |channel-lines|
----@param phase  -1: "non-streaming" paste: the call contains all lines.
+---@param lines  string[] # |readfile()|-style list of lines to paste. |channel-lines|
+---@param phase paste_phase  -1: "non-streaming" paste: the call contains all lines.
 ---              If paste is "streamed", `phase` indicates the stream state:
 ---                - 1: starts the paste (exactly once)
 ---                - 2: continues the paste (zero or more times)
 ---                - 3: ends the paste (exactly once)
----@returns false if client should cancel the paste.
+---@returns boolean # false if client should cancel the paste.
 function vim.paste(lines, phase) end
 
 --- Defers callback `cb` until the Nvim API is safe to call.
@@ -421,6 +450,8 @@ function vim.paste(lines, phase) end
 ---@see |lua-loop-callbacks|
 ---@see |vim.schedule()|
 ---@see |vim.in_fast_event()|
+---@param cb function
+---@return function
 function vim.schedule_wrap(cb) end
 
 --- Execute Vim script commands.
@@ -429,7 +460,7 @@ function vim.schedule_wrap(cb) end
 --- command.
 ---
 --- Example:
---- <pre>
+--- <pre>lua
 ---   vim.cmd('echo 42')
 ---   vim.cmd([[
 ---     augroup My_group
@@ -468,21 +499,21 @@ function vim.cmd(command) end
 --- Get a table of lines with start, end columns for a region marked by two points
 ---
 ---@param bufnr number of buffer
----@param pos1 (line, column) tuple marking beginning of region
----@param pos2 (line, column) tuple marking end of region
----@param regtype type of selection (:help setreg)
+---@param pos1 integer[] (line, column) tuple marking beginning of region
+---@param pos2 integer[] (line, column) tuple marking end of region
+---@param regtype string type of selection, see |setreg()|
 ---@param inclusive boolean indicating whether the selection is end-inclusive
----@return region lua table of the form {linenr = {startcol,endcol}}
+---@return table region Table of the form `{linenr = {startcol,endcol}}`
 function vim.region(bufnr, pos1, pos2, regtype, inclusive) end
 
 --- Defers calling `fn` until `timeout` ms passes.
 ---
 --- Use to do a one-shot timer that calls `fn`
---- Note: The {fn} is |schedule_wrap|ped automatically, so API functions are
+--- Note: The {fn} is |vim.schedule_wrap()|ped automatically, so API functions are
 --- safe to call.
----@param fn Callback to call once `timeout` expires
----@param timeout Number of milliseconds to wait before calling `fn`
----@return timer luv timer object
+---@param fn function Callback to call once `timeout` expires
+---@param timeout integer Number of milliseconds to wait before calling `fn`
+---@return table timer luv timer object
 function vim.defer_fn(fn, timeout) end
 
 --- Display a notification to the user.
@@ -543,12 +574,12 @@ function vim._expand_pat(pat, env) end
 
 ---Prints given arguments in human-readable format.
 ---Example:
----<pre>
+---<pre>lua
 ---  -- Print highlight group Normal and store it's contents in a variable.
 ---  local hl_normal = vim.pretty_print(vim.api.nvim_get_hl_by_name("Normal", true))
 ---</pre>
 ---@see |vim.inspect()|
----@return given arguments.
+---@return any # given arguments.
 function vim.pretty_print(...) end
 
 
