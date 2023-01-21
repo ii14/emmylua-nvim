@@ -1,0 +1,23 @@
+name: gen
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day
+
+jobs:
+  gen:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: gen
+        shell: bash
+        run: |
+          wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -O /tmp/nvim.deb
+          sudo dpkg -i /tmp/nvim.deb
+          nvim --clean --headless -c 'so gen_vim.lua' -c 'so gen_api.lua' -c 'so gen_fn.lua' -c 'so gen_opt.lua' -c 'qa!'
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "auto generate vimdoc"
+          git push
