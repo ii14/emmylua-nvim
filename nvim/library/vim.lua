@@ -270,6 +270,14 @@ function vim.list_extend(dst, src, start, finish) end
 ---@return table Flattened copy of the given list-like table
 function vim.tbl_flatten(t) end
 
+--- Enumerate a table sorted by its keys.
+---
+---@see Based on https://github.com/premake/premake-core/blob/master/src/base/table.lua
+---
+---@param t table List-like table
+---@return iterator over sorted keys and their values
+function vim.spairs(t) end
+
 --- Tests if a Lua table can be treated as an array.
 ---
 --- Empty table `{}` is assumed to be an array, unless it was created by
