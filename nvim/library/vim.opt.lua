@@ -6695,8 +6695,8 @@ vim.opt.list = false
 ---		are left blank.
 ---						*lcs-multispace*
 ---  multispace:c...
---- 		One or more characters to use cyclically to show for
---- 		multiple consecutive spaces.  Overrides the "space"
+---		One or more characters to use cyclically to show for
+---		multiple consecutive spaces.  Overrides the "space"
 ---		setting, except for single spaces.  When omitted, the
 ---		"space" setting is used.  For example,
 ---		`:set listchars=multispace:---+` shows ten consecutive
@@ -6804,8 +6804,8 @@ vim.o.listchars = "tab:> ,trail:-,nbsp:+"
 ---		are left blank.
 ---						*lcs-multispace*
 ---  multispace:c...
---- 		One or more characters to use cyclically to show for
---- 		multiple consecutive spaces.  Overrides the "space"
+---		One or more characters to use cyclically to show for
+---		multiple consecutive spaces.  Overrides the "space"
 ---		setting, except for single spaces.  When omitted, the
 ---		"space" setting is used.  For example,
 ---		`:set listchars=multispace:---+` shows ten consecutive
@@ -11394,8 +11394,8 @@ vim.opt.statuscolumn = ""
 ---      windows.
 ---* -   Set highlight group to User{N}, where {N} is taken from the
 ---      minwid field, e.g. %1*.  Restore normal highlight with %* or %0*.
----      The difference between User{N} and StatusLine  will be applied
----      to StatusLineNC for the statusline of non-current windows.
+---      The difference between User{N} and StatusLine will be applied to
+---      StatusLineNC for the statusline of non-current windows.
 ---      The number N must be between 1 and 9.  See |hl-User1..9|
 ---
 ---When displaying a flag, Vim removes the leading comma, if any, when
@@ -11616,8 +11616,8 @@ vim.o.statusline = ""
 ---      windows.
 ---* -   Set highlight group to User{N}, where {N} is taken from the
 ---      minwid field, e.g. %1*.  Restore normal highlight with %* or %0*.
----      The difference between User{N} and StatusLine  will be applied
----      to StatusLineNC for the statusline of non-current windows.
+---      The difference between User{N} and StatusLine will be applied to
+---      StatusLineNC for the statusline of non-current windows.
 ---      The number N must be between 1 and 9.  See |hl-User1..9|
 ---
 ---When displaying a flag, Vim removes the leading comma, if any, when
