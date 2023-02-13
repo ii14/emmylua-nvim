@@ -11395,8 +11395,10 @@ vim.opt.statuscolumn = ""
 ---         this label.
 ---< -   Where to truncate line if too long.  Default is at the start.
 ---      No width fields allowed.
----= -   Separation point between alignment sections. Each section will
----      be separated by an equal number of spaces.
+---= -   Separation point between alignment sections.  Each section will
+---      be separated by an equal number of spaces.  With one %= what
+---      comes after it will be right-aligned.  With two %= there is a
+---      middle part, with white space left and right of it.
 ---      No width fields allowed.
 ---# -   Set highlight group.  The name must follow and then a # again.
 ---      Thus use %#HLname# for highlight group HLname.  The same
@@ -11617,8 +11619,10 @@ vim.o.statusline = ""
 ---         this label.
 ---< -   Where to truncate line if too long.  Default is at the start.
 ---      No width fields allowed.
----= -   Separation point between alignment sections. Each section will
----      be separated by an equal number of spaces.
+---= -   Separation point between alignment sections.  Each section will
+---      be separated by an equal number of spaces.  With one %= what
+---      comes after it will be right-aligned.  With two %= there is a
+---      middle part, with white space left and right of it.
 ---      No width fields allowed.
 ---# -   Set highlight group.  The name must follow and then a # again.
 ---      Thus use %#HLname# for highlight group HLname.  The same
