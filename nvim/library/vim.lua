@@ -607,3 +607,9 @@ function vim.deprecate(name, alternative, version, plugin, backtrace) end
 --- Create builtin mappings (incl. menus).
 --- Called once on startup.
 function vim._init_default_mappings() end
+
+
+function vim._init_default_autocmds() end
+
+
+function vim._init_defaults() end
