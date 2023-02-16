@@ -1,7 +1,7 @@
 local opt_keys = vim.api.nvim_get_all_options_info()
 local inspect = vim.inspect
 
-local lines = {[[
+local opt_lines = {[[
 ---@meta
 
 ---@class vim.opt.Opt
@@ -20,8 +20,16 @@ function Opt:prepend(value) end
 function Opt:remove(value) end
 ]]}
 
-local function ins(s)
-  table.insert(lines, s)
+local o_lines = {[[
+---@meta
+]]}
+
+local function opt_ins(s)
+  table.insert(opt_lines, s)
+end
+
+local function o_ins(s)
+  table.insert(o_lines, s)
 end
 
 local docs = dofile('gen_opt_doc.lua')
@@ -59,44 +67,52 @@ for _, key in ipairs(opts) do
     doc = table.concat(doc, '\n')
   end
 
-  ins('')
-  if doc then ins(doc) end
-  ins(('---@type %s'):format(opt.type))
-  ins(('vim.o.%s = %s'):format(opt.name, default))
+  o_ins('')
+  if doc then o_ins(doc) end
+  o_ins(('---@type %s'):format(opt.type))
+  o_ins(('vim.o.%s = %s'):format(opt.name, default))
 
-  ins('')
-  if doc then ins(doc) end
-  ins('---@type vim.opt.Opt')
-  ins(('vim.opt.%s = %s'):format(opt.name, default))
+  opt_ins('')
+  if doc then opt_ins(doc) end
+  opt_ins('---@type vim.opt.Opt')
+  opt_ins(('vim.opt.%s = %s'):format(opt.name, default))
 
   -- vim.bo and vim.wo sucks anyway
   -- if opt.scope == 'buf' then
-  --   ins(('---@type %s'):format(opt.type))
-  --   ins(('vim.bo.%s = %s'):format(opt.name, default))
+  --   o_ins(('---@type %s'):format(opt.type))
+  --   o_ins(('vim.bo.%s = %s'):format(opt.name, default))
   -- elseif opt.scope == 'win' then
-  --   ins(('---@type %s'):format(opt.type))
-  --   ins(('vim.wo.%s = %s'):format(opt.name, default))
+  --   o_ins(('---@type %s'):format(opt.type))
+  --   o_ins(('vim.wo.%s = %s'):format(opt.name, default))
   -- end
 
   -- no short options
   -- if opt.shortname and opt.shortname ~= '' then
-  --   ins(('--- %s'):format(opt.name))
-  --   ins(('---@type %s'):format(opt.type))
-  --   ins(('vim.o.%s = %s'):format(opt.shortname, default))
+  --   o_ins(('--- %s'):format(opt.name))
+  --   o_ins(('---@type %s'):format(opt.type))
+  --   o_ins(('vim.o.%s = %s'):format(opt.shortname, default))
   --   if opt.scope == 'buf' then
-  --     ins(('---@type %s'):format(opt.type))
-  --     ins(('vim.bo.%s = %s'):format(opt.shortname, default))
+  --     o_ins(('---@type %s'):format(opt.type))
+  --     o_ins(('vim.bo.%s = %s'):format(opt.shortname, default))
   --   elseif opt.scope == 'win' then
-  --     ins(('---@type %s'):format(opt.type))
-  --     ins(('vim.wo.%s = %s'):format(opt.shortname, default))
+  --     o_ins(('---@type %s'):format(opt.type))
+  --     o_ins(('vim.wo.%s = %s'):format(opt.shortname, default))
   --   end
   -- end
 end
 
-ins('')
-ins('vim.opt_local = vim.opt')
-ins('vim.opt_global = vim.opt')
+opt_ins('')
+opt_ins('vim.opt_local = vim.opt')
+opt_ins('vim.opt_global = vim.opt')
 
-local f = io.open('./nvim/library/vim.opt.lua', 'w+b')
-f:write(table.concat(lines, '\n'))
-f:flush()
+do
+  local f = io.open('./nvim/library/vim.opt.lua', 'w+b')
+  f:write(table.concat(opt_lines, '\n'))
+  f:flush()
+end
+
+do
+  local f = io.open('./nvim/library/vim.o.lua', 'w+b')
+  f:write(table.concat(o_lines, '\n'))
+  f:flush()
+end
