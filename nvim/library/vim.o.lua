@@ -1,13 +1,6 @@
 ---@meta
 
 
----The ASCII code for the first letter of the Hebrew alphabet.  The
----routine that maps the keyboard in Hebrew mode, both in Insert mode
----(when hkmap is set) and on the command-line (when hitting CTRL-_)
----outputs the Hebrew characters in the range [aleph..aleph+26].
----aleph=128 applies to PC code, and aleph=224 applies to ISO 8859-8.
----See |rileft.txt|.
----
 ---@type number
 vim.o.aleph = 224
 
@@ -2670,17 +2663,9 @@ vim.o.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:NonT
 ---@type number
 vim.o.history = 10000
 
----When on, the keyboard is mapped for the Hebrew character set.
----Normally you would set 'allowrevins' and use CTRL-_ in insert mode to
----toggle this option.  See |rileft.txt|.
----
 ---@type boolean
 vim.o.hkmap = false
 
----When on, phonetic keyboard mapping is used.  'hkmap' must also be on.
----This is useful if you have a non-Hebrew keyboard.
----See |rileft.txt|.
----
 ---@type boolean
 vim.o.hkmapp = false
 

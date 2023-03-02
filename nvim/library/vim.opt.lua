@@ -16,13 +16,6 @@ function Opt:prepend(value) end
 function Opt:remove(value) end
 
 
----The ASCII code for the first letter of the Hebrew alphabet.  The
----routine that maps the keyboard in Hebrew mode, both in Insert mode
----(when hkmap is set) and on the command-line (when hitting CTRL-_)
----outputs the Hebrew characters in the range [aleph..aleph+26].
----aleph=128 applies to PC code, and aleph=224 applies to ISO 8859-8.
----See |rileft.txt|.
----
 ---@type vim.opt.Opt
 vim.opt.aleph = 224
 
@@ -2685,17 +2678,9 @@ vim.opt.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:No
 ---@type vim.opt.Opt
 vim.opt.history = 10000
 
----When on, the keyboard is mapped for the Hebrew character set.
----Normally you would set 'allowrevins' and use CTRL-_ in insert mode to
----toggle this option.  See |rileft.txt|.
----
 ---@type vim.opt.Opt
 vim.opt.hkmap = false
 
----When on, phonetic keyboard mapping is used.  'hkmap' must also be on.
----This is useful if you have a non-Hebrew keyboard.
----See |rileft.txt|.
----
 ---@type vim.opt.Opt
 vim.opt.hkmapp = false
 
