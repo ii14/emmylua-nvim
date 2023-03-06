@@ -256,8 +256,8 @@ function vim.tbl_get(o, ...) end
 ---@generic T: table
 ---@param dst T List which will be modified and appended to
 ---@param src table List from which values will be inserted
----@param start (number|nil) Start index on src. Defaults to 1
----@param finish (number|nil) Final index on src. Defaults to `#src`
+---@param start (integer|nil) Start index on src. Defaults to 1
+---@param finish (integer|nil) Final index on src. Defaults to `#src`
 ---@return T dst
 function vim.list_extend(dst, src, start, finish) end
 
@@ -297,15 +297,15 @@ function vim.tbl_islist(t) end
 ---
 ---@see https://github.com/Tieske/Penlight/blob/master/lua/pl/tablex.lua
 ---@param t table Table
----@return number Number of non-nil values in table
+---@return integer Number of non-nil values in table
 function vim.tbl_count(t) end
 
 --- Creates a copy of a table containing only elements from start to end (inclusive)
 ---
 ---@generic T
 ---@param list T[] (list) Table
----@param start number|nil Start range of slice
----@param finish number|nil End range of slice
+---@param start integer|nil Start range of slice
+---@param finish integer|nil End range of slice
 ---@return T[] (list) Copy of table sliced from start to finish (inclusive)
 function vim.list_slice(list, start, finish) end
 
@@ -506,7 +506,7 @@ function vim.cmd(command) end
 
 --- Get a table of lines with start, end columns for a region marked by two points
 ---
----@param bufnr number of buffer
+---@param bufnr integer number of buffer
 ---@param pos1 integer[] (line, column) tuple marking beginning of region
 ---@param pos2 integer[] (line, column) tuple marking end of region
 ---@param regtype string type of selection, see |setreg()|
@@ -531,7 +531,7 @@ function vim.defer_fn(fn, timeout) end
 --- writes to |:messages|.
 ---
 ---@param msg string Content of the notification to show to the user.
----@param level number|nil One of the values from |vim.log.levels|.
+---@param level integer|nil One of the values from |vim.log.levels|.
 ---@param opts table|nil Optional parameters. Unused by default.
 function vim.notify(msg, level, opts) end
 
@@ -541,7 +541,7 @@ function vim.notify(msg, level, opts) end
 --- display a notification.
 ---
 ---@param msg string Content of the notification to show to the user.
----@param level number|nil One of the values from |vim.log.levels|.
+---@param level integer|nil One of the values from |vim.log.levels|.
 ---@param opts table|nil Optional parameters. Unused by default.
 ---@return boolean true if message was displayed, else false
 function vim.notify_once(msg, level, opts) end
@@ -558,10 +558,10 @@ function vim.register_keystroke_callback() end
 ---@param fn function: Callback function. It should take one string argument.
 ---                   On each key press, Nvim passes the key char to fn(). |i_CTRL-V|
 ---                   If {fn} is nil, it removes the callback for the associated {ns_id}
----@param ns_id number? Namespace ID. If nil or 0, generates and returns a new
+---@param ns_id integer? Namespace ID. If nil or 0, generates and returns a new
 ---                    |nvim_create_namespace()| id.
 ---
----@return number Namespace id associated with {fn}. Or count of all callbacks
+---@return integer Namespace id associated with {fn}. Or count of all callbacks
 ---if on_key() is called without arguments.
 ---
 ---@note {fn} will be removed if an error occurs while calling.
