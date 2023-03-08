@@ -574,11 +574,17 @@ function vim.on_key(fn, ns_id) end
 function vim._on_key(char) end
 
 --- Generate a list of possible completions for the string.
---- String starts with ^ and then has the pattern.
+--- String has the pattern.
 ---
 ---     1. Can we get it to just return things in the global namespace with that name prefix
 ---     2. Can we get it to return things from global namespace even with `print(` in front.
 function vim._expand_pat(pat, env) end
+
+--- Omnifunc for completing lua values from from the runtime lua interpreter,
+--- similar to the builtin completion for the `:lua` command.
+---
+--- Activate using `set omnifunc=v:lua.vim.lua_omnifunc` in a lua buffer.
+function vim.lua_omnifunc(find_start, _) end
 
 ---Prints given arguments in human-readable format.
 ---Example:
