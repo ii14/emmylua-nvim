@@ -586,15 +586,19 @@ function vim._expand_pat(pat, env) end
 --- Activate using `set omnifunc=v:lua.vim.lua_omnifunc` in a lua buffer.
 function vim.lua_omnifunc(find_start, _) end
 
----Prints given arguments in human-readable format.
----Example:
----<pre>lua
----  -- Print highlight group Normal and store it's contents in a variable.
----  local hl_normal = vim.pretty_print(vim.api.nvim_get_hl_by_name("Normal", true))
----</pre>
----@see |vim.inspect()|
----@return any # given arguments.
+---@private
 function vim.pretty_print(...) end
+
+--- "Pretty prints" the given arguments and returns them unmodified.
+---
+--- Example:
+--- <pre>lua
+---   local hl_normal = vim.print(vim.api.nvim_get_hl_by_name('Normal', true))
+--- </pre>
+---
+--- @see |vim.inspect()|
+--- @return any # given arguments.
+function vim.print(...) end
 
 
 function vim._cs_remote(rcid, server_addr, connect_error, args) end

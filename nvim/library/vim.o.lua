@@ -101,8 +101,6 @@ vim.o.autochdir = false
 ---line.
 ---When 'smartindent' or 'cindent' is on the indent is changed in
 ---a different way.
----The 'autoindent' option is reset when the 'paste' option is set and
----restored when 'paste' is reset.
 ---{small difference from Vi: After the indent is deleted when typing
 ---<Esc> or <CR>, the cursor position when moving up or down is after the
 ---deleted indent; Vi puts the cursor somewhere in the deleted indent}.
@@ -707,7 +705,6 @@ vim.o.charconvert = ""
 ---See |C-indenting|.
 ---When you don't like the way 'cindent' works, try the 'smartindent'
 ---option or 'indentexpr'.
----This option is not used when 'paste' is set.
 ---
 ---@type boolean
 vim.o.cindent = false
@@ -1710,8 +1707,6 @@ vim.o.eventignore = ""
 ---<Tab>.  Spaces are used in indents with the '>' and '<' commands and
 ---when 'autoindent' is on.  To insert a real tab when 'expandtab' is
 ---on, use CTRL-V<Tab>.  See also |:retab| and |ins-expandtab|.
----This option is reset when the 'paste' option is set and restored when
----the 'paste' option is reset.
 ---
 ---@type boolean
 vim.o.expandtab = false
@@ -2221,9 +2216,8 @@ vim.o.formatexpr = ""
 vim.o.formatlistpat = "^\\s*\\d\\+[\\]:.)}\\t ]\\s*"
 
 ---This is a sequence of letters which describes how automatic
----formatting is to be done.  See |fo-table|.  When the 'paste' option is
----on, no formatting is done (like 'formatoptions' is empty).  Commas can
----be inserted for readability.
+---formatting is to be done.  See |fo-table|.  Commas can be inserted for
+---readability.
 ---To avoid problems with flags that are added in the future, use the
 ---"+=" and "-=" feature of ":set" |add-option-flags|.
 ---
@@ -2879,7 +2873,6 @@ vim.o.incsearch = true
 ---When this option is not empty, it overrules the 'cindent' and
 ---'smartindent' indenting.  When 'lisp' is set, this option is
 ---is only used when 'lispoptions' contains "expr:1".
----When 'paste' is set this option is not used for indenting.
 ---The expression is evaluated with |v:lnum| set to the line number for
 ---which the indent is to be computed.  The cursor is also in this line
 ---when the expression is evaluated (but it may be moved around).
@@ -3266,7 +3259,6 @@ vim.o.linespace = 0
 ---The '-' character is included in keyword characters.  Redefines the
 ---"=" operator to use this same indentation algorithm rather than
 ---calling an external program if 'equalprg' is empty.
----This option is not used when 'paste' is set.
 ---
 ---@type boolean
 vim.o.lisp = false
@@ -4011,78 +4003,9 @@ vim.o.packpath = ""
 ---@type string
 vim.o.paragraphs = "IPLPPPQPP TPHPLIPpLpItpplpipbp"
 
----This option is obsolete; |bracketed-paste-mode| is built-in.
----
----Put Vim in Paste mode.  This is useful if you want to cut or copy
----some text from one window and paste it in Vim.  This will avoid
----unexpected effects.
----Setting this option is useful when using Vim in a terminal, where Vim
----cannot distinguish between typed text and pasted text.  In the GUI, Vim
----knows about pasting and will mostly do the right thing without 'paste'
----being set.  The same is true for a terminal where Vim handles the
----mouse clicks itself.
----This option is reset when starting the GUI.  Thus if you set it in
----your vimrc it will work in a terminal, but not in the GUI.  Setting
----'paste' in the GUI has side effects: e.g., the Paste toolbar button
----will no longer work in Insert mode, because it uses a mapping.
----When the 'paste' option is switched on (also when it was already on):
----	- mapping in Insert mode and Command-line mode is disabled
----	- abbreviations are disabled
----	- 'autoindent' is reset
----	- 'expandtab' is reset
----	- 'hkmap' is reset
----	- 'revins' is reset
----	- 'ruler' is reset
----	- 'showmatch' is reset
----	- 'smarttab' is reset
----	- 'softtabstop' is set to 0
----	- 'textwidth' is set to 0
----	- 'wrapmargin' is set to 0
----	- 'varsofttabstop' is made empty
----These options keep their value, but their effect is disabled:
----	- 'cindent'
----	- 'formatoptions' is used like it is empty
----	- 'indentexpr'
----	- 'lisp'
----	- 'smartindent'
----NOTE: When you start editing another file while the 'paste' option is
----on, settings from the modelines or autocommands may change the
----settings again, causing trouble when pasting text.  You might want to
----set the 'paste' option again.
----When the 'paste' option is reset the mentioned options are restored to
----the value before the moment 'paste' was switched from off to on.
----Resetting 'paste' before ever setting it does not have any effect.
----Since mapping doesn't work while 'paste' is active, you need to use
----the 'pastetoggle' option to toggle the 'paste' option with some key.
----
 ---@type boolean
 vim.o.paste = false
 
----When non-empty, specifies the key sequence that toggles the 'paste'
----option.  This is like specifying a mapping:
----```
----    :map {keys} :set invpaste<CR>
----```
----Where {keys} is the value of 'pastetoggle'.
----The difference is that it will work even when 'paste' is set.
----'pastetoggle' works in Insert mode and Normal mode, but not in
----Command-line mode.
----Mappings are checked first, thus overrule 'pastetoggle'.  However,
----when 'paste' is on mappings are ignored in Insert mode, thus you can do
----this:
----```
----    :map <F10> :set paste<CR>
----    :map <F11> :set nopaste<CR>
----    :imap <F10> <C-O>:set paste<CR>
----    :imap <F11> <nop>
----    :set pastetoggle=<F11>
----```
----This will make <F10> start paste mode and <F11> stop paste mode.
----Note that typing <F10> in paste mode inserts "<F10>", since in paste
----mode everything is inserted literally, except the 'pastetoggle' key
----sequence.
----When the value has several bytes 'ttimeoutlen' applies.
----
 ---@type string
 vim.o.pastetoggle = ""
 
@@ -4387,8 +4310,6 @@ vim.o.report = 2
 ---Inserting characters in Insert mode will work backwards.  See "typing
 ---backwards" |ins-reverse|.  This option can be toggled with the CTRL-_
 ---command in Insert mode, when 'allowrevins' is set.
----This option is reset when 'paste' is set and restored when 'paste' is
----reset.
 ---
 ---@type boolean
 vim.o.revins = false
@@ -4437,8 +4358,6 @@ vim.o.rightleftcmd = "search"
 ---separated with a dash.
 ---For an empty line "0-1" is shown.
 ---For an empty buffer the line number will also be zero: "0,0-1".
----This option is reset when 'paste' is set and restored when 'paste' is
----reset.
 ---If you don't want to see the ruler all the time but want to know where
 ---you are, use "g CTRL-G" |g_CTRL-G|.
 ---
@@ -5174,8 +5093,6 @@ vim.o.showfulltag = false
 ---show the match can be set with 'matchtime'.
 ---A Beep is given if there is no match (no matter if the match can be
 ---seen or not).
----This option is reset when 'paste' is set and restored when 'paste' is
----reset.
 ---When the 'm' flag is not included in 'cpoptions', typing a character
 ---will immediately move the cursor back to where it belongs.
 ---See the "sm" field in 'guicursor' for setting the cursor shape and
@@ -5299,8 +5216,6 @@ vim.o.smartcase = false
 ---mapping: ":inoremap # X^H#", where ^H is entered with CTRL-V CTRL-H.
 ---When using the ">>" command, lines starting with '#' are not shifted
 ---right.
----This option is reset when 'paste' is set and restored when 'paste' is
----reset.
 ---
 ---@type boolean
 vim.o.smartindent = false
@@ -5315,8 +5230,6 @@ vim.o.smartindent = false
 ---What gets inserted (a <Tab> or spaces) depends on the 'expandtab'
 ---option.  Also see |ins-expandtab|.  When 'expandtab' is not set, the
 ---number of spaces is minimized by using <Tab>s.
----This option is reset when 'paste' is set and restored when 'paste' is
----reset.
 ---
 ---@type boolean
 vim.o.smarttab = true
@@ -5329,8 +5242,6 @@ vim.o.smarttab = true
 ---commands like "x" still work on the actual characters.
 ---When 'sts' is zero, this feature is off.
 ---When 'sts' is negative, the value of 'shiftwidth' is used.
----'softtabstop' is set to 0 when the 'paste' option is set and restored
----when 'paste' is reset.
 ---See also |ins-expandtab|.  When 'expandtab' is not set, the number of
 ---spaces is minimized by using <Tab>s.
 ---The 'L' flag in 'cpoptions' changes how tabs are used when 'list' is
@@ -6176,8 +6087,6 @@ vim.o.terse = false
 ---Maximum width of text that is being inserted.  A longer line will be
 ---broken after white space to get this width.  A zero value disables
 ---this.
----'textwidth' is set to 0 when the 'paste' option is set and restored
----when 'paste' is reset.
 ---When 'textwidth' is zero, 'wrapmargin' may be used.  See also
 ---'formatoptions' and |ins-textwidth|.
 ---When 'formatexpr' is set it will be used to break the line.
