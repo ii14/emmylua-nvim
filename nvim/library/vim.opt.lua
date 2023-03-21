@@ -4809,9 +4809,9 @@ vim.opt.shadafile = ""
 ---To use PowerShell:
 ---```
 ---	let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
----	let &shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
----	let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
----	let &shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+---	let &shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues[''Out-File:Encoding'']=''utf8'';'
+---	let &shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+---	let &shellpipe  = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
 ---	set shellquote= shellxquote=
 ---
 ---```
@@ -4842,8 +4842,8 @@ vim.opt.shellcmdflag = "-c"
 ---The name of the temporary file can be represented by "%s" if necessary
 ---(the file name is appended automatically if no %s appears in the value
 ---of this option).
----For MS-Windows the default is ">%s 2>&1".  The output is directly
----saved in a file and not echoed to the screen.
+---For MS-Windows the default is "2>&1| tee".  The stdout and stderr are
+---saved in a file and echoed to the screen.
 ---For Unix the default is "| tee".  The stdout of the compiler is saved
 ---in a file and echoed to the screen.  If the 'shell' option is "csh" or
 ---"tcsh" after initializations, the default becomes "|& tee".  If the
