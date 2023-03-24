@@ -107,16 +107,34 @@ function vim.deepcopy(orig) end
 
 --- Splits a string at each instance of a separator.
 ---
----@see |vim.split()|
----@see |luaref-patterns|
----@see https://www.lua.org/pil/20.2.html
----@see http://lua-users.org/wiki/StringLibraryTutorial
+--- Example:
+---   <pre>lua
+---   for s in vim.gsplit(':aa::b:', ':', {plain=true}) do
+---     print(s)
+---   end
+---   </pre>
 ---
----@param s string String to split
----@param sep string Separator or pattern
----@param plain (boolean|nil) If `true` use `sep` literally (passed to string.find)
----@return fun():string (function) Iterator over the split components
-function vim.gsplit(s, sep, plain) end
+--- If you want to also inspect the separator itself (instead of discarding it), use
+--- |string.gmatch()|. Example:
+---   <pre>lua
+---   for word, num in ('foo111bar222'):gmatch('([^0-9]*)(%d*)') do
+---     print(('word: %s num: %s'):format(word, num))
+---   end
+---   </pre>
+---
+--- @see |string.gmatch()|
+--- @see |vim.split()|
+--- @see |luaref-patterns|
+--- @see https://www.lua.org/pil/20.2.html
+--- @see http://lua-users.org/wiki/StringLibraryTutorial
+---
+--- @param s string String to split
+--- @param sep string Separator or pattern
+--- @param opts (table|nil) Keyword arguments |kwargs|:
+---       - plain: (boolean) Use `sep` literally (as in string.find).
+---       - trimempty: (boolean) Discard empty segments at start and end of the sequence.
+---@return fun():string|nil (function) Iterator over the split components
+function vim.gsplit(s, sep, opts) end
 
 --- Splits a string at each instance of a separator.
 ---
@@ -129,15 +147,13 @@ function vim.gsplit(s, sep, plain) end
 --- </pre>
 ---
 ---@see |vim.gsplit()|
+---@see |string.gmatch()|
 ---
 ---@param s string String to split
 ---@param sep string Separator or pattern
----@param kwargs (table|nil) Keyword arguments:
----       - plain: (boolean) If `true` use `sep` literally (passed to string.find)
----       - trimempty: (boolean) If `true` remove empty items from the front
----         and back of the list
+---@param opts (table|nil) Keyword arguments |kwargs| accepted by |vim.gsplit()|
 ---@return string[] List of split components
-function vim.split(s, sep, kwargs) end
+function vim.split(s, sep, opts) end
 
 --- Return a list of all keys used in a table.
 --- However, the order of the return table of keys is not guaranteed.
