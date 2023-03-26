@@ -391,6 +391,11 @@ function vim.api.nvim_get_current_tabpage() end
 ---@return Window
 function vim.api.nvim_get_current_win() end
 
+---@param ns_id integer
+---@param opts table
+---@return table
+function vim.api.nvim_get_hl(ns_id, opts) end
+
 ---@param hl_id integer
 ---@param rgb boolean
 ---@return table
