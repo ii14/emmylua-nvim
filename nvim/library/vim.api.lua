@@ -331,6 +331,11 @@ function vim.api.nvim_eval_statusline(str, opts) end
 ---@return string
 function vim.api.nvim_exec(src, output) end
 
+---@param src string
+---@param opts table
+---@return table
+function vim.api.nvim_exec2(src, opts) end
+
 ---@param event any
 ---@param opts table
 function vim.api.nvim_exec_autocmds(event, opts) end
