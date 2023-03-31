@@ -440,6 +440,11 @@ function vim.api.nvim_get_option_info(name) end
 
 ---@param name string
 ---@param opts table
+---@return table
+function vim.api.nvim_get_option_info2(name, opts) end
+
+---@param name string
+---@param opts table
 ---@return any
 function vim.api.nvim_get_option_value(name, opts) end
 
