@@ -428,7 +428,7 @@ function vim.is_callable(f) end
 --- a.b.c = 1
 --- </pre>
 ---
----@param create function|nil The function called to create a missing value.
+---@param create function?(key:any):any The function called to create a missing value.
 ---@return table Empty table with metamethod
 function vim.defaulttable(create) end
 
