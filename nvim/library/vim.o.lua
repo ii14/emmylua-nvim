@@ -844,7 +844,7 @@ vim.o.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-"
 ---|fold-marker|.
 ---
 ---@type string
-vim.o.commentstring = "/*%s*/"
+vim.o.commentstring = ""
 
 ---@type boolean
 vim.o.compatible = false

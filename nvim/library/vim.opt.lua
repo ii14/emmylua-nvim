@@ -859,7 +859,7 @@ vim.opt.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-"
 ---|fold-marker|.
 ---
 ---@type vim.opt.Opt
-vim.opt.commentstring = "/*%s*/"
+vim.opt.commentstring = ""
 
 ---@type vim.opt.Opt
 vim.opt.compatible = false
