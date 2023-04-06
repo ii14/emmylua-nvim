@@ -4394,7 +4394,7 @@ vim.o.rulerformat = ""
 ---  pack/		packages |:packadd|
 ---  parser/	|treesitter| syntax parsers
 ---  plugin/	plugin scripts |write-plugin|
----  query/	|treesitter| queries
+---  queries/	|treesitter| queries
 ---  rplugin/	|remote-plugin| scripts
 ---  spell/	spell checking files |spell|
 ---  syntax/	syntax files |mysyntaxfile|
@@ -6896,7 +6896,7 @@ vim.o.writeany = false
 ---@type boolean
 vim.o.writebackup = true
 
----Only takes effect toghether with 'redrawdebug'.
+---Only takes effect together with 'redrawdebug'.
 ---The number of milliseconds to wait after each line or each flush
 ---
 ---@type number

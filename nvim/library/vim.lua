@@ -385,7 +385,7 @@ function vim.endswith(s, suffix) end
 ---  vim.validate{arg1={{'foo'}, {'table', 'string'}}, arg2={'foo', {'table', 'string'}}}
 ---     --> NOP (success)
 ---
----  vim.validate{arg1={1, {'string', table'}}}
+---  vim.validate{arg1={1, {'string', 'table'}}}
 ---     --> error('arg1: expected string|table, got number')
 ---
 --- </pre>
