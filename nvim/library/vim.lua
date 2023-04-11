@@ -87,9 +87,9 @@ function vim.rpcnotify(channel, method, ...) end
 --- ```
 ---
 ---@param time integer
----@param callback function
----@param interval integer
----@param fast_only boolean
+---@param callback function?
+---@param interval integer?
+---@param fast_only boolean?
 ---@return boolean, integer
 function vim.wait(time, callback, interval, fast_only) end
 
