@@ -10,11 +10,18 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v3
+      - name: Install Neovim
+        shell: bash
+        run: |
+          mkdir -p /tmp/nvim
+          wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -O /tmp/nvim/nvim.appimage
+          cd /tmp/nvim
+          chmod a+x ./nvim.appimage
+          ./nvim.appimage --appimage-extract
+          echo "/tmp/nvim/squashfs-root/usr/bin/" >> $GITHUB_PATH
       - name: gen
         shell: bash
         run: |
-          wget -q https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.deb -O /tmp/nvim.deb
-          sudo dpkg -i /tmp/nvim.deb
           nvim --clean --headless -c 'so gen_vim.lua' -c 'so gen_api.lua' -c 'so gen_fn.lua' -c 'so gen_opt.lua' -c 'qa!'
           git diff --quiet --exit-code && exit
           git config user.name github-actions
