@@ -524,8 +524,8 @@ function vim.cmd(command) end
 --- Input and output positions are (0,0)-indexed and indicate byte positions.
 ---
 ---@param bufnr integer number of buffer
----@param pos1 integer[] (line, column) tuple marking beginning of region
----@param pos2 integer[] (line, column) tuple marking end of region
+---@param pos1 integer[]|string start of region as a (line, column) tuple or string accepted by |getpos()|
+---@param pos2 integer[]|string end of region as a (line, column) tuple or string accepted by |getpos()|
 ---@param regtype string type of selection, see |setreg()|
 ---@param inclusive boolean indicating whether column of pos2 is inclusive
 ---@return table region Table of the form `{linenr = {startcol,endcol}}`.
