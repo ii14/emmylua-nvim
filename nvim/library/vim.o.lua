@@ -3077,7 +3077,6 @@ vim.o.keymap = ""
 ---   stopsel	Using a not-shifted special key stops selection.
 ---Special keys in this context are the cursor keys, <End>, <Home>,
 ---<PageUp> and <PageDown>.
----The 'keymodel' option is set by the |:behave| command.
 ---
 ---@type string
 vim.o.keymodel = ""
@@ -3700,20 +3699,6 @@ vim.o.more = true
 ---'mousehide'	hide mouse pointer while typing text
 ---'selectmode'	whether to start Select mode or Visual mode
 ---
----The :behave command provides some "profiles" for mouse behavior.
----							*:behave* *:be*
----:be[have] {model}	Set behavior for mouse and selection.  Valid
----			arguments are:
----			   mswin	MS-Windows behavior
----			   xterm	Xterm behavior
----
----			Using ":behave" changes these options:
----			option		mswin			xterm	~
----			'selectmode'	"mouse,key"		""
----			'mousemodel'	"popup"			"extend"
----			'keymodel'	"startsel,stopsel"	""
----			'selection'	"exclusive"		"inclusive"
----
 ---@type string
 vim.o.mouse = "nvi"
 
@@ -3781,8 +3766,6 @@ vim.o.mousehide = true
 ---the "g" key before using the mouse:
 ---    "g<LeftMouse>"  is "<C-LeftMouse>	(jump to tag under mouse click)
 ---    "g<RightMouse>" is "<C-RightMouse>	("CTRL-T")
----
----The 'mousemodel' option is set by the |:behave| command.
 ---
 ---@type string
 vim.o.mousemodel = "popup_setpos"
@@ -4568,8 +4551,6 @@ vim.o.secure = false
 ---backwards, you cannot include the last character of a line, when
 ---starting in Normal mode and 'virtualedit' empty.
 ---
----The 'selection' option is set by the |:behave| command.
----
 ---@type string
 vim.o.selection = "inclusive"
 
@@ -4580,7 +4561,6 @@ vim.o.selection = "inclusive"
 ---   key		when using shifted special keys
 ---   cmd		when using "v", "V" or CTRL-V
 ---See |Select-mode|.
----The 'selectmode' option is set by the |:behave| command.
 ---
 ---@type string
 vim.o.selectmode = ""
