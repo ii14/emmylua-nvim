@@ -189,12 +189,34 @@ function vim.tbl_map(func, t) end
 ---@return T[] (table) Table of filtered values
 function vim.tbl_filter(func, t) end
 
---- Checks if a list-like (vector) table contains `value`.
+--- Checks if a table contains a given value, specified either directly or via
+--- a predicate that is checked for each value.
+---
+--- Example:
+--- <pre>lua
+---  vim.tbl_contains({ 'a', { 'b', 'c' } }, function(v)
+---    return vim.deep_equal(v, { 'b', 'c' })
+---  end, { predicate = true })
+---  -- true
+--- </pre>
+---
+---@see |vim.list_contains()| for checking values in list-like tables
 ---
 ---@param t table Table to check
+---@param value any Value to compare or predicate function reference
+---@param opts (table|nil) Keyword arguments |kwargs|:
+---       - predicate: (boolean) `value` is a function reference to be checked (default false)
+---@return boolean `true` if `t` contains `value`
+function vim.tbl_contains(t, value, opts) end
+
+--- Checks if a list-like table (integer keys without gaps) contains `value`.
+---
+---@see |vim.tbl_contains()| for checking values in general tables
+---
+---@param t table Table to check (must be list-like, not validated)
 ---@param value any Value to compare
 ---@return boolean `true` if `t` contains `value`
-function vim.tbl_contains(t, value) end
+function vim.list_contains(t, value) end
 
 --- Checks if a table is empty.
 ---
@@ -294,14 +316,24 @@ function vim.tbl_flatten(t) end
 ---@return iterator over sorted keys and their values
 function vim.spairs(t) end
 
---- Tests if a Lua table can be treated as an array.
+--- Tests if a Lua table can be treated as an array (a table indexed by integers).
 ---
 --- Empty table `{}` is assumed to be an array, unless it was created by
 --- |vim.empty_dict()| or returned as a dict-like |API| or Vimscript result,
 --- for example from |rpcrequest()| or |vim.fn|.
 ---
----@param t table Table
----@return boolean `true` if array-like table, else `false`
+---@param t table
+---@return boolean `true` if array-like table, else `false`.
+function vim.tbl_isarray(t) end
+
+--- Tests if a Lua table can be treated as a list (a table indexed by consecutive integers starting from 1).
+---
+--- Empty table `{}` is assumed to be an list, unless it was created by
+--- |vim.empty_dict()| or returned as a dict-like |API| or Vimscript result,
+--- for example from |rpcrequest()| or |vim.fn|.
+---
+---@param t table
+---@return boolean `true` if list-like table, else `false`.
 function vim.tbl_islist(t) end
 
 --- Counts the number of non-nil values in table `t`.
