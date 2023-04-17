@@ -2833,8 +2833,8 @@ vim.opt.include = "^\\s*#\\s*include"
 ---If the expression starts with s: or |<SID>|, then it is replaced with
 ---the script ID (|local-function|). Example:
 ---```
----	set includeexpr=s:MyIncludeExpr(v:fname)
----	set includeexpr=<SID>SomeIncludeExpr(v:fname)
+---	setlocal includeexpr=s:MyIncludeExpr(v:fname)
+---	setlocal includeexpr=<SID>SomeIncludeExpr(v:fname)
 ---```
 ---The expression will be evaluated in the |sandbox| when set from a
 ---modeline, see |sandbox-option|.
