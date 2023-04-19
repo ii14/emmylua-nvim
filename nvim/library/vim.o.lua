@@ -2033,7 +2033,9 @@ vim.o.foldcolumn = "0"
 vim.o.foldenable = true
 
 ---The expression used for when 'foldmethod' is "expr".  It is evaluated
----for each line to obtain its fold level.  See |fold-expr|.
+---for each line to obtain its fold level.  The context is set to the
+---script where 'foldexpr' was set, script-local items can be accessed.
+---See |fold-expr| for the usage.
 ---
 ---The expression will be evaluated in the |sandbox| if set from a
 ---modeline, see |sandbox-option|.
@@ -2148,7 +2150,9 @@ vim.o.foldnestmax = 20
 vim.o.foldopen = "block,hor,mark,percent,quickfix,search,tag,undo"
 
 ---An expression which is used to specify the text displayed for a closed
----fold.  See |fold-foldtext|.
+---fold.  The context is set to the script where 'foldexpr' was set,
+---script-local items can be accessed.  See |fold-foldtext| for the
+---usage.
 ---
 ---The expression will be evaluated in the |sandbox| if set from a
 ---modeline, see |sandbox-option|.
@@ -2193,6 +2197,9 @@ vim.o.foldtext = "foldtext()"
 ---	set formatexpr=s:MyFormatExpr()
 ---	set formatexpr=<SID>SomeFormatExpr()
 ---```
+---Otherwise, the expression is evaluated in the context of the script
+---where the option was set, thus script-local items are available.
+---
 ---The expression will be evaluated in the |sandbox| when set from a
 ---modeline, see |sandbox-option|.  That stops the option from working,
 ---since changing the buffer text is not allowed.
@@ -2821,6 +2828,9 @@ vim.o.include = "^\\s*#\\s*include"
 ---	setlocal includeexpr=s:MyIncludeExpr(v:fname)
 ---	setlocal includeexpr=<SID>SomeIncludeExpr(v:fname)
 ---```
+---Otherwise, the expression is evaluated in the context of the script
+---where the option was set, thus script-local items are available.
+---
 ---The expression will be evaluated in the |sandbox| when set from a
 ---modeline, see |sandbox-option|.
 ---This option cannot be set in a modeline when 'modelineexpr' is off.
@@ -2876,12 +2886,16 @@ vim.o.incsearch = true
 ---The expression is evaluated with |v:lnum| set to the line number for
 ---which the indent is to be computed.  The cursor is also in this line
 ---when the expression is evaluated (but it may be moved around).
+---
 ---If the expression starts with s: or |<SID>|, then it is replaced with
 ---the script ID (|local-function|). Example:
 ---```
 ---	set indentexpr=s:MyIndentExpr()
 ---	set indentexpr=<SID>SomeIndentExpr()
 ---```
+---Otherwise, the expression is evaluated in the context of the script
+---where the option was set, thus script-local items are available.
+---
 ---The expression must return the number of spaces worth of indent.  It
 ---can return "-1" to keep the current indent (this means 'autoindent' is
 ---used for the indent).
