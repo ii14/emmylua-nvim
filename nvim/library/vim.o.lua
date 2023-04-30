@@ -2247,8 +2247,8 @@ vim.o.formatoptions = "tcqj"
 vim.o.formatprg = ""
 
 ---When on, the OS function fsync() will be called after saving a file
----(|:write|, |writefile()|, …), |swap-file| and |shada-file|. This
----flushes the file to disk, ensuring that it is safely written.
+---(|:write|, |writefile()|, …), |swap-file|, |undo-persistence| and |shada-file|.
+---This flushes the file to disk, ensuring that it is safely written.
 ---Slow on some systems: writing buffers, quitting Nvim, and other
 ---operations may sometimes take a few seconds.
 ---
