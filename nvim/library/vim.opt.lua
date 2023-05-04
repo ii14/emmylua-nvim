@@ -5243,6 +5243,16 @@ vim.opt.smartindent = false
 ---@type vim.opt.Opt
 vim.opt.smarttab = true
 
+---Scrolling works with screen lines.  When 'wrap' is set and the first
+---line in the window wraps part of it may not be visible, as if it is
+---above the window. "<<<" is displayed at the start of the first line,
+---highlighted with |hl-NonText|.
+---NOTE: only partly implemented, currently works with CTRL-E, CTRL-Y
+---and scrolling with the mouse.
+---
+---@type vim.opt.Opt
+vim.opt.smoothscroll = false
+
 ---Number of spaces that a <Tab> counts for while performing editing
 ---operations, like inserting a <Tab> or using <BS>.  It "feels" like
 ---<Tab>s are being inserted, while in fact a mix of spaces and <Tab>s is
