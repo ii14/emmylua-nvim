@@ -226,7 +226,7 @@ function vim.list_contains(t, value) end
 ---@return boolean `true` if `t` is empty
 function vim.tbl_isempty(t) end
 
---- Merges two or more map-like tables.
+--- Merges two or more tables.
 ---
 ---@see |extend()|
 ---
@@ -234,11 +234,11 @@ function vim.tbl_isempty(t) end
 ---      - "error": raise an error
 ---      - "keep":  use value from the leftmost map
 ---      - "force": use value from the rightmost map
----@param ... table Two or more map-like tables
+---@param ... table Two or more tables
 ---@return table Merged table
 function vim.tbl_extend(behavior, ...) end
 
---- Merges recursively two or more map-like tables.
+--- Merges recursively two or more tables.
 ---
 ---@see |vim.tbl_extend()|
 ---
@@ -248,7 +248,7 @@ function vim.tbl_extend(behavior, ...) end
 ---      - "error": raise an error
 ---      - "keep":  use value from the leftmost map
 ---      - "force": use value from the rightmost map
----@param ... T2 Two or more map-like tables
+---@param ... T2 Two or more tables
 ---@return T1|T2 (table) Merged table
 function vim.tbl_deep_extend(behavior, ...) end
 
@@ -628,7 +628,7 @@ function vim._on_key(char) end
 ---     2. Can we get it to return things from global namespace even with `print(` in front.
 function vim._expand_pat(pat, env) end
 
---- Omnifunc for completing lua values from from the runtime lua interpreter,
+--- Omnifunc for completing lua values from the runtime lua interpreter,
 --- similar to the builtin completion for the `:lua` command.
 ---
 --- Activate using `set omnifunc=v:lua.vim.lua_omnifunc` in a lua buffer.

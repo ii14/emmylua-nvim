@@ -756,7 +756,7 @@ vim.o.cinoptions = ""
 ---		register.  When "unnamed" is also included to the
 ---		option, yank and delete operations (but not put)
 ---		will additionally copy the text into register
----		'*'. See |clipboard|.
+---		"*". See |clipboard|.
 ---
 ---@type string
 vim.o.cinscopedecls = "public,protected,private"
@@ -3014,7 +3014,7 @@ vim.o.isident = "@,48-57,_,192-255"
 ---that is not white space or punctuation).
 ---For C programs you could use "a-z,A-Z,48-57,_,.,-,>".
 ---For a help file it is set to all non-blank printable characters except
----'*', '"' and '|' (so that CTRL-] on a command finds the help for that
+---"*", '"' and '|' (so that CTRL-] on a command finds the help for that
 ---command).
 ---When the 'lisp' option is on the '-' character is always included.
 ---This option also influences syntax highlighting, unless the syntax
