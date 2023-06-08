@@ -843,8 +843,8 @@ vim.o.columns = 80
 vim.o.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-"
 
 ---A template for a comment.  The "%s" in the value is replaced with the
----comment text.  Currently only used to add markers for folding, see
----|fold-marker|.
+---comment text.  For example, C uses "/*%s*/". Currently only used to
+---add markers for folding, see |fold-marker|.
 ---
 ---@type string
 vim.o.commentstring = ""
@@ -1318,8 +1318,7 @@ vim.o.debug = ""
 ---	{match with 'define'}{non-ID chars}{defined name}{non-ID char}
 ---See |option-backslash| about inserting backslashes to include a space
 ---or backslash.
----The default value is for C programs.  For C++ this value would be
----useful, to include const type declarations:
+---For C++ this value would be useful, to include const type declarations:
 ---```
 ---	^\(#\s*define\|[a-z]*\s*const\s*[a-z]*\)
 ---```
@@ -1339,7 +1338,7 @@ vim.o.debug = ""
 ---```
 ---
 ---@type string
-vim.o.define = "^\\s*#\\s*define"
+vim.o.define = ""
 
 ---If editing Unicode and this option is set, backspace and Normal mode
 ---"x" delete each combining character on its own.  When it is off (the
@@ -2795,9 +2794,8 @@ vim.o.imsearch = -1
 vim.o.inccommand = "nosplit"
 
 ---Pattern to be used to find an include command.  It is a search
----pattern, just like for the "/" command (See |pattern|).  The default
----value is for C programs.  This option is used for the commands "[i",
----"]I", "[d", etc.
+---pattern, just like for the "/" command (See |pattern|).  This option
+---is used for the commands "[i", "]I", "[d", etc.
 ---Normally the 'isfname' option is used to recognize the file name that
 ---comes after the matched pattern.  But if "\zs" appears in the pattern
 ---then the text matched from "\zs" to the end, or until "\ze" if it
@@ -2807,7 +2805,7 @@ vim.o.inccommand = "nosplit"
 ---See |option-backslash| about including spaces and backslashes.
 ---
 ---@type string
-vim.o.include = "^\\s*#\\s*include"
+vim.o.include = ""
 
 ---Expression to be used to transform the string found with the 'include'
 ---option to a file name.  Mostly useful to change "." to "/" for Java:
@@ -4101,7 +4099,7 @@ vim.o.patchmode = ""
 ---this doesn't work when $INCL contains a comma or white space.
 ---
 ---@type string
-vim.o.path = ".,/usr/include,,"
+vim.o.path = ".,,"
 
 ---When changing the indent of the current line, preserve as much of the
 ---indent structure as possible.  Normally the indent is replaced by a
