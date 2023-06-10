@@ -464,6 +464,36 @@ function vim.is_callable(f) end
 ---@return table Empty table with metamethod
 function vim.defaulttable(create) end
 
+--- Create a ring buffer limited to a maximal number of items.
+--- Once the buffer is full, adding a new entry overrides the oldest entry.
+---
+--- <pre>
+---   local ringbuf = vim.ringbuf(4)
+---   ringbuf:push("a")
+---   ringbuf:push("b")
+---   ringbuf:push("c")
+---   ringbuf:push("d")
+---   ringbuf:push("e")    -- overrides "a"
+---   print(ringbuf:pop()) -- returns "b"
+---   print(ringbuf:pop()) -- returns "c"
+---
+---   -- Can be used as iterator. Pops remaining items:
+---   for val in ringbuf do
+---     print(val)
+---   end
+--- </pre>
+---
+--- Returns a Ringbuf instance with the following methods:
+---
+--- - |Ringbuf:push()|
+--- - |Ringbuf:pop()|
+--- - |Ringbuf:peek()|
+--- - |Ringbuf:clear()|
+---
+---@param size integer
+---@return vim.Ringbuf ringbuf (table)
+function vim.ringbuf(size) end
+
 --- Run a system command
 ---
 --- Examples:
