@@ -1546,17 +1546,13 @@ vim.o.digraph = false
 ---```
 ---- For backwards compatibility with Vim version 3.0 a '>' at the start
 ---  of the option is removed.
----Using "." first in the list is recommended.  This means that editing
----the same file twice will result in a warning.  Using "/tmp" on Unix is
----discouraged: When the system crashes you lose the swap file.
----"/var/tmp" is often not cleared when rebooting, thus is a better
----choice than "/tmp".  But others on the computer may be able to see the
----files, and it can contain a lot of files, your swap files get lost in
----the crowd.  That is why a "tmp" directory in your home directory is
----tried first.
----The use of |:set+=| and |:set-=| is preferred when adding or removing
----directories from the list.  This avoids problems when a future version
----uses another default.
+---
+---Editing the same file twice will result in a warning.  Using "/tmp" on
+---is discouraged: if the system crashes you lose the swap file. And
+---others on the computer may be able to see the files.
+---Use |:set+=| and |:set-=| when adding or removing directories from the
+---list, this avoids problems if the Nvim default is changed.
+---
 ---This option cannot be set from a |modeline| or in the |sandbox|, for
 ---security reasons.
 ---
