@@ -948,7 +948,7 @@ vim.opt.completefunc = ""
 ---@type vim.opt.Opt
 vim.opt.completeopt = "menu,preview"
 
----		{only for MS-Windows}
+---		only for MS-Windows
 ---When this option is set it overrules 'shellslash' for completion:
 ---- When this option is set to "slash", a forward slash is used for path
 ---  completion in insert mode. This is useful when editing HTML tag, or
@@ -3264,7 +3264,7 @@ vim.opt.linebreak = false
 ---@type vim.opt.Opt
 vim.opt.lines = 24
 
----		{only in the GUI}
+---		only in the GUI
 ---Number of pixel lines inserted between characters.  Useful if the font
 ---uses the full character cell height, making lines touch each other.
 ---When non-zero there is room for underlining.
@@ -3737,7 +3737,7 @@ vim.opt.mouse = "nvi"
 ---@type vim.opt.Opt
 vim.opt.mousefocus = false
 
----		{only works in the GUI}
+---		only in the GUI
 ---When on, the mouse pointer is hidden when characters are typed.
 ---The mouse pointer is restored when the mouse is moved.
 ---
@@ -3980,7 +3980,7 @@ vim.opt.numberwidth = 4
 ---@type vim.opt.Opt
 vim.opt.omnifunc = ""
 
----		{only for Windows}
+---		only for Windows
 ---Enable reading and writing from devices.  This may get Vim stuck on a
 ---device that can be opened but doesn't actually do the I/O.  Therefore
 ---it is off by default.
@@ -4902,7 +4902,7 @@ vim.opt.shellquote = ""
 ---@type vim.opt.Opt
 vim.opt.shellredir = ">%s 2>&1"
 
----		{only for MS-Windows}
+---		only for MS-Windows
 ---When set, a forward slash is used when expanding file names.  This is
 ---useful when a Unix-like shell is used instead of cmd.exe.  Backward
 ---slashes can still be typed, but they are changed to forward slashes by
@@ -6708,7 +6708,7 @@ vim.opt.wildmode = "full"
 ---@type vim.opt.Opt
 vim.opt.wildoptions = "pum,tagfile"
 
----		{only used in Win32}
+---		only used in Win32
 ---Some GUI versions allow the access to menu entries by using the ALT
 ---key in combination with a character that appears underlined in the
 ---menu.  This conflicts with the use of the ALT key for mappings and

@@ -717,10 +717,10 @@ function vim._on_key(char) end
 ---     2. Can we get it to return things from global namespace even with `print(` in front.
 function vim._expand_pat(pat, env) end
 
---- Omnifunc for completing lua values from the runtime lua interpreter,
+--- Omnifunc for completing Lua values from the runtime Lua interpreter,
 --- similar to the builtin completion for the `:lua` command.
 ---
---- Activate using `set omnifunc=v:lua.vim.lua_omnifunc` in a lua buffer.
+--- Activate using `set omnifunc=v:lua.vim.lua_omnifunc` in a Lua buffer.
 function vim.lua_omnifunc(find_start, _) end
 
 ---@private
