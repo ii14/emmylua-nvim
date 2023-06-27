@@ -101,9 +101,6 @@ vim.o.autochdir = false
 ---line.
 ---When 'smartindent' or 'cindent' is on the indent is changed in
 ---a different way.
----{small difference from Vi: After the indent is deleted when typing
----<Esc> or <CR>, the cursor position when moving up or down is after the
----deleted indent; Vi puts the cursor somewhere in the deleted indent}.
 ---
 ---@type boolean
 vim.o.autoindent = true
@@ -1315,7 +1312,9 @@ vim.o.debug = ""
 ---pattern, just like for the "/" command.  This option is used for the
 ---commands like "[i" and "[d" |include-search|.  The 'isident' option is
 ---used to recognize the defined name after the match:
+---```
 ---	{match with 'define'}{non-ID chars}{defined name}{non-ID char}
+---```
 ---See |option-backslash| about inserting backslashes to include a space
 ---or backslash.
 ---For C++ this value would be useful, to include const type declarations:
@@ -3574,8 +3573,9 @@ vim.o.menuitems = 25
 ---this tuning is complicated.
 ---
 ---There are three numbers, separated by commas:
+---```
 ---	{start},{inc},{added}
----
+---```
 ---For most languages the uncompressed word tree fits in memory.  {start}
 ---gives the amount of memory in Kbyte that can be used before any
 ---compression is done.  It should be a bit smaller than the amount of

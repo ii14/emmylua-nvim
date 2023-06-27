@@ -734,6 +734,7 @@ function vim.pretty_print(...) end
 --- </pre>
 ---
 --- @see |vim.inspect()|
+--- @see |:=|
 --- @return any # given arguments.
 function vim.print(...) end
 
