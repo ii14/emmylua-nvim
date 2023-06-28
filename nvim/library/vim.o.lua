@@ -334,7 +334,7 @@ vim.o.backupdir = ""
 ---accidentally overwriting existing files with a backup file.  You might
 ---prefer using ".bak", but make sure that you don't have files with
 ---".bak" that you want to keep.
----Only normal file name characters can be used; "/\*?[|<>" are illegal.
+---Only normal file name characters can be used; `/\*?[|<>` are illegal.
 ---
 ---If you like to keep a lot of backups, you could use a BufWritePre
 ---autocommand to change 'backupext' just before writing the file to
@@ -1915,7 +1915,7 @@ vim.o.fileignorecase = false
 ---one dot may appear.
 ---This option is not copied to another buffer, independent of the 's' or
 ---'S' flag in 'cpoptions'.
----Only normal file name characters can be used, "/\*?[|<>" are illegal.
+---Only normal file name characters can be used, `/\*?[|<>` are illegal.
 ---
 ---@type string
 vim.o.filetype = ""
@@ -2121,7 +2121,7 @@ vim.o.foldnestmax = 20
 ---
 ---	item		commands ~
 ---	all		any
----	block		"(", "{", "[[", "[{", etc.
+---	block		(, {, [[, [{, etc.
 ---	hor		horizontal movements: "l", "w", "fx", etc.
 ---	insert		any command in Insert mode
 ---	jump		far jumps: "G", "gg", etc.
@@ -3074,7 +3074,7 @@ vim.o.jumpoptions = ""
 ---Setting this option to a valid keymap name has the side effect of
 ---setting 'iminsert' to one, so that the keymap becomes effective.
 ---'imsearch' is also set to one, unless it was -1
----Only normal file name characters can be used, "/\*?[|<>" are illegal.
+---Only normal file name characters can be used, `/\*?[|<>` are illegal.
 ---
 ---@type string
 vim.o.keymap = ""
@@ -3167,7 +3167,7 @@ vim.o.langmap = ""
 ---	:set langmenu=nl_NL.ISO_8859-1
 ---```
 ---When 'langmenu' is empty, |v:lang| is used.
----Only normal file name characters can be used, "/\*?[|<>" are illegal.
+---Only normal file name characters can be used, `/\*?[|<>` are illegal.
 ---If your $LANG is set to a non-English language but you do want to use
 ---the English menus:
 ---```
@@ -4024,7 +4024,7 @@ vim.o.patchexpr = ""
 ---Using 'patchmode' for compressed files appends the extension at the
 ---end (e.g., "file.gz.orig"), thus the resulting name isn't always
 ---recognized as a compressed file.
----Only normal file name characters can be used, "/\*?[|<>" are illegal.
+---Only normal file name characters can be used, `/\*?[|<>` are illegal.
 ---
 ---@type string
 vim.o.patchmode = ""
@@ -5863,7 +5863,7 @@ vim.o.synmaxcol = 3000
 ---Syntax autocommand event is triggered with the value as argument.
 ---This option is not copied to another buffer, independent of the 's' or
 ---'S' flag in 'cpoptions'.
----Only normal file name characters can be used, "/\*?[|<>" are illegal.
+---Only normal file name characters can be used, `/\*?[|<>` are illegal.
 ---
 ---@type string
 vim.o.syntax = ""
