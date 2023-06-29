@@ -3986,7 +3986,8 @@ vim.o.opendevice = false
 ---@type string
 vim.o.operatorfunc = ""
 
----Directories used to find packages.  See |packages| and |rtp-packages|.
+---Directories used to find packages.
+---See |packages| and |packages-runtimepath|.
 ---
 ---@type string
 vim.o.packpath = ""

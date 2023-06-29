@@ -4001,7 +4001,8 @@ vim.opt.opendevice = false
 ---@type vim.opt.Opt
 vim.opt.operatorfunc = ""
 
----Directories used to find packages.  See |packages| and |rtp-packages|.
+---Directories used to find packages.
+---See |packages| and |packages-runtimepath|.
 ---
 ---@type vim.opt.Opt
 vim.opt.packpath = ""
