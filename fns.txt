@@ -36,21 +36,24 @@ assert_report({msg})		Number	report a test failure
 assert_true({actual} [, {msg}])	Number	assert {actual} is true
 atan({expr})			Float	arc tangent of {expr}
 atan2({expr1}, {expr2})		Float	arc tangent of {expr1} / {expr2}
+blob2list({blob})		List	convert {blob} into a list of numbers
 browse({save}, {title}, {initdir}, {default})
 				String	put up a file requester
 browsedir({title}, {initdir})	String	put up a directory requester
 bufadd({name})			Number	add a buffer to the buffer list
-bufexists({expr})		Number	|TRUE| if buffer {expr} exists
-buflisted({expr})		Number	|TRUE| if buffer {expr} is listed
-bufload({expr})			Number	load buffer {expr} if not loaded yet
-bufloaded({expr})		Number	|TRUE| if buffer {expr} is loaded
-bufname([{expr}])		String	Name of the buffer {expr}
-bufnr([{expr} [, {create}]])	Number	Number of the buffer {expr}
-bufwinid({expr})		Number	|window-ID| of buffer {expr}
-bufwinnr({expr})		Number	window number of buffer {expr}
+bufexists({buf})		Number	|TRUE| if buffer {buf} exists
+buflisted({buf})		Number	|TRUE| if buffer {buf} is listed
+bufload({buf})			Number	load buffer {buf} if not loaded yet
+bufloaded({buf})		Number	|TRUE| if buffer {buf} is loaded
+bufname([{buf}])		String	Name of the buffer {buf}
+bufnr([{buf} [, {create}]])	Number	Number of the buffer {buf}
+bufwinid({buf})			Number	window ID of buffer {buf}
+bufwinnr({buf})			Number	window number of buffer {buf}
 byte2line({byte})		Number	line number at byte count {byte}
-byteidx({expr}, {nr})		Number	byte index of {nr}'th char in {expr}
-byteidxcomp({expr}, {nr})	Number	byte index of {nr}'th char in {expr}
+byteidx({expr}, {nr} [, {utf16}])
+				Number	byte index of {nr}th char in {expr}
+byteidxcomp({expr}, {nr} [, {utf16}])
+				Number	byte index of {nr}th char in {expr}
 call({func}, {arglist} [, {dict}])
 				any	call {func} with arguments {arglist}
 ceil({expr})			Float	round {expr} up
@@ -58,13 +61,14 @@ changenr()			Number	current change number
 chanclose({id} [, {stream}])	Number	Closes a channel or one of its streams
 chansend({id}, {data})		Number	Writes {data} to channel
 char2nr({expr} [, {utf8}])	Number	ASCII/UTF-8 value of first char in {expr}
-charcol({expr})			Number	column number of cursor or mark
-charidx({string}, {idx} [, {countcc}])
+charclass({string})		Number	character class of {string}
+charcol({expr} [, {winid}])	Number	column number of cursor or mark
+charidx({string}, {idx} [, {countcc} [, {utf16}]])
 				Number	char index of byte {idx} in {string}
 chdir({dir})			String	change current working directory
 cindent({lnum})			Number	C indent for line {lnum}
 clearmatches([{win}])		none	clear all matches
-col({expr})			Number	column byte index of cursor or mark
+col({expr} [, {winid}])		Number	column byte index of cursor or mark
 complete({startcol}, {matches}) none	set Insert mode completion
 complete_add({expr})		Number	add completion match
 complete_check()		Number	check for key typed during completion
@@ -76,8 +80,6 @@ cos({expr})			Float	cosine of {expr}
 cosh({expr})			Float	hyperbolic cosine of {expr}
 count({comp}, {expr} [, {ic} [, {start}]])
 				Number	count how many {expr} are in {comp}
-cscope_connection([{num}, {dbpath} [, {prepend}]])
-				Number	checks existence of cscope connection
 ctxget([{index}])		Dict	return the |context| dict at {index}
 ctxpop()			none	pop and restore |context| from the
 					|context-stack|
@@ -100,7 +102,7 @@ dictwatcherdel({dict}, {pattern}, {callback})
 did_filetype()			Number	|TRUE| if FileType autocommand event used
 diff_filler({lnum})		Number	diff filler lines about {lnum}
 diff_hlID({lnum}, {col})	Number	diff highlighting at {lnum}/{col}
-digraph_get({chars})		String	get the digraph of {chars}
+digraph_get({chars})		String	get the |digraph| of {chars}
 digraph_getlist([{listall}])	List	get all |digraph|s
 digraph_set({chars}, {digraph})	Boolean	register |digraph|
 digraph_setlist({digraphlist})	Boolean	register multiple |digraph|s
@@ -113,12 +115,16 @@ executable({expr})		Number	1 if executable {expr} exists
 execute({command})		String	execute and capture output of {command}
 exepath({expr})			String	full path of the command {expr}
 exists({expr})			Number	|TRUE| if {expr} exists
-extend({expr1}, {expr2} [, {expr3}])
-				List/Dict insert items of {expr2} into {expr1}
 exp({expr})			Float	exponential of {expr}
 expand({expr} [, {nosuf} [, {list}]])
 				any	expand special keywords in {expr}
-expandcmd({expr})		String	expand {expr} like with `:edit`
+expandcmd({string} [, {options}])
+				String	expand {string} like with `:edit`
+extend({expr1}, {expr2} [, {expr3}])
+				List/Dict insert items of {expr2} into {expr1}
+extendnew({expr1}, {expr2} [, {expr3}])
+				List/Dict like |extend()| but creates a new
+					List or Dictionary
 feedkeys({string} [, {mode}])	Number	add key sequence to typeahead buffer
 filereadable({file})		Number	|TRUE| if {file} is a readable file
 filewritable({file})		Number	|TRUE| if {file} is a writable file
@@ -129,6 +135,8 @@ finddir({name} [, {path} [, {count}]])
 findfile({name} [, {path} [, {count}]])
 				String	find file {name} in {path}
 flatten({list} [, {maxdepth}])	List	flatten {list} up to {maxdepth} levels
+flattennew({list} [, {maxdepth}])
+				List	flatten a copy of {list}
 float2nr({expr})		Number	convert Float {expr} to a Number
 floor({expr})			Float	round {expr} down
 fmod({expr1}, {expr2})		Float	remainder of {expr1} / {expr2}
@@ -151,8 +159,10 @@ get({func}, {what})		any	get property of funcref/partial {func}
 getbufinfo([{buf}])		List	information about buffers
 getbufline({buf}, {lnum} [, {end}])
 				List	lines {lnum} to {end} of buffer {buf}
+getbufoneline({buf}, {lnum})	String	line {lnum} of buffer {buf}
 getbufvar({buf}, {varname} [, {def}])
 				any	variable {varname} in buffer {buf}
+getcellwidths()			List	get character cell width overrides
 getchangelist([{buf}])		List	list of change list items
 getchar([expr])			Number or String
 					get one character from the user
@@ -196,14 +206,16 @@ getreg([{regname} [, 1 [, {list}]]])
 				String or List   contents of a register
 getreginfo([{regname}])		Dict	information about a register
 getregtype([{regname}])		String	type of a register
+getscriptinfo([{opts}])		List	list of sourced scripts
 gettabinfo([{expr}])		List	list of tab pages
 gettabvar({nr}, {varname} [, {def}])
 				any	variable {varname} in tab {nr} or {def}
 gettabwinvar({tabnr}, {winnr}, {name} [, {def}])
 				any	{name} in {winnr} in tab page {tabnr}
 gettagstack([{nr}])		Dict	get the tag stack of window {nr}
+gettext({text})			String	lookup translation of {text}
 getwininfo([{winid}])		List	list of info about each window
-getwinpos([{timeout}])		List	X and Y coord in pixels of the Vim window
+getwinpos([{timeout}])		List	X and Y coord in pixels of Vim window
 getwinposx()			Number	X coord in pixels of Vim window
 getwinposy()			Number	Y coord in pixels of Vim window
 getwinvar({nr}, {varname} [, {def}])
@@ -220,17 +232,19 @@ haslocaldir([{winnr} [, {tabnr}]])
 					the tab executed |:tcd|
 hasmapto({what} [, {mode} [, {abbr}]])
 				Number	|TRUE| if mapping to {what} exists
-histadd({history}, {item})	String	add an item to a history
-histdel({history} [, {item}])	String	remove an item from a history
+histadd({history}, {item})	Number	add an item to a history
+histdel({history} [, {item}])	Number	remove an item from a history
 histget({history} [, {index}])	String	get the item {index} from a history
 histnr({history})		Number	highest index of a history
-hlexists({name})		Number	|TRUE| if highlight group {name} exists
 hlID({name})			Number	syntax ID of highlight group {name}
+hlexists({name})		Number	|TRUE| if highlight group {name} exists
 hostname()			String	name of the machine Vim is running on
 iconv({expr}, {from}, {to})	String	convert encoding of {expr}
 indent({lnum})			Number	indent of line {lnum}
 index({object}, {expr} [, {start} [, {ic}]])
 				Number	index in {object} where {expr} appears
+indexof({object}, {expr} [, {opts}]])
+				Number	index in {object} where {expr} is true
 input({prompt} [, {text} [, {completion}]])
 				String	get input from the user
 inputlist({textlist})		Number	let the user pick from a choice list
@@ -259,13 +273,16 @@ join({list} [, {sep}])		String	join {list} items into one String
 json_decode({expr})		any	Convert {expr} from JSON
 json_encode({expr})		String	Convert {expr} to JSON
 keys({dict})			List	keys in {dict}
+keytrans({string})		String	translate internal keycodes to a form
+					that can be used by |:map|
 len({expr})			Number	the length of {expr}
 libcall({lib}, {func}, {arg})	String	call {func} in library {lib} with {arg}
 libcallnr({lib}, {func}, {arg})	Number	idem, but return a Number
 line({expr} [, {winid}])	Number	line nr of cursor, last line or mark
 line2byte({lnum})		Number	byte count of line {lnum}
 lispindent({lnum})		Number	Lisp indent for line {lnum}
-list2str({list} [, {utf8}])	String	turn numbers in {list} into a String
+list2blob({list})		Blob	turn {list} of numbers into a Blob
+list2str({list} [, {utf8}])	String	turn {list} of numbers into a String
 localtime()			Number	current time
 log({expr})			Float	natural logarithm (base e) of {expr}
 log10({expr})			Float	logarithm of Float {expr} to base 10
@@ -276,6 +293,8 @@ maparg({name} [, {mode} [, {abbr} [, {dict}]]])
 					rhs of mapping {name} in mode {mode}
 mapcheck({name} [, {mode} [, {abbr}]])
 				String	check for mappings matching {name}
+mapset({mode}, {abbr}, {dict})
+				none	restore mapping from |maparg()| result
 match({expr}, {pat} [, {start} [, {count}]])
 				Number	position where {pat} matches in {expr}
 matchadd({group}, {pattern} [, {priority} [, {id} [, {dict}]]])
@@ -293,13 +312,14 @@ matchfuzzypos({list}, {str} [, {dict}])
 matchlist({expr}, {pat} [, {start} [, {count}]])
 				List	match and submatches of {pat} in {expr}
 matchstr({expr}, {pat} [, {start} [, {count}]])
-				String	{count}'th match of {pat} in {expr}
+				String	{count}th match of {pat} in {expr}
 matchstrpos({expr}, {pat} [, {start} [, {count}]])
-				List	{count}'th match of {pat} in {expr}
+				List	{count}th match of {pat} in {expr}
 max({expr})			Number	maximum value of items in {expr}
 menu_get({path} [, {modes}])	List	description of |menus| matched by {path}
+menu_info({name} [, {mode}])	Dict	get menu item information
 min({expr})			Number	minimum value of items in {expr}
-mkdir({name} [, {path} [, {prot}]])
+mkdir({name} [, {flags} [, {prot}]])
 				Number	create directory {name}
 mode([expr])			String	current editing mode
 msgpackdump({list} [, {type}])	List/Blob  dump objects to msgpack
@@ -319,12 +339,14 @@ prompt_setinterrupt({buf}, {text}) none	set prompt interrupt function
 prompt_setprompt({buf}, {text}) none	set prompt text
 pum_getpos()			Dict	position and size of pum if visible
 pumvisible()			Number	whether popup menu is visible
-pyeval({expr})			any	evaluate |Python| expression
 py3eval({expr})			any	evaluate |python3| expression
+pyeval({expr})			any	evaluate |Python| expression
 pyxeval({expr})			any	evaluate |python_x| expression
 rand([{expr}])			Number	get pseudo-random number
 range({expr} [, {max} [, {stride}]])
 				List	items from {expr} to {max}
+readblob({fname} [, {offset} [, {size}]])
+				Blob	read a |Blob| from {fname}
 readdir({dir} [, {expr}])	List	file names in {dir} selected by {expr}
 readfile({fname} [, {type} [, {max}]])
 				List	get list of lines from file {fname}
@@ -342,7 +364,8 @@ remove({blob}, {idx} [, {end}])	Number/Blob
 					remove bytes {idx}-{end} from {blob}
 remove({dict}, {key})		any	remove entry {key} from {dict}
 rename({from}, {to})		Number	rename (move) file from {from} to {to}
-repeat({expr}, {count})		String	repeat {expr} {count} times
+repeat({expr}, {count})		List/Blob/String
+					repeat {expr} {count} times
 resolve({filename})		String	get filename a shortcut points to
 reverse({list})			List	reverse {list} in-place
 round({expr})			Float	round off {expr}
@@ -374,8 +397,10 @@ setbufline({expr}, {lnum}, {text})
 				Number	set line {lnum} to {text} in buffer
 					{expr}
 setbufvar({buf}, {varname}, {val})	set {varname} in buffer {buf} to {val}
+setcellwidths({list})		none	set character cell width overrides
 setcharpos({expr}, {list})	Number	set the {expr} position to {list}
 setcharsearch({dict})		Dict	set character search from {dict}
+setcmdline({str} [, {pos}])	Number	set command-line
 setcmdpos({pos})		Number	set cursor position in command-line
 setcursorcharpos({list})	Number	move cursor to position in {list}
 setenv({name}, {val})		none	set environment variable
@@ -420,6 +445,8 @@ sign_unplacelist({list})	List	unplace a list of signs
 simplify({filename})		String	simplify filename as much as possible
 sin({expr})			Float	sine of {expr}
 sinh({expr})			Float	hyperbolic sine of {expr}
+slice({expr}, {start} [, {end}])  String, List or Blob
+					slice of a String, List or Blob
 sockconnect({mode}, {address} [, {opts}])
 				Number	Connects to socket
 sort({list} [, {func} [, {dict}]])
@@ -439,10 +466,11 @@ str2list({expr} [, {utf8}])	List	convert each character of {expr} to
 					ASCII/UTF-8 value
 str2nr({expr} [, {base} [, {quoted}]])
 				Number	convert String to Number
-strchars({expr} [, {skipcc}])	Number	character length of the String {expr}
-strcharpart({str}, {start} [, {len}])
+strcharlen({expr})		Number	character length of the String {expr}
+strcharpart({str}, {start} [, {len} [, {skipcc}]])
 				String	{len} characters of {str} at
 					character {start}
+strchars({expr} [, {skipcc}])	Number	character count of the String {expr}
 strdisplaywidth({expr} [, {col}]) Number display length of the String {expr}
 strftime({format} [, {time}])	String	format time with a specified format
 strgetchar({str}, {index})	Number	get char {index} from {str}
@@ -458,11 +486,14 @@ strptime({format}, {timestring})
 strridx({haystack}, {needle} [, {start}])
 				Number	last index of {needle} in {haystack}
 strtrans({expr})		String	translate string to make it printable
+strutf16len({string} [, {countcc}])
+				Number	number of UTF-16 code units in {string}
 strwidth({expr})		Number	display cell length of the String {expr}
 submatch({nr} [, {list}])	String or List
 					specific match in ":s" or substitute()
 substitute({expr}, {pat}, {sub}, {flags})
 				String	all {pat} in {expr} replaced with {sub}
+swapfilelist()			List	swap files found in 'directory'
 swapinfo({fname})		Dict	information about swap file {fname}
 swapname({buf})			String	swap file of buffer {buf}
 synID({lnum}, {col}, {trans})	Number	syntax ID at {lnum} and {col}
@@ -477,8 +508,8 @@ tabpagebuflist([{arg}])		List	list of buffer numbers in tab page
 tabpagenr([{arg}])		Number	number of current or last tab page
 tabpagewinnr({tabarg} [, {arg}])
 				Number	number of current window in tab page
-taglist({expr} [, {filename}])	List	list of tags matching {expr}
 tagfiles()			List	tags files used
+taglist({expr} [, {filename}])	List	list of tags matching {expr}
 tan({expr})			Float	tangent of {expr}
 tanh({expr})			Float	hyperbolic tangent of {expr}
 tempname()			String	name for a temporary file
@@ -501,8 +532,13 @@ undofile({name})		String	undo file name for {name}
 undotree()			List	undo file tree
 uniq({list} [, {func} [, {dict}]])
 				List	remove adjacent duplicates from a list
+utf16idx({string}, {idx} [, {countcc} [, {charidx}]])
+				Number	UTF-16 index of byte {idx} in {string}
 values({dict})			List	values in {dict}
-virtcol({expr})			Number	screen column of cursor or mark
+virtcol({expr} [, {list}])	Number or List
+					screen column of cursor or mark
+virtcol2col({winid}, {lnum}, {col})
+				Number  byte index of a character on screen
 visualmode([expr])		String	last visual mode used
 wait({timeout}, {condition} [, {interval}])
 				Number	Wait until {condition} is satisfied

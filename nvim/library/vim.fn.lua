@@ -77,6 +77,9 @@ function vim.fn.atan(expr) end
 function vim.fn.atan2(expr1, expr2) end
 
 ---@return any
+function vim.fn.blob2list(blob) end
+
+---@return any
 function vim.fn.browse(save, title, initdir, default) end
 
 ---@return any
@@ -86,37 +89,37 @@ function vim.fn.browsedir(title, initdir) end
 function vim.fn.bufadd(name) end
 
 ---@return any
-function vim.fn.bufexists(expr) end
+function vim.fn.bufexists(buf) end
 
 ---@return any
-function vim.fn.buflisted(expr) end
+function vim.fn.buflisted(buf) end
 
 ---@return any
-function vim.fn.bufload(expr) end
+function vim.fn.bufload(buf) end
 
 ---@return any
-function vim.fn.bufloaded(expr) end
+function vim.fn.bufloaded(buf) end
 
 ---@return any
-function vim.fn.bufname(expr) end
+function vim.fn.bufname(buf) end
 
 ---@return any
-function vim.fn.bufnr(expr, create) end
+function vim.fn.bufnr(buf, create) end
 
 ---@return any
-function vim.fn.bufwinid(expr) end
+function vim.fn.bufwinid(buf) end
 
 ---@return any
-function vim.fn.bufwinnr(expr) end
+function vim.fn.bufwinnr(buf) end
 
 ---@return any
 function vim.fn.byte2line(byte) end
 
 ---@return any
-function vim.fn.byteidx(expr, nr) end
+function vim.fn.byteidx(expr, nr, utf16) end
 
 ---@return any
-function vim.fn.byteidxcomp(expr, nr) end
+function vim.fn.byteidxcomp(expr, nr, utf16) end
 
 ---@return any
 function vim.fn.call(func, arglist, dict) end
@@ -134,10 +137,13 @@ function vim.fn.chansend(id, data) end
 function vim.fn.char2nr(expr, utf8) end
 
 ---@return any
-function vim.fn.charcol(expr) end
+function vim.fn.charclass(string) end
 
 ---@return any
-function vim.fn.charidx(string, idx, countcc) end
+function vim.fn.charcol(expr, winid) end
+
+---@return any
+function vim.fn.charidx(string, idx, countcc, utf16) end
 
 ---@return any
 function vim.fn.chdir(dir) end
@@ -149,7 +155,7 @@ function vim.fn.cindent(lnum) end
 function vim.fn.clearmatches(win) end
 
 ---@return any
-function vim.fn.col(expr) end
+function vim.fn.col(expr, winid) end
 
 ---@return any
 function vim.fn.complete(startcol, matches) end
@@ -174,9 +180,6 @@ function vim.fn.cosh(expr) end
 
 ---@return any
 function vim.fn.count(comp, expr, ic, start) end
-
----@return any
-function vim.fn.cscope_connection(num, dbpath, prepend) end
 
 ---@return any
 function vim.fn.ctxget(index) end
@@ -251,16 +254,19 @@ function vim.fn.exepath(expr) end
 function vim.fn.exists(expr) end
 
 ---@return any
-function vim.fn.extend(expr1, expr2, expr3) end
-
----@return any
 function vim.fn.exp(expr) end
 
 ---@return any
 function vim.fn.expand(expr, nosuf, list) end
 
 ---@return any
-function vim.fn.expandcmd(expr) end
+function vim.fn.expandcmd(string, options) end
+
+---@return any
+function vim.fn.extend(expr1, expr2, expr3) end
+
+---@return any
+function vim.fn.extendnew(expr1, expr2, expr3) end
 
 ---@return any
 function vim.fn.feedkeys(string, mode) end
@@ -282,6 +288,9 @@ function vim.fn.findfile(name, path, count) end
 
 ---@return any
 function vim.fn.flatten(list, maxdepth) end
+
+---@return any
+function vim.fn.flattennew(list, maxdepth) end
 
 ---@return any
 function vim.fn.float2nr(expr) end
@@ -336,6 +345,9 @@ function vim.fn.getbufinfo(buf) end
 
 ---@return any
 function vim.fn.getbufline(buf, lnum, end_) end
+
+---@return any
+function vim.fn.getbufoneline(buf, lnum) end
 
 ---@return any
 function vim.fn.getbufvar(buf, varname, def) end
@@ -416,6 +428,9 @@ function vim.fn.getreginfo(regname) end
 function vim.fn.getregtype(regname) end
 
 ---@return any
+function vim.fn.getscriptinfo(opts) end
+
+---@return any
 function vim.fn.gettabinfo(expr) end
 
 ---@return any
@@ -426,6 +441,9 @@ function vim.fn.gettabwinvar(tabnr, winnr, name, def) end
 
 ---@return any
 function vim.fn.gettagstack(nr) end
+
+---@return any
+function vim.fn.gettext(text) end
 
 ---@return any
 function vim.fn.getwininfo(winid) end
@@ -470,10 +488,10 @@ function vim.fn.histget(history, index) end
 function vim.fn.histnr(history) end
 
 ---@return any
-function vim.fn.hlexists(name) end
+function vim.fn.hlID(name) end
 
 ---@return any
-function vim.fn.hlID(name) end
+function vim.fn.hlexists(name) end
 
 ---@return any
 function vim.fn.iconv(expr, from, to) end
@@ -483,6 +501,9 @@ function vim.fn.indent(lnum) end
 
 ---@return any
 function vim.fn.index(object, expr, start, ic) end
+
+---@return any
+function vim.fn.indexof(object, expr, opts) end
 
 ---@return any
 function vim.fn.input(prompt, text, completion) end
@@ -545,6 +566,9 @@ function vim.fn.json_encode(expr) end
 function vim.fn.keys(dict) end
 
 ---@return any
+function vim.fn.keytrans(string) end
+
+---@return any
 function vim.fn.len(expr) end
 
 ---@return any
@@ -561,6 +585,9 @@ function vim.fn.line2byte(lnum) end
 
 ---@return any
 function vim.fn.lispindent(lnum) end
+
+---@return any
+function vim.fn.list2blob(list) end
 
 ---@return any
 function vim.fn.list2str(list, utf8) end
@@ -582,6 +609,9 @@ function vim.fn.maparg(name, mode, abbr, dict) end
 
 ---@return any
 function vim.fn.mapcheck(name, mode, abbr) end
+
+---@return any
+function vim.fn.mapset(mode, abbr, dict) end
 
 ---@return any
 function vim.fn.match(expr, pat, start, count) end
@@ -623,10 +653,13 @@ function vim.fn.max(expr) end
 function vim.fn.menu_get(path, modes) end
 
 ---@return any
+function vim.fn.menu_info(name, mode) end
+
+---@return any
 function vim.fn.min(expr) end
 
 ---@return any
-function vim.fn.mkdir(name, path, prot) end
+function vim.fn.mkdir(name, flags, prot) end
 
 ---@return any
 function vim.fn.mode(expr) end
@@ -674,10 +707,10 @@ function vim.fn.prompt_setinterrupt(buf, text) end
 function vim.fn.prompt_setprompt(buf, text) end
 
 ---@return any
-function vim.fn.pyeval(expr) end
+function vim.fn.py3eval(expr) end
 
 ---@return any
-function vim.fn.py3eval(expr) end
+function vim.fn.pyeval(expr) end
 
 ---@return any
 function vim.fn.pyxeval(expr) end
@@ -687,6 +720,9 @@ function vim.fn.rand(expr) end
 
 ---@return any
 function vim.fn.range(expr, max, stride) end
+
+---@return any
+function vim.fn.readblob(fname, offset, size) end
 
 ---@return any
 function vim.fn.readdir(dir, expr) end
@@ -779,10 +815,16 @@ function vim.fn.setbufline(expr, lnum, text) end
 function vim.fn.setbufvar(buf, varname, val) end
 
 ---@return any
+function vim.fn.setcellwidths(list) end
+
+---@return any
 function vim.fn.setcharpos(expr, list) end
 
 ---@return any
 function vim.fn.setcharsearch(dict) end
+
+---@return any
+function vim.fn.setcmdline(str, pos) end
 
 ---@return any
 function vim.fn.setcmdpos(pos) end
@@ -881,6 +923,9 @@ function vim.fn.sin(expr) end
 function vim.fn.sinh(expr) end
 
 ---@return any
+function vim.fn.slice(expr, start, end_) end
+
+---@return any
 function vim.fn.sockconnect(mode, address, opts) end
 
 ---@return any
@@ -917,10 +962,13 @@ function vim.fn.str2list(expr, utf8) end
 function vim.fn.str2nr(expr, base, quoted) end
 
 ---@return any
-function vim.fn.strchars(expr, skipcc) end
+function vim.fn.strcharlen(expr) end
 
 ---@return any
-function vim.fn.strcharpart(str, start, len) end
+function vim.fn.strcharpart(str, start, len, skipcc) end
+
+---@return any
+function vim.fn.strchars(expr, skipcc) end
 
 ---@return any
 function vim.fn.strdisplaywidth(expr, col) end
@@ -951,6 +999,9 @@ function vim.fn.strridx(haystack, needle, start) end
 
 ---@return any
 function vim.fn.strtrans(expr) end
+
+---@return any
+function vim.fn.strutf16len(string, countcc) end
 
 ---@return any
 function vim.fn.strwidth(expr) end
@@ -1043,10 +1094,16 @@ function vim.fn.undofile(name) end
 function vim.fn.uniq(list, func, dict) end
 
 ---@return any
+function vim.fn.utf16idx(string, idx, countcc, charidx) end
+
+---@return any
 function vim.fn.values(dict) end
 
 ---@return any
-function vim.fn.virtcol(expr) end
+function vim.fn.virtcol(expr, list) end
+
+---@return any
+function vim.fn.virtcol2col(winid, lnum, col) end
 
 ---@return any
 function vim.fn.visualmode(expr) end
