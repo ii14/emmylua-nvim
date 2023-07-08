@@ -762,7 +762,7 @@ function vim._cs_remote(rcid, server_addr, connect_error, args) end
 ---                              Defaults to "Nvim".
 ---@param backtrace   boolean|nil Prints backtrace. Defaults to true.
 ---
----@returns Deprecated message, or nil if no message was shown.
+---@return string|nil # Deprecated message, or nil if no message was shown.
 function vim.deprecate(name, alternative, version, plugin, backtrace) end
 
 --- Create builtin mappings (incl. menus).
