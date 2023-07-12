@@ -587,7 +587,7 @@ function vim._os_proc_children(ppid) end
 ---                - 1: starts the paste (exactly once)
 ---                - 2: continues the paste (zero or more times)
 ---                - 3: ends the paste (exactly once)
----@returns boolean # false if client should cancel the paste.
+---@return boolean result false if client should cancel the paste.
 function vim.paste(lines, phase) end
 
 --- Defers callback `cb` until the Nvim API is safe to call.

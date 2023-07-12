@@ -786,3 +786,8 @@ function vim.api.nvim_win_set_var(window, name, value) end
 ---@param window Window
 ---@param width integer
 function vim.api.nvim_win_set_width(window, width) end
+
+---@param window Window
+---@param opts table
+---@return any
+function vim.api.nvim_win_text_height(window, opts) end
