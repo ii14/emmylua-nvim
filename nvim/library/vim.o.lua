@@ -191,13 +191,6 @@ vim.o.background = "dark"
 ---When the value is empty, Vi compatible backspacing is used, none of
 ---the ways mentioned for the items above are possible.
 ---
----For backwards compatibility with version 5.4 and earlier:
----value	effect	~
----  0	same as ":set backspace=" (Vi compatible)
----  1	same as ":set backspace=indent,eol"
----  2	same as ":set backspace=indent,eol,start"
----  3	same as ":set backspace=indent,eol,nostop"
----
 ---@type string
 vim.o.backspace = "indent,eol,start"
 
@@ -311,8 +304,6 @@ vim.o.backupcopy = "auto"
 ---```
 ---    :set bdir=c:\\tmp,\ dir\\,with\\,commas,\\\ dir\ with\ spaces
 ---```
----- For backwards compatibility with Vim version 3.0 a '>' at the start
----  of the option is removed.
 ---See also 'backup' and 'writebackup' options.
 ---If you want to hide your backup files on Unix, consider this value:
 ---```
@@ -1543,9 +1534,6 @@ vim.o.digraph = false
 ---```
 ---    :set dir=c:\\tmp,\ dir\\,with\\,commas,\\\ dir\ with\ spaces
 ---```
----- For backwards compatibility with Vim version 3.0 a '>' at the start
----  of the option is removed.
----
 ---Editing the same file twice will result in a warning.  Using "/tmp" on
 ---is discouraged: if the system crashes you lose the swap file. And
 ---others on the computer may be able to see the files.
@@ -4038,12 +4026,6 @@ vim.o.patchmode = ""
 ---- Use commas to separate directory names:
 ---```
 ---	:set path=.,/usr/local/include,/usr/include
----```
----- Spaces can also be used to separate directory names (for backwards
----  compatibility with version 3.0).  To have a space in a directory
----  name, precede it with an extra backslash, and escape the space:
----```
----	:set path=.,/dir/with\\\ space
 ---```
 ---- To include a comma in a directory name precede it with an extra
 ---  backslash:
