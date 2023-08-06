@@ -736,11 +736,21 @@ vim.opt.cinoptions = ""
 ---scope declarations "signals", "public slots" and "private slots":
 ---```
 ---	set cinscopedecls+=signals,public\ slots,private\ slots
----
 ---```
----					*'clipboard'* *'cb'*
----'clipboard' 'cb'	string	(default "")
----		global
+---
+---@type vim.opt.Opt
+vim.opt.cinscopedecls = "public,protected,private"
+
+---These keywords start an extra indent in the next line when
+---'smartindent' or 'cindent' is set.  For 'cindent' this is only done at
+---an appropriate place (inside {}).
+---Note that 'ignorecase' isn't used for 'cinwords'.  If case doesn't
+---matter, include the keyword both the uppercase and lowercase:
+---"if,If,IF".
+---
+---@type vim.opt.Opt
+vim.opt.cinwords = "if,else,while,do,for,switch"
+
 ---This option is a list of comma-separated names.
 ---These names are recognized:
 ---
@@ -764,19 +774,6 @@ vim.opt.cinoptions = ""
 ---		will additionally copy the text into register
 ---		"*". See |clipboard|.
 ---
----@type vim.opt.Opt
-vim.opt.cinscopedecls = "public,protected,private"
-
----These keywords start an extra indent in the next line when
----'smartindent' or 'cindent' is set.  For 'cindent' this is only done at
----an appropriate place (inside {}).
----Note that 'ignorecase' isn't used for 'cinwords'.  If case doesn't
----matter, include the keyword both the uppercase and lowercase:
----"if,If,IF".
----
----@type vim.opt.Opt
-vim.opt.cinwords = "if,else,while,do,for,switch"
-
 ---@type vim.opt.Opt
 vim.opt.clipboard = ""
 
@@ -1488,7 +1485,7 @@ vim.opt.diffexpr = ""
 ---			hunks of up to 30 lines each, or a 3 buffer
 ---			diff with hunks of up to 20 lines each.
 ---
----                algorithm:{text} Use the specified diff algorithm with the
+---	algorithm:{text} Use the specified diff algorithm with the
 ---			internal diff engine. Currently supported
 ---			algorithms are:
 ---			myers      the default algorithm
@@ -2014,7 +2011,7 @@ vim.opt.foldclose = ""
 ---    "auto":       resize to the minimum amount of folds to display.
 ---    "auto:[1-9]": resize to accommodate multiple folds up to the
 ---		  selected level
----            0:            to disable foldcolumn
+---    0:            to disable foldcolumn
 ---    "[1-9]":      to display a fixed number of columns
 ---See |folding|.
 ---
@@ -2398,9 +2395,10 @@ vim.opt.grepprg = "grep -n $* /dev/null"
 ---    :highlight Cursor gui=reverse guifg=NONE guibg=NONE
 ---    :highlight Cursor gui=NONE guifg=bg guibg=fg
 ---```
----					   *E235* *E596*
----'guifont' 'gfn'		string	(default "")
----		global
+---
+---@type vim.opt.Opt
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+
 ---This is a list of fonts which will be used for the GUI version of Vim.
 ---In its simplest form the value is just one font name.  When
 ---the font cannot be found you will get an error message.  To try other
@@ -2466,9 +2464,6 @@ vim.opt.grepprg = "grep -n $* /dev/null"
 ---    :set guifont=Andale_Mono:h7.5:w4.5
 ---```
 ---
----@type vim.opt.Opt
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-
 ---@type vim.opt.Opt
 vim.opt.guifont = ""
 
@@ -3301,7 +3296,7 @@ vim.opt.lispwords = "defun,define,defmacro,set!,lambda,if,case,let,flet,let*,let
 ---occupies, not at the end as usual in Normal mode.  To get this cursor
 ---position while displaying Tabs with spaces, use:
 ---```
----	:set list lcs=tab:\ \ 
+---	:set list lcs=tab:\ \
 ---```
 ---Note that list mode will also affect formatting (set with 'textwidth'
 ---or 'wrapmargin') when 'cpoptions' includes 'L'.  See 'listchars' for
@@ -3630,16 +3625,13 @@ vim.opt.modelineexpr = false
 ---checked for set commands.  If 'modeline' is off or 'modelines' is zero
 ---no lines are checked.  See |modeline|.
 ---
----			*E21*
----'modifiable' 'ma'	boolean	(default on)
----		local to buffer
+---@type vim.opt.Opt
+vim.opt.modelines = 5
+
 ---When off the buffer contents cannot be changed.  The 'fileformat' and
 ---'fileencoding' options also can't be changed.
 ---Can be reset on startup with the |-M| command line argument.
 ---
----@type vim.opt.Opt
-vim.opt.modelines = 5
-
 ---@type vim.opt.Opt
 vim.opt.modifiable = true
 
@@ -3930,7 +3922,7 @@ vim.opt.nrformats = "bin,hex"
 ---
 ---	'nonu'          'nu'            'nonu'          'nu'
 ---	'nornu'         'nornu'         'rnu'           'rnu'
----```
+--->
 ---    |apple          |  1 apple      |  2 apple      |  2 apple
 ---    |pear           |  2 pear       |  1 pear       |  1 pear
 ---    |nobody         |  3 nobody     |  0 nobody     |3   nobody
@@ -5015,11 +5007,7 @@ vim.opt.shortmess = "filnxtToOCF"
 ---String to put at the start of lines that have been wrapped.  Useful
 ---values are "> " or "+++ ":
 ---```
----	:set showbreak=>\ 
----```
----Note the backslash to escape the trailing space.  It's easier like
----this:
----```
+---	:let &showbreak = "> "
 ---	:let &showbreak = '+++ '
 ---```
 ---Only printable single-cell characters are allowed, excluding <Tab> and
@@ -5274,7 +5262,7 @@ vim.opt.spell = false
 ---|set-spc-auto|.
 ---
 ---@type vim.opt.Opt
-vim.opt.spellcapcheck = "[.?!]\\_[\\])'\"\t ]\\+"
+vim.opt.spellcapcheck = "[.?!]\\_[\\])'\"\\t ]\\+"
 
 ---Name of the word list file where words are added for the |zg| and |zw|
 ---commands.  It must end in ".{encoding}.add".  You need to include the
