@@ -315,7 +315,7 @@ function vim.tbl_flatten(t) end
 ---@see Based on https://github.com/premake/premake-core/blob/master/src/base/table.lua
 ---
 ---@param t table Dict-like table
----@return # iterator over sorted keys and their values
+---@return function iterator over sorted keys and their values
 function vim.spairs(t) end
 
 --- Tests if a Lua table can be treated as an array (a table indexed by integers).
@@ -659,8 +659,8 @@ function vim.notify_once(msg, level, opts) end
 ---
 ---@param fn fun(key: string) Function invoked on every key press. |i_CTRL-V|
 ---                   Returning nil removes the callback associated with namespace {ns_id}.
----@param ns_id integer? Namespace ID. If nil or 0, generates and returns a new
----                    |nvim_create_namespace()| id.
+---@param ns_id integer? Namespace ID. If nil or 0, generates and returns a
+---                     new |nvim_create_namespace()| id.
 ---
 ---@return integer Namespace id associated with {fn}. Or count of all callbacks
 ---if on_key() is called without arguments.

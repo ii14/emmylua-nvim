@@ -840,7 +840,7 @@ vim.opt.columns = 80
 ---insert a space.
 ---
 ---@type vim.opt.Opt
-vim.opt.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-"
+vim.opt.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-,fb:•"
 
 ---A template for a comment.  The "%s" in the value is replaced with the
 ---comment text.  For example, C uses "/*%s*/". Currently only used to
