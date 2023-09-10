@@ -536,7 +536,8 @@ function vim.ringbuf(size) end
 ---     Handle output from stdout. When passed as a function must have the signature `fun(err: string, data: string)`.
 ---     Defaults to `true`.
 ---   - text: (boolean) Handle stdout and stderr as text. Replaces `\r\n` with `\n`.
----   - timeout: (integer)
+---   - timeout: (integer) Run the command with a time limit. Upon timeout the process is sent the
+---     TERM signal (15) and the exit code is set to 124.
 ---   - detach: (boolean) If true, spawn the child process in a detached state - this will make it
 ---     a process group leader, and will effectively enable the child to keep running after the
 ---     parent exits. Note that the child process will still keep the parent's event loop alive
@@ -545,15 +546,16 @@ function vim.ringbuf(size) end
 --- @param on_exit (function|nil) Called when subprocess exits. When provided, the command runs
 ---   asynchronously. Receives SystemCompleted object, see return of SystemObj:wait().
 ---
---- @return SystemObj Object with the fields:
+--- @return vim.SystemObj Object with the fields:
 ---   - pid (integer) Process ID
----   - wait (fun(timeout: integer|nil): SystemCompleted)
+---   - wait (fun(timeout: integer|nil): SystemCompleted) Wait for the process to complete. Upon
+---     timeout the process is sent the KILL signal (9) and the exit code is set to 124.
 ---     - SystemCompleted is an object with the fields:
 ---      - code: (integer)
 ---      - signal: (integer)
 ---      - stdout: (string), nil if stdout argument is passed
 ---      - stderr: (string), nil if stderr argument is passed
----   - kill (fun(signal: integer))
+---   - kill (fun(signal: integer|string))
 ---   - write (fun(data: string|nil)) Requires `stdin=true`. Pass `nil` to close the stream.
 ---   - is_closing (fun(): boolean)
 function vim.system(cmd, opts, on_exit) end
