@@ -109,19 +109,21 @@ function vim.deepcopy(orig) end
 --- (as opposed to |vim.split()| which is "eager").
 ---
 --- Example:
----   <pre>lua
----   for s in vim.gsplit(':aa::b:', ':', {plain=true}) do
----     print(s)
----   end
----   </pre>
+---
+--- ```lua
+--- for s in vim.gsplit(':aa::b:', ':', {plain=true}) do
+---   print(s)
+--- end
+--- ```
 ---
 --- If you want to also inspect the separator itself (instead of discarding it), use
 --- |string.gmatch()|. Example:
----   <pre>lua
----   for word, num in ('foo111bar222'):gmatch('([^0-9]*)(%d*)') do
----     print(('word: %s num: %s'):format(word, num))
----   end
----   </pre>
+---
+--- ```lua
+--- for word, num in ('foo111bar222'):gmatch('([^0-9]*)(%d*)') do
+---   print(('word: %s num: %s'):format(word, num))
+--- end
+--- ```
 ---
 --- @see |string.gmatch()|
 --- @see |vim.split()|
@@ -141,12 +143,13 @@ function vim.gsplit(s, sep, opts) end
 --- |vim.gsplit()|).
 ---
 --- Examples:
---- <pre>lua
----  split(":aa::b:", ":")                   --> {'','aa','','b',''}
----  split("axaby", "ab?")                   --> {'','x','y'}
----  split("x*yz*o", "*", {plain=true})      --> {'x','yz','o'}
----  split("|x|y|z|", "|", {trimempty=true}) --> {'x', 'y', 'z'}
---- </pre>
+---
+--- ```lua
+--- split(":aa::b:", ":")                   --> {'','aa','','b',''}
+--- split("axaby", "ab?")                   --> {'','x','y'}
+--- split("x*yz*o", "*", {plain=true})      --> {'x','yz','o'}
+--- split("|x|y|z|", "|", {trimempty=true}) --> {'x', 'y', 'z'}
+--- ```
 ---
 ---@see |vim.gsplit()|
 ---@see |string.gmatch()|
@@ -195,12 +198,13 @@ function vim.tbl_filter(func, t) end
 --- a predicate that is checked for each value.
 ---
 --- Example:
---- <pre>lua
----  vim.tbl_contains({ 'a', { 'b', 'c' } }, function(v)
----    return vim.deep_equal(v, { 'b', 'c' })
----  end, { predicate = true })
----  -- true
---- </pre>
+---
+--- ```lua
+--- vim.tbl_contains({ 'a', { 'b', 'c' } }, function(v)
+---   return vim.deep_equal(v, { 'b', 'c' })
+--- end, { predicate = true })
+--- -- true
+--- ```
 ---
 ---@see |vim.list_contains()| for checking values in list-like tables
 ---
@@ -276,10 +280,11 @@ function vim.tbl_add_reverse_lookup(o) end
 --- Return `nil` if the key does not exist.
 ---
 --- Examples:
---- <pre>lua
----  vim.tbl_get({ key = { nested_key = true }}, 'key', 'nested_key') == true
----  vim.tbl_get({ key = {}}, 'key', 'nested_key') == nil
---- </pre>
+---
+--- ```lua
+--- vim.tbl_get({ key = { nested_key = true }}, 'key', 'nested_key') == true
+--- vim.tbl_get({ key = {}}, 'key', 'nested_key') == nil
+--- ```
 ---
 ---@param o table Table to index
 ---@param ... any Optional keys (0 or more, variadic) via which to index the table
@@ -340,10 +345,10 @@ function vim.tbl_islist(t) end
 
 --- Counts the number of non-nil values in table `t`.
 ---
---- <pre>lua
+--- ```lua
 --- vim.tbl_count({ a=1, b=2 })  --> 2
 --- vim.tbl_count({ 1, 2 })      --> 2
---- </pre>
+--- ```
 ---
 ---@see https://github.com/Tieske/Penlight/blob/master/lua/pl/tablex.lua
 ---@param t table Table
@@ -391,38 +396,41 @@ function vim.endswith(s, suffix) end
 --- Validates a parameter specification (types and values).
 ---
 --- Usage example:
---- <pre>lua
----  function user.new(name, age, hobbies)
----    vim.validate{
----      name={name, 'string'},
----      age={age, 'number'},
----      hobbies={hobbies, 'table'},
----    }
----    ...
----  end
---- </pre>
+---
+--- ```lua
+--- function user.new(name, age, hobbies)
+---   vim.validate{
+---     name={name, 'string'},
+---     age={age, 'number'},
+---     hobbies={hobbies, 'table'},
+---   }
+---   ...
+--- end
+--- ```
 ---
 --- Examples with explicit argument values (can be run directly):
---- <pre>lua
----  vim.validate{arg1={{'foo'}, 'table'}, arg2={'foo', 'string'}}
----     --> NOP (success)
 ---
----  vim.validate{arg1={1, 'table'}}
----     --> error('arg1: expected table, got number')
+--- ```lua
+--- vim.validate{arg1={{'foo'}, 'table'}, arg2={'foo', 'string'}}
+---    --> NOP (success)
 ---
----  vim.validate{arg1={3, function(a) return (a % 2) == 0 end, 'even number'}}
----     --> error('arg1: expected even number, got 3')
---- </pre>
+--- vim.validate{arg1={1, 'table'}}
+---    --> error('arg1: expected table, got number')
+---
+--- vim.validate{arg1={3, function(a) return (a % 2) == 0 end, 'even number'}}
+---    --> error('arg1: expected even number, got 3')
+--- ```
 ---
 --- If multiple types are valid they can be given as a list.
---- <pre>lua
----  vim.validate{arg1={{'foo'}, {'table', 'string'}}, arg2={'foo', {'table', 'string'}}}
----     --> NOP (success)
 ---
----  vim.validate{arg1={1, {'string', 'table'}}}
----     --> error('arg1: expected string|table, got number')
+--- ```lua
+--- vim.validate{arg1={{'foo'}, {'table', 'string'}}, arg2={'foo', {'table', 'string'}}}
+--- -- NOP (success)
 ---
---- </pre>
+--- vim.validate{arg1={1, {'string', 'table'}}}
+--- -- error('arg1: expected string|table, got number')
+---
+--- ```
 ---
 ---@param opt table Names of parameters to validate. Each key is a parameter
 ---          name; each value is a tuple in one of these forms:
@@ -457,10 +465,10 @@ function vim.is_callable(f) end
 --- If {create} is `nil`, this will create a defaulttable whose constructor function is
 --- this function, effectively allowing to create nested tables on the fly:
 ---
---- <pre>lua
+--- ```lua
 --- local a = vim.defaulttable()
 --- a.b.c = 1
---- </pre>
+--- ```
 ---
 ---@param create function?(key:any):any The function called to create a missing value.
 ---@return table Empty table with metamethod
@@ -469,7 +477,7 @@ function vim.defaulttable(create) end
 --- Create a ring buffer limited to a maximal number of items.
 --- Once the buffer is full, adding a new entry overrides the oldest entry.
 ---
---- <pre>
+--- ```lua
 ---   local ringbuf = vim.ringbuf(4)
 ---   ringbuf:push("a")
 ---   ringbuf:push("b")
@@ -483,7 +491,7 @@ function vim.defaulttable(create) end
 ---   for val in ringbuf do
 ---     print(val)
 ---   end
---- </pre>
+--- ```
 ---
 --- Returns a Ringbuf instance with the following methods:
 ---
@@ -499,23 +507,24 @@ function vim.ringbuf(size) end
 --- Run a system command
 ---
 --- Examples:
---- <pre>lua
 ---
----   local on_exit = function(obj)
----     print(obj.code)
----     print(obj.signal)
----     print(obj.stdout)
----     print(obj.stderr)
----   end
+--- ```lua
 ---
----   -- Run asynchronously
----   vim.system({'echo', 'hello'}, { text = true }, on_exit)
+--- local on_exit = function(obj)
+---   print(obj.code)
+---   print(obj.signal)
+---   print(obj.stdout)
+---   print(obj.stderr)
+--- end
 ---
----   -- Run synchronously
----   local obj = vim.system({'echo', 'hello'}, { text = true }):wait()
----   -- { code = 0, signal = 0, stdout = 'hello', stderr = '' }
+--- -- Run asynchronously
+--- vim.system({'echo', 'hello'}, { text = true }, on_exit)
 ---
---- </pre>
+--- -- Run synchronously
+--- local obj = vim.system({'echo', 'hello'}, { text = true }):wait()
+--- -- { code = 0, signal = 0, stdout = 'hello', stderr = '' }
+---
+--- ```
 ---
 --- See |uv.spawn()| for more details.
 ---
@@ -570,7 +579,8 @@ function vim._os_proc_children(ppid) end
 --- (such as the |TUI|) pastes text into the editor.
 ---
 --- Example: To remove ANSI color codes when pasting:
---- <pre>lua
+---
+--- ```lua
 --- vim.paste = (function(overridden)
 ---   return function(lines, phase)
 ---     for i,line in ipairs(lines) do
@@ -580,7 +590,7 @@ function vim._os_proc_children(ppid) end
 ---     overridden(lines, phase)
 ---   end
 --- end)(vim.paste)
---- </pre>
+--- ```
 ---
 ---@see |paste|
 ---@alias paste_phase -1 | 1 | 2 | 3
@@ -691,9 +701,10 @@ function vim.pretty_print(...) end
 --- "Pretty prints" the given arguments and returns them unmodified.
 ---
 --- Example:
---- <pre>lua
----   local hl_normal = vim.print(vim.api.nvim_get_hl_by_name('Normal', true))
---- </pre>
+---
+--- ```lua
+--- local hl_normal = vim.print(vim.api.nvim_get_hl_by_name('Normal', true))
+--- ```
 ---
 --- @see |vim.inspect()|
 --- @see |:=|
@@ -703,10 +714,12 @@ function vim.print(...) end
 --- Translate keycodes.
 ---
 --- Example:
---- <pre>lua
----   local k = vim.keycode
----   vim.g.mapleader = k'<bs>'
---- </pre>
+---
+--- ```lua
+--- local k = vim.keycode
+--- vim.g.mapleader = k'<bs>'
+--- ```
+---
 --- @param str string String to be converted.
 --- @return string
 --- @see |nvim_replace_termcodes()|
