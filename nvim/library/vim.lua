@@ -315,29 +315,34 @@ function vim.list_extend(dst, src, start, finish) end
 ---@return table Flattened copy of the given list-like table
 function vim.tbl_flatten(t) end
 
---- Enumerate a table sorted by its keys.
+--- Enumerates key-value pairs of a table, ordered by key.
 ---
 ---@see Based on https://github.com/premake/premake-core/blob/master/src/base/table.lua
 ---
 ---@param t table Dict-like table
----@return function iterator over sorted keys and their values
+---@return function # |for-in| iterator over sorted keys and their values
 function vim.spairs(t) end
 
---- Tests if a Lua table can be treated as an array (a table indexed by integers).
+--- Tests if `t` is an "array": a table indexed _only_ by integers (potentially non-contiguous).
 ---
---- Empty table `{}` is assumed to be an array, unless it was created by
---- |vim.empty_dict()| or returned as a dict-like |API| or Vimscript result,
---- for example from |rpcrequest()| or |vim.fn|.
+--- If the indexes start from 1 and are contiguous then the array is also a list. |vim.tbl_islist()|
+---
+--- Empty table `{}` is an array, unless it was created by |vim.empty_dict()| or returned as
+--- a dict-like |API| or Vimscript result, for example from |rpcrequest()| or |vim.fn|.
+---
+---@see https://github.com/openresty/luajit2#tableisarray
 ---
 ---@param t table
 ---@return boolean `true` if array-like table, else `false`.
 function vim.tbl_isarray(t) end
 
---- Tests if a Lua table can be treated as a list (a table indexed by consecutive integers starting from 1).
+--- Tests if `t` is a "list": a table indexed _only_ by contiguous integers starting from 1 (what
+--- |lua-length| calls a "regular array").
 ---
---- Empty table `{}` is assumed to be an list, unless it was created by
---- |vim.empty_dict()| or returned as a dict-like |API| or Vimscript result,
---- for example from |rpcrequest()| or |vim.fn|.
+--- Empty table `{}` is a list, unless it was created by |vim.empty_dict()| or returned as
+--- a dict-like |API| or Vimscript result, for example from |rpcrequest()| or |vim.fn|.
+---
+---@see |vim.tbl_isarray()|
 ---
 ---@param t table
 ---@return boolean `true` if list-like table, else `false`.
@@ -398,37 +403,37 @@ function vim.endswith(s, suffix) end
 --- Usage example:
 ---
 --- ```lua
---- function user.new(name, age, hobbies)
----   vim.validate{
----     name={name, 'string'},
----     age={age, 'number'},
----     hobbies={hobbies, 'table'},
----   }
----   ...
---- end
+---  function user.new(name, age, hobbies)
+---    vim.validate{
+---      name={name, 'string'},
+---      age={age, 'number'},
+---      hobbies={hobbies, 'table'},
+---    }
+---    ...
+---  end
 --- ```
 ---
 --- Examples with explicit argument values (can be run directly):
 ---
 --- ```lua
---- vim.validate{arg1={{'foo'}, 'table'}, arg2={'foo', 'string'}}
----    --> NOP (success)
+---  vim.validate{arg1={{'foo'}, 'table'}, arg2={'foo', 'string'}}
+---     --> NOP (success)
 ---
---- vim.validate{arg1={1, 'table'}}
----    --> error('arg1: expected table, got number')
+---  vim.validate{arg1={1, 'table'}}
+---     --> error('arg1: expected table, got number')
 ---
---- vim.validate{arg1={3, function(a) return (a % 2) == 0 end, 'even number'}}
----    --> error('arg1: expected even number, got 3')
+---  vim.validate{arg1={3, function(a) return (a % 2) == 0 end, 'even number'}}
+---     --> error('arg1: expected even number, got 3')
 --- ```
 ---
 --- If multiple types are valid they can be given as a list.
 ---
 --- ```lua
---- vim.validate{arg1={{'foo'}, {'table', 'string'}}, arg2={'foo', {'table', 'string'}}}
---- -- NOP (success)
+---  vim.validate{arg1={{'foo'}, {'table', 'string'}}, arg2={'foo', {'table', 'string'}}}
+---  -- NOP (success)
 ---
---- vim.validate{arg1={1, {'string', 'table'}}}
---- -- error('arg1: expected string|table, got number')
+---  vim.validate{arg1={1, {'string', 'table'}}}
+---  -- error('arg1: expected string|table, got number')
 ---
 --- ```
 ---
@@ -448,31 +453,25 @@ function vim.endswith(s, suffix) end
 ---             - msg: (optional) error string if validation fails
 function vim.validate(opt) end
 
-
-function vim.validate(opt) end
-
 --- Returns true if object `f` can be called as a function.
 ---
 ---@param f any Any object
 ---@return boolean `true` if `f` is callable, else `false`
 function vim.is_callable(f) end
 
---- Creates a table whose members are automatically created when accessed, if they don't already
---- exist.
+--- Creates a table whose missing keys are provided by {createfn} (like Python's "defaultdict").
 ---
---- They mimic defaultdict in python.
----
---- If {create} is `nil`, this will create a defaulttable whose constructor function is
---- this function, effectively allowing to create nested tables on the fly:
+--- If {createfn} is `nil` it defaults to defaulttable() itself, so accessing nested keys creates
+--- nested tables:
 ---
 --- ```lua
 --- local a = vim.defaulttable()
 --- a.b.c = 1
 --- ```
 ---
----@param create function?(key:any):any The function called to create a missing value.
----@return table Empty table with metamethod
-function vim.defaulttable(create) end
+---@param createfn function?(key:any):any Provides the value for a missing `key`.
+---@return table # Empty table with `__index` metamethod.
+function vim.defaulttable(createfn) end
 
 --- Create a ring buffer limited to a maximal number of items.
 --- Once the buffer is full, adding a new entry overrides the oldest entry.
