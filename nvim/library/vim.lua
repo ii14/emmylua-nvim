@@ -603,14 +603,25 @@ function vim._os_proc_children(ppid) end
 ---@return boolean result false if client should cancel the paste.
 function vim.paste(lines, phase) end
 
---- Defers callback `cb` until the Nvim API is safe to call.
+--- Returns a function which calls {fn} via |vim.schedule()|.
+---
+--- The returned function passes all arguments to {fn}.
+---
+--- Example:
+---
+--- ```lua
+--- function notify_readable(_err, readable)
+---   vim.notify("readable? " .. tostring(readable))
+--- end
+--- vim.uv.fs_access(vim.fn.stdpath("config"), "R", vim.schedule_wrap(notify_readable))
+--- ```
 ---
 ---@see |lua-loop-callbacks|
 ---@see |vim.schedule()|
 ---@see |vim.in_fast_event()|
----@param cb function
+---@param fn function
 ---@return function
-function vim.schedule_wrap(cb) end
+function vim.schedule_wrap(fn) end
 
 --- Gets a dict of line segment ("chunk") positions for the region from `pos1` to `pos2`.
 ---
