@@ -4944,16 +4944,11 @@ vim.opt.shiftwidth = 8
 ---messages, for example  with CTRL-G, and to avoid some other messages.
 ---It is a list of flags:
 --- flag	meaning when present	~
----  i	use "[noeol]" instead of "[Incomplete last line]"	*shm-i*
 ---  l	use "999L, 888B" instead of "999 lines, 888 bytes"	*shm-l*
 ---  m	use "[+]" instead of "[Modified]"			*shm-m*
----  n	use "[New]" instead of "[New File]"			*shm-n*
 ---  r	use "[RO]" instead of "[readonly]"			*shm-r*
 ---  w	use "[w]" instead of "written" for file write message	*shm-w*
 ---	and "[a]" instead of "appended" for ':w >> file' command
----  x	use "[dos]" instead of "[dos format]", "[unix]"		*shm-x*
----	instead of "[unix format]" and "[mac]" instead of "[mac
----	format]"
 ---  a	all of the above abbreviations				*shm-a*
 ---
 ---  o	overwrite message for writing a file with subsequent	*shm-o*
@@ -4997,7 +4992,7 @@ vim.opt.shiftwidth = 8
 ---    shm=at	Abbreviation, and truncate message when necessary.
 ---
 ---@type vim.opt.Opt
-vim.opt.shortmess = "filnxtToOCF"
+vim.opt.shortmess = "ltToOCF"
 
 ---String to put at the start of lines that have been wrapped.  Useful
 ---values are "> " or "+++ ":
