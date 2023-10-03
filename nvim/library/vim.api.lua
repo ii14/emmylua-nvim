@@ -415,6 +415,10 @@ function vim.api.nvim_get_hl_by_name(name, rgb) end
 ---@return integer
 function vim.api.nvim_get_hl_id_by_name(name) end
 
+---@param opts table
+---@return integer
+function vim.api.nvim_get_hl_ns(opts) end
+
 ---@param mode string
 ---@return table[]
 function vim.api.nvim_get_keymap(mode) end
