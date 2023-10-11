@@ -1994,7 +1994,7 @@ vim.o.foldclose = ""
 ---    "auto":       resize to the minimum amount of folds to display.
 ---    "auto:[1-9]": resize to accommodate multiple folds up to the
 ---		  selected level
----    0:            to disable foldcolumn
+---    "0":          to disable foldcolumn
 ---    "[1-9]":      to display a fixed number of columns
 ---See |folding|.
 ---
@@ -4016,6 +4016,12 @@ vim.o.patchmode = ""
 ---```
 ---	:set path=.,/usr/local/include,/usr/include
 ---```
+---- Spaces can also be used to separate directory names.  To have a
+---  space in a directory name, precede it with an extra backslash, and
+---  escape the space:
+---```
+---	:set path=.,/dir/with\\\ space
+---```
 ---- To include a comma in a directory name precede it with an extra
 ---  backslash:
 ---```
@@ -5990,8 +5996,8 @@ vim.o.taglength = 0
 vim.o.tagrelative = true
 
 ---Filenames for the tag command, separated by spaces or commas.  To
----include a space or comma in a file name, precede it with a backslash
----(see |option-backslash| about including spaces and backslashes).
+---include a space or comma in a file name, precede it with backslashes
+---(see |option-backslash| about including spaces/commas and backslashes).
 ---When a file name starts with "./", the '.' is replaced with the path
 ---of the current file.  But only when the 'd' flag is not included in
 ---'cpoptions'.  Environment variables are expanded |:set_env|.  Also see
