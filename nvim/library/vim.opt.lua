@@ -6518,6 +6518,8 @@ vim.opt.whichwrap = "b,s"
 ---The character is not recognized when used inside a macro.  See
 ---'wildcharm' for that.
 ---Some keys will not work, such as CTRL-C, <CR> and Enter.
+---<Esc> can be used, but hitting it twice in a row will still exit
+---command-line as a failsafe measure.
 ---Although 'wc' is a number option, you can set it to a special key:
 ---```
 ---	:set wc=<Tab>
