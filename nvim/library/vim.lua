@@ -503,7 +503,7 @@ function vim.defaulttable(createfn) end
 ---@return vim.Ringbuf ringbuf (table)
 function vim.ringbuf(size) end
 
---- Run a system command
+--- Runs a system command or throws an error if {cmd} cannot be run.
 ---
 --- Examples:
 ---
@@ -516,16 +516,17 @@ function vim.ringbuf(size) end
 ---   print(obj.stderr)
 --- end
 ---
---- -- Run asynchronously
+--- -- Runs asynchronously:
 --- vim.system({'echo', 'hello'}, { text = true }, on_exit)
 ---
---- -- Run synchronously
+--- -- Runs synchronously:
 --- local obj = vim.system({'echo', 'hello'}, { text = true }):wait()
 --- -- { code = 0, signal = 0, stdout = 'hello', stderr = '' }
 ---
 --- ```
 ---
---- See |uv.spawn()| for more details.
+--- See |uv.spawn()| for more details. Note: unlike |uv.spawn()|, vim.system
+--- throws an error if {cmd} cannot be run.
 ---
 --- @param cmd (string[]) Command to execute
 --- @param opts (SystemOpts|nil) Options:
@@ -647,7 +648,7 @@ function vim.region(bufnr, pos1, pos2, regtype, inclusive) end
 ---@return table timer luv timer object
 function vim.defer_fn(fn, timeout) end
 
---- Display a notification to the user.
+--- Displays a notification to the user.
 ---
 --- This function can be overridden by plugins to display notifications using a
 --- custom provider (such as the system notification provider). By default,
@@ -658,7 +659,7 @@ function vim.defer_fn(fn, timeout) end
 ---@param opts table|nil Optional parameters. Unused by default.
 function vim.notify(msg, level, opts) end
 
---- Display a notification only one time.
+--- Displays a notification only one time.
 ---
 --- Like |vim.notify()|, but subsequent calls with the same message will not
 --- display a notification.
@@ -692,7 +693,7 @@ function vim.on_key(fn, ns_id) end
 ---@private
 function vim._on_key(char) end
 
---- Generate a list of possible completions for the string.
+--- Generates a list of possible completions for the string.
 --- String has the pattern.
 ---
 ---     1. Can we get it to just return things in the global namespace with that name prefix
@@ -721,7 +722,7 @@ function vim.pretty_print(...) end
 --- @return any # given arguments.
 function vim.print(...) end
 
---- Translate keycodes.
+--- Translates keycodes.
 ---
 --- Example:
 ---
@@ -750,7 +751,7 @@ function vim._cs_remote(rcid, server_addr, connect_error, args) end
 ---@return string|nil # Deprecated message, or nil if no message was shown.
 function vim.deprecate(name, alternative, version, plugin, backtrace) end
 
---- Create builtin mappings (incl. menus).
+--- Creates builtin mappings (incl. menus).
 --- Called once on startup.
 function vim._init_default_mappings() end
 
