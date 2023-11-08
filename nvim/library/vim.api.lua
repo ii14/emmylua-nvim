@@ -683,6 +683,10 @@ function vim.api.nvim_ui_set_focus(gained) end
 ---@param value any
 function vim.api.nvim_ui_set_option(name, value) end
 
+---@param event string
+---@param value any
+function vim.api.nvim_ui_term_event(event, value) end
+
 ---@param width integer
 ---@param height integer
 function vim.api.nvim_ui_try_resize(width, height) end
