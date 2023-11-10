@@ -750,13 +750,3 @@ function vim._cs_remote(rcid, server_addr, connect_error, args) end
 ---
 ---@return string|nil # Deprecated message, or nil if no message was shown.
 function vim.deprecate(name, alternative, version, plugin, backtrace) end
-
---- Creates builtin mappings (incl. menus).
---- Called once on startup.
-function vim._init_default_mappings() end
-
-
-function vim._init_default_autocmds() end
-
-
-function vim._init_defaults() end
