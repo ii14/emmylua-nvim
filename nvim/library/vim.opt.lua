@@ -3526,7 +3526,6 @@ vim.opt.maxcombine = 6
 ---Increasing this limit above 200 also changes the maximum for Ex
 ---command recursion, see |E169|.
 ---See also |:function|.
----Also used for maximum depth of callback functions.
 ---
 ---@type vim.opt.Opt
 vim.opt.maxfuncdepth = 100
