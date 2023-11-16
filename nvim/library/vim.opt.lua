@@ -2258,7 +2258,7 @@ vim.opt.formatprg = ""
 ---security reasons.
 ---
 ---@type vim.opt.Opt
-vim.opt.fsync = false
+vim.opt.fsync = true
 
 ---When on, the ":substitute" flag 'g' is default on.  This means that
 ---all matches in a line are substituted instead of one.  When a 'g' flag
@@ -6096,6 +6096,14 @@ vim.opt.termguicolors = false
 ---
 ---@type vim.opt.Opt
 vim.opt.termpastefilter = "BS,HT,ESC,DEL"
+
+---If the host terminal supports it, buffer all screen updates
+---made during a redraw cycle so that each screen is displayed in
+---the terminal all at once. This can prevent tearing or flickering
+---when the terminal updates faster than Nvim can redraw.
+---
+---@type vim.opt.Opt
+vim.opt.termsync = true
 
 ---@type vim.opt.Opt
 vim.opt.terse = false

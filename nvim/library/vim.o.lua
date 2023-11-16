@@ -2243,7 +2243,7 @@ vim.o.formatprg = ""
 ---security reasons.
 ---
 ---@type boolean
-vim.o.fsync = false
+vim.o.fsync = true
 
 ---When on, the ":substitute" flag 'g' is default on.  This means that
 ---all matches in a line are substituted instead of one.  When a 'g' flag
@@ -6081,6 +6081,14 @@ vim.o.termguicolors = false
 ---
 ---@type string
 vim.o.termpastefilter = "BS,HT,ESC,DEL"
+
+---If the host terminal supports it, buffer all screen updates
+---made during a redraw cycle so that each screen is displayed in
+---the terminal all at once. This can prevent tearing or flickering
+---when the terminal updates faster than Nvim can redraw.
+---
+---@type boolean
+vim.o.termsync = true
 
 ---@type boolean
 vim.o.terse = false
