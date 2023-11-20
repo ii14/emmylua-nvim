@@ -5149,12 +5149,6 @@ vim.o.sidescrolloff = 0
 ---   "number"	display signs in the 'number' column. If the number
 ---		column is not present, then behaves like "auto".
 ---
----Note regarding "orphaned signs": with signcolumn numbers higher than
----1, deleting lines will also remove the associated signs automatically,
----in contrast to the default Vim behavior of keeping and grouping them.
----This is done in order for the signcolumn appearance not appear weird
----during line deletion.
----
 ---@type string
 vim.o.signcolumn = "auto"
 
