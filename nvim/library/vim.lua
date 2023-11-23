@@ -633,7 +633,7 @@ function vim.schedule_wrap(fn) end
 ---@param pos1 integer[]|string Start of region as a (line, column) tuple or |getpos()|-compatible string
 ---@param pos2 integer[]|string End of region as a (line, column) tuple or |getpos()|-compatible string
 ---@param regtype string \|setreg()|-style selection type
----@param inclusive boolean Controls whether `pos2` column is inclusive (see also 'selection').
+---@param inclusive boolean Controls whether the ending column is inclusive (see also 'selection').
 ---@return table region Dict of the form `{linenr = {startcol,endcol}}`. `endcol` is exclusive, and
 ---whole lines are returned as `{startcol,endcol} = {0,-1}`.
 function vim.region(bufnr, pos1, pos2, regtype, inclusive) end
