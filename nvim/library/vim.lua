@@ -558,7 +558,8 @@ function vim.ringbuf(size) end
 --- @return vim.SystemObj Object with the fields:
 ---   - pid (integer) Process ID
 ---   - wait (fun(timeout: integer|nil): SystemCompleted) Wait for the process to complete. Upon
----     timeout the process is sent the KILL signal (9) and the exit code is set to 124.
+---     timeout the process is sent the KILL signal (9) and the exit code is set to 124. Cannot
+---     be called in |api-fast|.
 ---     - SystemCompleted is an object with the fields:
 ---      - code: (integer)
 ---      - signal: (integer)
