@@ -257,6 +257,11 @@ function vim.api.nvim_command(command) end
 ---@return string
 function vim.api.nvim_command_output(command) end
 
+---@param index integer
+---@param opts table
+---@return table
+function vim.api.nvim_complete_set(index, opts) end
+
 ---@param name string
 ---@param opts table
 ---@return integer
