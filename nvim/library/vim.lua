@@ -658,6 +658,7 @@ function vim.defer_fn(fn, timeout) end
 ---@param msg string Content of the notification to show to the user.
 ---@param level integer|nil One of the values from |vim.log.levels|.
 ---@param opts table|nil Optional parameters. Unused by default.
+---@diagnostic disable-next-line: unused-local
 function vim.notify(msg, level, opts) end
 
 --- Displays a notification only one time.
@@ -699,6 +700,8 @@ function vim._on_key(char) end
 ---
 ---     1. Can we get it to just return things in the global namespace with that name prefix
 ---     2. Can we get it to return things from global namespace even with `print(` in front.
+---
+--- @param pat string
 function vim._expand_pat(pat, env) end
 
 --- Omnifunc for completing Lua values from the runtime Lua interpreter,
@@ -737,7 +740,8 @@ function vim.print(...) end
 --- @see |nvim_replace_termcodes()|
 function vim.keycode(str) end
 
-
+--- @param server_addr string
+--- @param connect_error string
 function vim._cs_remote(rcid, server_addr, connect_error, args) end
 
 --- Shows a deprecation message to the user.
