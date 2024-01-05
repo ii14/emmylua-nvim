@@ -100,10 +100,19 @@ function vim.wait(time, callback, interval, fast_only) end
 --- same functions as those in the input table. Userdata and threads are not
 --- copied and will throw an error.
 ---
+--- Note: `noref=true` is much more performant on tables with unique table
+--- fields, while `noref=false` is more performant on tables that reuse table
+--- fields.
+---
 ---@generic T: table
 ---@param orig T Table to copy
+---@param noref? boolean
+--- When `false` (default) a contained table is only copied once and all
+--- references point to this single copy. When `true` every occurrence of a
+--- table results in a new copy. This also means that a cyclic reference can
+--- cause `deepcopy()` to fail.
 ---@return T Table of copied keys and (nested) values.
-function vim.deepcopy(orig) end
+function vim.deepcopy(orig, noref) end
 
 --- Gets an |iterator| that splits a string at each instance of a separator, in "lazy" fashion
 --- (as opposed to |vim.split()| which is "eager").
