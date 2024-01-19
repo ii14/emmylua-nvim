@@ -1902,7 +1902,7 @@ vim.opt.filetype = ""
 ---Characters to fill the statuslines, vertical separators and special
 ---lines in the window.
 ---It is a comma-separated list of items.  Each item has a name, a colon
----and the value of that item:
+---and the value of that item: |E1511|
 ---
 ---  item		default		Used for ~
 ---  stl		' '		statusline of the current window
@@ -1940,7 +1940,7 @@ vim.opt.filetype = ""
 ---```
 ---For the "stl", "stlnc", "foldopen", "foldclose" and "foldsep" items
 ---single-byte and multibyte characters are supported.  But double-width
----characters are not supported.
+---characters are not supported. |E1512|
 ---
 ---The highlighting used for these items:
 ---  item		highlight group ~
@@ -3252,7 +3252,7 @@ vim.opt.lispwords = "defun,define,defmacro,set!,lambda,if,case,let,flet,let*,let
 vim.opt.list = false
 
 ---Strings to use in 'list' mode and for the |:list| command.  It is a
----comma-separated list of string settings.
+---comma-separated list of string settings. *E1511*
 ---
 ---						*lcs-eol*
 ---  eol:c		Character to show at the end of each line.  When
@@ -3335,7 +3335,7 @@ vim.opt.list = false
 ---		omitted.
 ---
 ---The characters ':' and ',' should not be used.  UTF-8 characters can
----be used.  All characters must be single width.
+---be used.  All characters must be single width. *E1512*
 ---
 ---Each character can be specified as hex: >vim
 ---	set listchars=eol:\\x24
@@ -5384,7 +5384,7 @@ vim.opt.startofline = false
 ---The 'statuscolumn' width follows that of the default columns and
 ---adapts to the |'numberwidth'|, |'signcolumn'| and |'foldcolumn'| option
 ---values (regardless of whether the sign and fold items are present).
----Aditionally, the 'statuscolumn' grows with the size of the evaluated
+---Additionally, the 'statuscolumn' grows with the size of the evaluated
 ---format string, up to a point (following the maximum size of the default
 ---fold, sign and number columns). Shrinking only happens when the number
 ---of lines in a buffer changes, or the 'statuscolumn' option is set.
