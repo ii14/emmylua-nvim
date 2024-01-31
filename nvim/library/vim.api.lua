@@ -665,6 +665,10 @@ function vim.api.nvim_tabpage_list_wins(tabpage) end
 ---@param value any
 function vim.api.nvim_tabpage_set_var(tabpage, name, value) end
 
+---@param tabpage Tabpage
+---@param win Window
+function vim.api.nvim_tabpage_set_win(tabpage, win) end
+
 ---@param width integer
 ---@param height integer
 ---@param options table
