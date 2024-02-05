@@ -512,6 +512,13 @@ function vim.defaulttable(createfn) end
 ---@return vim.Ringbuf ringbuf (table)
 function vim.ringbuf(size) end
 
+--- @private
+--- @generic T
+--- @param root string
+--- @param mod T
+--- @return T
+function vim._defer_require(root, mod) end
+
 --- Runs a system command or throws an error if {cmd} cannot be run.
 ---
 --- Examples:
