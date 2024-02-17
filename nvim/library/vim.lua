@@ -142,7 +142,7 @@ function vim.deepcopy(orig, noref) end
 ---
 --- @param s string String to split
 --- @param sep string Separator or pattern
---- @param opts (table|nil) Keyword arguments |kwargs|:
+--- @param opts? vim.gsplit.Opts (table) Keyword arguments |kwargs|:
 ---       - plain: (boolean) Use `sep` literally (as in string.find).
 ---       - trimempty: (boolean) Discard empty segments at start and end of the sequence.
 ---@return fun():string|nil (function) Iterator over the split components
@@ -219,7 +219,7 @@ function vim.tbl_filter(func, t) end
 ---
 ---@param t table Table to check
 ---@param value any Value to compare or predicate function reference
----@param opts (table|nil) Keyword arguments |kwargs|:
+---@param opts? vim.tbl_contains.Opts (table) Keyword arguments |kwargs|:
 ---       - predicate: (boolean) `value` is a function reference to be checked (default false)
 ---@return boolean `true` if `t` contains `value`
 function vim.tbl_contains(t, value, opts) end
@@ -297,7 +297,6 @@ function vim.tbl_add_reverse_lookup(o) end
 ---
 ---@param o table Table to index
 ---@param ... any Optional keys (0 or more, variadic) via which to index the table
----
 ---@return any Nested value indexed by key (if it exists), else nil
 function vim.tbl_get(o, ...) end
 
@@ -446,7 +445,7 @@ function vim.endswith(s, suffix) end
 ---
 --- ```
 ---
----@param opt table Names of parameters to validate. Each key is a parameter
+---@param opt table<vim.validate.Type,vim.validate.Spec> (table) Names of parameters to validate. Each key is a parameter
 ---          name; each value is a tuple in one of these forms:
 ---          1. (arg_value, type_name, optional)
 ---             - arg_value: argument value
