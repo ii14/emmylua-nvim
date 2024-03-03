@@ -142,10 +142,8 @@ function vim.deepcopy(orig, noref) end
 ---
 --- @param s string String to split
 --- @param sep string Separator or pattern
---- @param opts? vim.gsplit.Opts (table) Keyword arguments |kwargs|:
----       - plain: (boolean) Use `sep` literally (as in string.find).
----       - trimempty: (boolean) Discard empty segments at start and end of the sequence.
----@return fun():string|nil (function) Iterator over the split components
+--- @param opts? vim.gsplit.Opts Keyword arguments |kwargs|:
+--- @return fun():string|nil (function) Iterator over the split components
 function vim.gsplit(s, sep, opts) end
 
 --- Splits a string at each instance of a separator and returns the result as a table (unlike
@@ -165,7 +163,7 @@ function vim.gsplit(s, sep, opts) end
 ---
 ---@param s string String to split
 ---@param sep string Separator or pattern
----@param opts? table Keyword arguments |kwargs| accepted by |vim.gsplit()|
+---@param opts? vim.gsplit.Opts Keyword arguments |kwargs|:
 ---@return string[] : List of split components
 function vim.split(s, sep, opts) end
 
@@ -219,8 +217,7 @@ function vim.tbl_filter(func, t) end
 ---
 ---@param t table Table to check
 ---@param value any Value to compare or predicate function reference
----@param opts? vim.tbl_contains.Opts (table) Keyword arguments |kwargs|:
----       - predicate: (boolean) `value` is a function reference to be checked (default false)
+---@param opts? vim.tbl_contains.Opts Keyword arguments |kwargs|:
 ---@return boolean `true` if `t` contains `value`
 function vim.tbl_contains(t, value, opts) end
 
