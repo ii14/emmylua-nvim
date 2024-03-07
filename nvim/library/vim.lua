@@ -143,7 +143,7 @@ function vim.deepcopy(orig, noref) end
 --- @param s string String to split
 --- @param sep string Separator or pattern
 --- @param opts? vim.gsplit.Opts Keyword arguments |kwargs|:
---- @return fun():string|nil (function) Iterator over the split components
+--- @return fun():string? : Iterator over the split components
 function vim.gsplit(s, sep, opts) end
 
 --- Splits a string at each instance of a separator and returns the result as a table (unlike
@@ -188,8 +188,8 @@ function vim.tbl_values(t) end
 --- Apply a function to all values of a table.
 ---
 ---@generic T
----@param func fun(value: T): any (function) Function
----@param t table<any, T> (table) Table
+---@param func fun(value: T): any Function
+---@param t table<any, T> Table
 ---@return table : Table of transformed values
 function vim.tbl_map(func, t) end
 
@@ -324,8 +324,10 @@ function vim.tbl_flatten(t) end
 ---
 ---@see Based on https://github.com/premake/premake-core/blob/master/src/base/table.lua
 ---
----@param t table Dict-like table
----@return function # |for-in| iterator over sorted keys and their values
+---@generic T: table, K, V
+---@param t T Dict-like table
+---@return fun(table: table<K, V>, index?: K):K, V # |for-in| iterator over sorted keys and their values
+---@return T
 function vim.spairs(t) end
 
 --- Tests if `t` is an "array": a table indexed _only_ by integers (potentially non-contiguous).
@@ -504,7 +506,7 @@ function vim.defaulttable(createfn) end
 --- - |Ringbuf:clear()|
 ---
 ---@param size integer
----@return vim.Ringbuf ringbuf (table)
+---@return vim.Ringbuf ringbuf
 function vim.ringbuf(size) end
 
 --- @private
