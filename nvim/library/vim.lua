@@ -715,6 +715,7 @@ function vim._on_key(char) end
 --- 2. Can we get it to return things from global namespace even with `print(` in front.
 ---
 --- @param pat string
+--- @return any[], integer
 function vim._expand_pat(pat, env) end
 
 --- Omnifunc for completing Lua values from the runtime Lua interpreter,
