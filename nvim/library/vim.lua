@@ -278,6 +278,7 @@ function vim.deep_equal(a, b) end
 --- `tbl_add_reverse_lookup { A = 1 } == { [1] = 'A', A = 1 }`
 ---
 --- Note that this *modifies* the input.
+---@deprecated
 ---@param o table Table to add the reverse to
 ---@return table o
 function vim.tbl_add_reverse_lookup(o) end
