@@ -242,7 +242,7 @@ function vim.tbl_isempty(t) end
 ---
 ---@see |extend()|
 ---
----@param behavior string Decides what to do if a key is found in more than one map:
+---@param behavior 'error'|'keep'|'force' Decides what to do if a key is found in more than one map:
 ---      - "error": raise an error
 ---      - "keep":  use value from the leftmost map
 ---      - "force": use value from the rightmost map
@@ -256,7 +256,7 @@ function vim.tbl_extend(behavior, ...) end
 ---
 ---@generic T1: table
 ---@generic T2: table
----@param behavior "error"|"keep"|"force" (string) Decides what to do if a key is found in more than one map:
+---@param behavior 'error'|'keep'|'force' Decides what to do if a key is found in more than one map:
 ---      - "error": raise an error
 ---      - "keep":  use value from the leftmost map
 ---      - "force": use value from the rightmost map
@@ -522,7 +522,6 @@ function vim._defer_require(root, mod) end
 --- Examples:
 ---
 --- ```lua
----
 --- local on_exit = function(obj)
 ---   print(obj.code)
 ---   print(obj.signal)

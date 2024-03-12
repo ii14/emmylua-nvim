@@ -5711,6 +5711,8 @@ vim.o.swapfile = true
 ---		"split" when both are present.
 ---   uselast	If included, jump to the previously used window when
 ---		jumping to errors with |quickfix| commands.
+---If a window has 'winfixbuf' enabled, 'switchbuf' is currently not
+---applied to the split window.
 ---
 ---@type string
 vim.o.switchbuf = "uselast"
@@ -6641,6 +6643,15 @@ vim.o.winblend = 0
 ---
 ---@type number
 vim.o.window = 23
+
+---If enabled, the buffer and any window that displays it are paired.
+---For example, attempting to change the buffer with |:edit| will fail.
+---Other commands which change a window's buffer such as |:cnext| will
+---also skip any window with 'winfixbuf' enabled. However if a command
+---has an "!" option, a window can be forced to switch buffers.
+---
+---@type boolean
+vim.o.winfixbuf = false
 
 ---Keep the window height when windows are opened or closed and
 ---'equalalways' is set.  Also for |CTRL-W_=|.  Set by default for the
