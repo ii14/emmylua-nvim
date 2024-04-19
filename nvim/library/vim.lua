@@ -406,7 +406,8 @@ function vim.startswith(s, prefix) end
 ---@return boolean `true` if `suffix` is a suffix of `s`
 function vim.endswith(s, suffix) end
 
---- Validates a parameter specification (types and values).
+--- Validates a parameter specification (types and values). Specs are evaluated in alphanumeric
+--- order, until the first failure.
 ---
 --- Usage example:
 ---
