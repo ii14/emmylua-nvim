@@ -295,7 +295,7 @@ function vim.tbl_add_reverse_lookup(o) end
 ---
 ---@param o table Table to index
 ---@param ... any Optional keys (0 or more, variadic) via which to index the table
----@return any : Nested value indexed by key (if it exists), else nil
+---@return any # Nested value indexed by key (if it exists), else nil
 function vim.tbl_get(o, ...) end
 
 --- Extends a list-like table with the values of another list-like table.
@@ -312,6 +312,7 @@ function vim.tbl_get(o, ...) end
 ---@return T dst
 function vim.list_extend(dst, src, start, finish) end
 
+--- @deprecated
 --- Creates a copy of a list-like table such that any nested tables are
 --- "unrolled" and appended to the result.
 ---
@@ -331,18 +332,24 @@ function vim.tbl_flatten(t) end
 ---@return T
 function vim.spairs(t) end
 
+--- @deprecated
+function vim.tbl_isarray() end
+
 --- Tests if `t` is an "array": a table indexed _only_ by integers (potentially non-contiguous).
 ---
---- If the indexes start from 1 and are contiguous then the array is also a list. |vim.tbl_islist()|
+--- If the indexes start from 1 and are contiguous then the array is also a list. |vim.islist()|
 ---
 --- Empty table `{}` is an array, unless it was created by |vim.empty_dict()| or returned as
 --- a dict-like |API| or Vimscript result, for example from |rpcrequest()| or |vim.fn|.
 ---
 ---@see https://github.com/openresty/luajit2#tableisarray
 ---
----@param t table
+---@param t? table
 ---@return boolean `true` if array-like table, else `false`.
-function vim.tbl_isarray(t) end
+function vim.isarray(t) end
+
+--- @deprecated
+function vim.tbl_islist(t) end
 
 --- Tests if `t` is a "list": a table indexed _only_ by contiguous integers starting from 1 (what
 --- |lua-length| calls a "regular array").
@@ -350,11 +357,11 @@ function vim.tbl_isarray(t) end
 --- Empty table `{}` is a list, unless it was created by |vim.empty_dict()| or returned as
 --- a dict-like |API| or Vimscript result, for example from |rpcrequest()| or |vim.fn|.
 ---
----@see |vim.tbl_isarray()|
+---@see |vim.isarray()|
 ---
----@param t table
+---@param t? table
 ---@return boolean `true` if list-like table, else `false`.
-function vim.tbl_islist(t) end
+function vim.islist(t) end
 
 --- Counts the number of non-nil values in table `t`.
 ---
