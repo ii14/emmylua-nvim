@@ -813,7 +813,7 @@ vim.o.columns = 80
 vim.o.comments = "s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-,fb:•"
 
 ---A template for a comment.  The "%s" in the value is replaced with the
----comment text.  For example, C uses "/*%s*/". Currently only used to
+---comment text. For example, C uses "/*%s*/". Used for |commenting| and to
 ---add markers for folding, see |fold-marker|.
 ---
 ---@type string
