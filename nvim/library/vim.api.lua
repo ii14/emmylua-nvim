@@ -704,11 +704,6 @@ function vim.api.nvim_ui_try_resize_grid(grid, width, height) end
 function vim.api.nvim_unsubscribe(event) end
 
 ---@param window Window
----@param ns_id integer
----@return boolean
-function vim.api.nvim_win_add_ns(window, ns_id) end
-
----@param window Window
 ---@param fun function
 ---@return any
 function vim.api.nvim_win_call(window, fun) end
@@ -736,10 +731,6 @@ function vim.api.nvim_win_get_cursor(window) end
 ---@param window Window
 ---@return integer
 function vim.api.nvim_win_get_height(window) end
-
----@param window Window
----@return integer[]
-function vim.api.nvim_win_get_ns(window) end
 
 ---@param window Window
 ---@return integer
@@ -773,11 +764,6 @@ function vim.api.nvim_win_hide(window) end
 ---@param window Window
 ---@return boolean
 function vim.api.nvim_win_is_valid(window) end
-
----@param window Window
----@param ns_id integer
----@return boolean
-function vim.api.nvim_win_remove_ns(window, ns_id) end
 
 ---@param window Window
 ---@param buffer Buffer
