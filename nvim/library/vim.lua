@@ -332,9 +332,6 @@ function vim.tbl_flatten(t) end
 ---@return T
 function vim.spairs(t) end
 
---- @deprecated
-function vim.tbl_isarray() end
-
 --- Tests if `t` is an "array": a table indexed _only_ by integers (potentially non-contiguous).
 ---
 --- If the indexes start from 1 and are contiguous then the array is also a list. |vim.islist()|
