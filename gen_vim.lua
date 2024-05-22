@@ -111,6 +111,7 @@ for _, file in ipairs(files) do
   for line in io.lines(RUNTIME..'/lua/vim/'..file) do
     local doc = line:match('^%s*(%-%-%-.*)')
     if doc then
+      doc = string.gsub(doc, '^---%s*@see |([^|]+)|(.*)', '--- @see %1%2')
       buf[#buf+1] = doc
     else
       local sig = line:match('^%s*function%s+(vim%..*%(.*%))')
