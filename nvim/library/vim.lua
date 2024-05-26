@@ -766,6 +766,9 @@ function vim.keycode(str) end
 --- @param connect_error string
 function vim._cs_remote(rcid, server_addr, connect_error, args) end
 
+
+function vim._truncated_echo_once(msg) end
+
 --- Shows a deprecation message to the user.
 ---
 ---@param name        string     Deprecated feature (function, API, etc.).
