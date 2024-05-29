@@ -410,8 +410,30 @@ function vim.startswith(s, prefix) end
 ---@return boolean `true` if `suffix` is a suffix of `s`
 function vim.endswith(s, suffix) end
 
---- Validates a parameter specification (types and values). Specs are evaluated in alphanumeric
---- order, until the first failure.
+--- Validate function arguments.
+---
+--- This function has two valid forms:
+---
+--- 1. vim.validate(name: str, value: any, type: string, optional?: bool)
+--- 2. vim.validate(spec: table)
+---
+--- Form 1 validates that argument {name} with value {value} has the type
+--- {type}. {type} must be a value returned by |lua-type()|. If {optional} is
+--- true, then {value} may be null. This form is significantly faster and
+--- should be preferred for simple cases.
+---
+--- Example:
+---
+--- ```lua
+--- function vim.startswith(s, prefix)
+---   vim.validate('s', s, 'string')
+---   vim.validate('prefix', prefix, 'string')
+---   ...
+--- end
+--- ```
+---
+--- Form 2 validates a parameter specification (types and values). Specs are
+--- evaluated in alphanumeric order, until the first failure.
 ---
 --- Usage example:
 ---
@@ -463,7 +485,8 @@ function vim.endswith(s, suffix) end
 ---               only if the argument is valid. Can optionally return an additional
 ---               informative error message as the second returned value.
 ---             - msg: (optional) error string if validation fails
-function vim.validate(opt) end
+--- @overload fun(name: string, val: any, expected: string, optional?: boolean)
+function vim.validate(opt, ...) end
 
 --- Returns true if object `f` can be called as a function.
 ---
