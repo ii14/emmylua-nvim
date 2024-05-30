@@ -666,6 +666,7 @@ function vim.paste(lines, phase) end
 ---@return function
 function vim.schedule_wrap(fn) end
 
+--- @deprecated
 --- Gets a dict of line segment ("chunk") positions for the region from `pos1` to `pos2`.
 ---
 --- Input and output positions are byte positions, (0,0)-indexed. "End of line" column
