@@ -545,6 +545,11 @@ function vim.ringbuf(size) end
 --- @return T
 function vim._defer_require(root, mod) end
 
+--- Executes function `f` with the given context specification.
+---
+--- @param context vim.context.mods
+function vim._with(context, f) end
+
 --- Runs a system command or throws an error if {cmd} cannot be run.
 ---
 --- Examples:
