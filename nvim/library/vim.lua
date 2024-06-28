@@ -547,6 +547,23 @@ function vim._defer_require(root, mod) end
 
 --- Executes function `f` with the given context specification.
 ---
+--- Notes:
+--- - Context `{ buf = buf }` has no guarantees about current window when
+---   inside context.
+--- - Context `{ buf = buf, win = win }` is yet not allowed, but this seems
+---   to be an implementation detail.
+--- - There should be no way to revert currently set `context.sandbox = true`
+---   (like with nested `vim._with()` calls). Otherwise it kind of breaks the
+---   whole purpose of sandbox execution.
+--- - Saving and restoring option contexts (`bo`, `go`, `o`, `wo`) trigger
+---   `OptionSet` events. This is an implementation issue because not doing it
+---   seems to mean using either 'eventignore' option or extra nesting with
+---   `{ noautocmd = true }` (which itself is a wrapper for 'eventignore').
+---   As `{ go = { eventignore = '...' } }` is a valid context which should be
+---   properly set and restored, this is not a good approach.
+---   Not triggering `OptionSet` seems to be a good idea, though. So probably
+---   only moving context save and restore to lower level might resolve this.
+---
 --- @param context vim.context.mods
 function vim._with(context, f) end
 
