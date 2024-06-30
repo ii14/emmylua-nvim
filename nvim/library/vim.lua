@@ -565,6 +565,8 @@ function vim._defer_require(root, mod) end
 ---   only moving context save and restore to lower level might resolve this.
 ---
 --- @param context vim.context.mods
+--- @param f function
+--- @return any
 function vim._with(context, f) end
 
 --- Runs a system command or throws an error if {cmd} cannot be run.
