@@ -474,7 +474,7 @@ vim.opt.breakindent = false
 ---		    applying 'breakindent', even if the resulting
 ---		    text should normally be narrower. This prevents
 ---		    text indented almost to the right window border
----		    occupying lot of vertical space when broken.
+---		    occupying lots of vertical space when broken.
 ---		    (default: 20)
 ---	shift:{n}   After applying 'breakindent', the wrapped line's
 ---		    beginning will be shifted by the given number of
@@ -2851,7 +2851,7 @@ vim.opt.incsearch = true
 ---in Insert mode as specified with the 'indentkeys' option.
 ---When this option is not empty, it overrules the 'cindent' and
 ---'smartindent' indenting.  When 'lisp' is set, this option is
----is only used when 'lispoptions' contains "expr:1".
+---only used when 'lispoptions' contains "expr:1".
 ---The expression is evaluated with |v:lnum| set to the line number for
 ---which the indent is to be computed.  The cursor is also in this line
 ---when the expression is evaluated (but it may be moved around).
@@ -3106,7 +3106,7 @@ vim.opt.keywordprg = ":Man"
 ---part can be in one of two forms:
 ---1.  A list of pairs.  Each pair is a "from" character immediately
 ---    followed by the "to" character.  Examples: "aA", "aAbBcC".
----2.  A list of "from" characters, a semi-colon and a list of "to"
+---2.  A list of "from" characters, a semicolon and a list of "to"
 ---    characters.  Example: "abc;ABC"
 ---Example: "aA,fgh;FGH,cCdDeE"
 ---Special characters need to be preceded with a backslash.  These are
@@ -3181,7 +3181,7 @@ vim.opt.laststatus = 2
 ---update use |:redraw|.
 ---This may occasionally cause display errors.  It is only meant to be set
 ---temporarily when performing an operation where redrawing may cause
----flickering or cause a slow down.
+---flickering or cause a slowdown.
 ---
 ---@type vim.opt.Opt
 vim.opt.lazyredraw = false
@@ -4055,7 +4055,7 @@ vim.opt.patchmode = ""
 ---```
 ---To use an environment variable, you probably need to replace the
 ---separator.  Here is an example to append $INCL, in which directory
----names are separated with a semi-colon: >vim
+---names are separated with a semicolon: >vim
 ---	let &path = &path .. "," .. substitute($INCL, ';', ',', 'g')
 ---```
 ---Replace the ';' with a ':' or whatever separator is used.  Note that
@@ -4912,7 +4912,7 @@ vim.opt.shiftround = false
 vim.opt.shiftwidth = 8
 
 ---This option helps to avoid all the |hit-enter| prompts caused by file
----messages, for example  with CTRL-G, and to avoid some other messages.
+---messages, for example with CTRL-G, and to avoid some other messages.
 ---It is a list of flags:
 --- flag	meaning when present	~
 ---  l	use "999L, 888B" instead of "999 lines, 888 bytes"	*shm-l*
@@ -5323,7 +5323,7 @@ vim.opt.spelloptions = ""
 ---		minus two.
 ---
 ---timeout:{millisec}   Limit the time searching for suggestions to
----		{millisec} milli seconds.  Applies to the following
+---		{millisec} milliseconds.  Applies to the following
 ---		methods.  When omitted the limit is 5000. When
 ---		negative there is no limit.
 ---
