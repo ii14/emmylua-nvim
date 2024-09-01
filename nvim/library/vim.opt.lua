@@ -1595,9 +1595,12 @@ vim.opt.edcompatible = false
 
 ---When on all Unicode emoji characters are considered to be full width.
 ---This excludes "text emoji" characters, which are normally displayed as
----single width.  Unfortunately there is no good specification for this
----and it has been determined on trial-and-error basis.  Use the
----|setcellwidths()| function to change the behavior.
+---single width. However, such "text emoji" are treated as full-width
+---emoji if they are followed by the U+FE0F variant selector.
+---
+---Unfortunately there is no good specification for this and it has been
+---determined on trial-and-error basis.  Use the |setcellwidths()|
+---function to change the behavior.
 ---
 ---@type vim.opt.Opt
 vim.opt.emoji = true
