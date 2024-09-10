@@ -252,6 +252,11 @@ function vim.tbl_extend(behavior, ...) end
 
 --- Merges recursively two or more tables.
 ---
+--- Only values that are empty tables or tables that are not |lua-list|s (indexed by consecutive
+--- integers starting from 1) are merged recursively. This is useful for merging nested tables
+--- like default and user configurations where lists should be treated as literals (i.e., are
+--- overwritten instead of merged).
+---
 ---@see |vim.tbl_extend()|
 ---
 ---@generic T1: table
