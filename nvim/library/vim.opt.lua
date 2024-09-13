@@ -6157,7 +6157,7 @@ vim.opt.timeoutlen = 1000
 
 ---When on, the title of the window will be set to the value of
 ---'titlestring' (if it is not empty), or to:
----	filename [+=-] (path) - NVIM
+---	filename [+=-] (path) - Nvim
 ---Where:
 ---	filename	the name of the file being edited
 ---	-		indicates the file cannot be modified, 'ma' off
@@ -6165,7 +6165,7 @@ vim.opt.timeoutlen = 1000
 ---	=		indicates the file is read-only
 ---	=+		indicates the file is read-only and modified
 ---	(path)		is the path of the file being edited
----	- NVIM		the server name |v:servername| or "NVIM"
+---	- Nvim		the server name |v:servername| or "Nvim"
 ---
 ---@type vim.opt.Opt
 vim.opt.title = false
