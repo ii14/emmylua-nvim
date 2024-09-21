@@ -3046,11 +3046,11 @@ vim.o.joinspaces = false
 ---		|alternate-file| or using |mark-motions| try to
 ---		restore the |mark-view| in which the action occurred.
 ---
----  unload        Remove unloaded buffers from the jumplist.
+---  clean         Remove unloaded buffers from the jumplist.
 ---		EXPERIMENTAL: this flag may change in the future.
 ---
 ---@type string
-vim.o.jumpoptions = "unload"
+vim.o.jumpoptions = "clean"
 
 ---Name of a keyboard mapping.  See |mbyte-keymap|.
 ---Setting this option to a valid keymap name has the side effect of
