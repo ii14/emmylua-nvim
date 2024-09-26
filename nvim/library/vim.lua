@@ -647,8 +647,10 @@ function vim._os_proc_info(pid) end
 
 function vim._os_proc_children(ppid) end
 
---- Paste handler, invoked by |nvim_paste()| when a conforming UI
---- (such as the |TUI|) pastes text into the editor.
+--- Paste handler, invoked by |nvim_paste()|.
+---
+--- Note: This is provided only as a "hook", don't call it directly; call |nvim_paste()| instead,
+--- which arranges redo (dot-repeat) and invokes `vim.paste`.
 ---
 --- Example: To remove ANSI color codes when pasting:
 ---
