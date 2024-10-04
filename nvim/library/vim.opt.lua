@@ -899,6 +899,16 @@ vim.opt.complete = ".,w,b,u,t"
 ---@type vim.opt.Opt
 vim.opt.completefunc = ""
 
+---A comma-separated list of |complete-items| that controls the alignment
+---and display order of items in the popup menu during Insert mode
+---completion. The supported values are abbr, kind, and menu. These
+---options allow to customize how the completion items are shown in the
+---popup menu.  Note: must always contain those three values in any
+---order.
+---
+---@type vim.opt.Opt
+vim.opt.completeitemalign = "abbr,kind,menu"
+
 ---A comma-separated list of options for Insert mode completion
 ---|ins-completion|.  The supported values are:
 ---
@@ -1909,7 +1919,7 @@ vim.opt.fileignorecase = false
 ---```
 ---|FileType| |filetypes|
 ---When a dot appears in the value then this separates two filetype
----names.  Example: >c
+---names, it should therefore not be used for a filetype.  Example: >c
 ---	/* vim: set filetype=c.doxygen : */
 ---```
 ---This will use the "c" filetype first, then the "doxygen" filetype.
@@ -1917,7 +1927,7 @@ vim.opt.fileignorecase = false
 ---one dot may appear.
 ---This option is not copied to another buffer, independent of the 's' or
 ---'S' flag in 'cpoptions'.
----Only normal file name characters can be used, `/\*?[|<>` are illegal.
+---Only alphanumeric characters, '-' and '_' can be used.
 ---
 ---@type vim.opt.Opt
 vim.opt.filetype = ""
@@ -3072,7 +3082,7 @@ vim.opt.jumpoptions = "clean"
 ---Setting this option to a valid keymap name has the side effect of
 ---setting 'iminsert' to one, so that the keymap becomes effective.
 ---'imsearch' is also set to one, unless it was -1
----Only normal file name characters can be used, `/\*?[|<>` are illegal.
+---Only alphanumeric characters, '.', '-' and '_' can be used.
 ---
 ---@type vim.opt.Opt
 vim.opt.keymap = ""
@@ -5829,7 +5839,7 @@ vim.opt.synmaxcol = 3000
 ---Syntax autocommand event is triggered with the value as argument.
 ---This option is not copied to another buffer, independent of the 's' or
 ---'S' flag in 'cpoptions'.
----Only normal file name characters can be used, `/\*?[|<>` are illegal.
+---Only alphanumeric characters, '.', '-' and '_' can be used.
 ---
 ---@type vim.opt.Opt
 vim.opt.syntax = ""
