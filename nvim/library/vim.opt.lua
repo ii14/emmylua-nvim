@@ -5437,7 +5437,8 @@ vim.opt.splitright = false
 ---non-blank of the line.  When off the cursor is kept in the same column
 ---(if possible).  This applies to the commands:
 ---- CTRL-D, CTRL-U, CTRL-B, CTRL-F, "G", "H", "M", "L", "gg"
----- "d", "<<" and ">>" with a linewise operator
+---- "d", "<<", "==" and ">>" with a linewise operator
+---  (|operator-resulting-pos|)
 ---- "%" with a count
 ---- buffer changing commands (CTRL-^, :bnext, :bNext, etc.)
 ---- Ex commands that only have a line number, e.g., ":25" or ":+".
@@ -6528,7 +6529,12 @@ vim.opt.whichwrap = "b,s"
 ---Some keys will not work, such as CTRL-C, <CR> and Enter.
 ---<Esc> can be used, but hitting it twice in a row will still exit
 ---command-line as a failsafe measure.
----Although 'wc' is a number option, you can set it to a special key: >vim
+---Although 'wc' is a number option, it can be specified as a number, a
+---single character, a |key-notation| (e.g. <Up>, <C-F>) or a letter
+---preceded with a caret (e.g. `^F` is CTRL-F): >vim
+---	:set wc=27
+---	:set wc=X
+---	:set wc=^I
 ---	set wc=<Tab>
 ---```
 ---
