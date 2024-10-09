@@ -786,11 +786,10 @@ vim.opt.clipboard = ""
 ---used.  The command-line will cover the last line of the screen when
 ---shown.
 ---
----WARNING: `cmdheight=0` is considered experimental. Expect some
----unwanted behaviour. Some 'shortmess' flags and similar
----mechanism might fail to take effect, causing unwanted hit-enter
----prompts.  Some informative messages, both from Nvim itself and
----plugins, will not be displayed.
+---WARNING: `cmdheight=0` is EXPERIMENTAL. Expect some unwanted behaviour.
+---Some 'shortmess' flags and similar mechanism might fail to take effect,
+---causing unwanted hit-enter prompts.  Some informative messages, both
+---from Nvim itself and plugins, will not be displayed.
 ---
 ---@type vim.opt.Opt
 vim.opt.cmdheight = 1
@@ -5448,7 +5447,6 @@ vim.opt.splitright = false
 ---@type vim.opt.Opt
 vim.opt.startofline = false
 
----EXPERIMENTAL
 ---When non-empty, this option determines the content of the area to the
 ---side of a window, normally containing the fold, sign and number columns.
 ---The format of this option is like that of 'statusline'.
