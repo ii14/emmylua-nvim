@@ -490,7 +490,7 @@ function vim.endswith(s, suffix) end
 ---               only if the argument is valid. Can optionally return an additional
 ---               informative error message as the second returned value.
 ---             - msg: (optional) error string if validation fails
---- @overload fun(name: string, val: any, expected: string, optional?: boolean)
+--- @overload fun(name: string, val: any, expected: vim.validate.LuaType, optional?: boolean)
 function vim.validate(opt, ...) end
 
 --- Returns true if object `f` can be called as a function.
