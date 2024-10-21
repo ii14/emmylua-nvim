@@ -358,6 +358,7 @@ vim.o.backupskip = "/tmp/*"
 ---separated list of items. For each item that is present, the bell
 ---will be silenced. This is most useful to specify specific events in
 ---insert mode to be silenced.
+---You can also make it flash by using 'visualbell'.
 ---
 ---item	    meaning when present	~
 ---all	    All events.
@@ -381,6 +382,7 @@ vim.o.backupskip = "/tmp/*"
 ---register    Unknown register after <C-R> in |Insert-mode|.
 ---shell	    Bell from shell output |:!|.
 ---spell	    Error happened on spell suggest.
+---term	    Bell from |:terminal| output.
 ---wildmode    More matches in |cmdline-completion| available
 ---	    (depends on the 'wildmode' setting).
 ---
