@@ -550,6 +550,17 @@ function vim.ringbuf(size) end
 --- @return T
 function vim._defer_require(root, mod) end
 
+--- @private
+--- Creates a module alias/shim that lazy-loads a target module.
+---
+--- Unlike `vim.defaulttable()` this also:
+--- - implements __call
+--- - calls vim.deprecate()
+---
+--- @param old_name string Name of the deprecated module, which will be shimmed.
+--- @param new_name string Name of the new module, which will be loaded by require().
+function vim._defer_deprecated_module(old_name, new_name) end
+
 --- Executes function `f` with the given context specification.
 ---
 --- Notes:
