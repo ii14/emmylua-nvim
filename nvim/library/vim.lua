@@ -793,7 +793,37 @@ function vim.on_key(fn, ns_id) end
 ---@private
 function vim._on_key(buf, typed_buf) end
 
---- Generates a list of possible completions for the string.
+--- Convert UTF-32, UTF-16 or UTF-8 {index} to byte index.
+--- If {strict_indexing} is false
+--- then then an out of range index will return byte length
+--- instead of throwing an error.
+---
+--- Invalid UTF-8 and NUL is treated like in |vim.str_utfindex()|.
+--- An {index} in the middle of a UTF-16 sequence is rounded upwards to
+--- the end of that sequence.
+---@param s string
+---@param encoding "utf-8"|"utf-16"|"utf-32"
+---@param index integer
+---@param strict_indexing? boolean # default: true
+---@return integer
+function vim.str_byteindex(s, encoding, index, strict_indexing) end
+
+--- Convert byte index to UTF-32, UTF-16 or UTF-8 indices. If {index} is not
+--- supplied, the length of the string is used. All indices are zero-based.
+---
+--- If {strict_indexing} is false then an out of range index will return string
+--- length instead of throwing an error.
+--- Invalid UTF-8 bytes, and embedded surrogates are counted as one code point
+--- each. An {index} in the middle of a UTF-8 sequence is rounded upwards to the end of
+--- that sequence.
+---@param s string
+---@param encoding "utf-8"|"utf-16"|"utf-32"
+---@param index? integer
+---@param strict_indexing? boolean # default: true
+---@return integer
+function vim.str_utfindex(s, encoding, index, strict_indexing) end
+
+--- Generates a list of possible completions for the str
 --- String has the pattern.
 ---
 --- 1. Can we get it to just return things in the global namespace with that name prefix
