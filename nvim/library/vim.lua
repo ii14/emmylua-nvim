@@ -772,22 +772,23 @@ function vim.notify_once(msg, level, opts) end
 ---           it won't be invoked for those keys.
 ---@note {fn} will not be cleared by |nvim_buf_clear_namespace()|
 ---
----@param fn fun(key: string, typed: string)? Function invoked for every input key,
+---@param fn nil|fun(key: string, typed: string): string? Function invoked for every input key,
 ---          after mappings have been applied but before further processing. Arguments
 ---          {key} and {typed} are raw keycodes, where {key} is the key after mappings
 ---          are applied, and {typed} is the key(s) before mappings are applied.
 ---          {typed} may be empty if {key} is produced by non-typed key(s) or by the
 ---          same typed key(s) that produced a previous {key}.
----          When {fn} is `nil` and {ns_id} is specified, the callback associated with
----          namespace {ns_id} is removed.
+---          If {fn} returns an empty string, {key} is discarded/ignored.
+---          When {fn} is `nil`, the callback associated with namespace {ns_id} is removed.
 ---@param ns_id integer? Namespace ID. If nil or 0, generates and returns a
 ---                      new |nvim_create_namespace()| id.
+---@param opts table? Optional parameters
 ---
 ---@see |keytrans()|
 ---
 ---@return integer Namespace id associated with {fn}. Or count of all callbacks
 ---if on_key() is called without arguments.
-function vim.on_key(fn, ns_id) end
+function vim.on_key(fn, ns_id, opts) end
 
 --- Executes the on_key callbacks.
 ---@private
