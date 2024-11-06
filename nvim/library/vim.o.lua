@@ -933,7 +933,7 @@ vim.o.completeitemalign = "abbr,kind,menu"
 ---@type string
 vim.o.completeopt = "menu,preview"
 
----		only for MS-Windows
+---		only modifiable in MS-Windows
 ---When this option is set it overrules 'shellslash' for completion:
 ---- When this option is set to "slash", a forward slash is used for path
 ---  completion in insert mode. This is useful when editing HTML tag, or
@@ -4730,7 +4730,7 @@ vim.o.shellquote = ""
 ---@type string
 vim.o.shellredir = ">%s 2>&1"
 
----		only for MS-Windows
+---		only modifiable in MS-Windows
 ---When set, a forward slash is used when expanding file names.  This is
 ---useful when a Unix-like shell is used instead of cmd.exe.  Backward
 ---slashes can still be typed, but they are changed to forward slashes by
@@ -4745,7 +4745,7 @@ vim.o.shellredir = ">%s 2>&1"
 ---Also see 'completeslash'.
 ---
 ---@type boolean
-vim.o.shellslash = false
+vim.o.shellslash = true
 
 ---When on, use temp files for shell commands.  When off use a pipe.
 ---When using a pipe is not possible temp files are used anyway.
