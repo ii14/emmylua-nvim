@@ -2604,7 +2604,8 @@ vim.opt.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:No
 
 ---A history of ":" commands, and a history of previous search patterns
 ---is remembered.  This option decides how many entries may be stored in
----each of these histories (see |cmdline-editing|).
+---each of these histories (see |cmdline-editing| and 'msghistory' for
+---the number of messages to remember).
 ---The maximum value is 10000.
 ---
 ---@type vim.opt.Opt
@@ -3742,6 +3743,12 @@ vim.opt.mouseshape = ""
 ---
 ---@type vim.opt.Opt
 vim.opt.mousetime = 500
+
+---Determines how many entries are remembered in the |:messages| history.
+---The maximum value is 10000.
+---
+---@type vim.opt.Opt
+vim.opt.msghistory = 500
 
 ---This defines what bases Vim will consider for numbers when using the
 ---CTRL-A and CTRL-X commands for adding to and subtracting from a number
