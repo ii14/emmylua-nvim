@@ -3746,6 +3746,7 @@ vim.opt.mousetime = 500
 
 ---Determines how many entries are remembered in the |:messages| history.
 ---The maximum value is 10000.
+---Setting it to zero clears the message history.
 ---
 ---@type vim.opt.Opt
 vim.opt.msghistory = 500
