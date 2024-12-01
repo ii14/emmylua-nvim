@@ -386,6 +386,33 @@ function vim.tbl_count(t) end
 ---@return T[] Copy of table sliced from start to finish (inclusive)
 function vim.list_slice(list, start, finish) end
 
+--- Efficiently insert items into the middle of a list.
+---
+--- Calling table.insert() in a loop will re-index the tail of the table on
+--- every iteration, instead this function will re-index  the table exactly
+--- once.
+---
+--- Based on https://stackoverflow.com/questions/12394841/safely-remove-items-from-an-array-table-while-iterating/53038524#53038524
+---
+---@param t any[]
+---@param first integer
+---@param last integer
+---@param v any
+function vim._list_insert(t, first, last, v) end
+
+--- Efficiently remove items from middle of a list.
+---
+--- Calling table.remove() in a loop will re-index the tail of the table on
+--- every iteration, instead this function will re-index  the table exactly
+--- once.
+---
+--- Based on https://stackoverflow.com/questions/12394841/safely-remove-items-from-an-array-table-while-iterating/53038524#53038524
+---
+---@param t any[]
+---@param first integer
+---@param last integer
+function vim._list_remove(t, first, last) end
+
 --- Trim whitespace (Lua pattern "%s") from both sides of a string.
 ---
 ---@see |lua-patterns|
