@@ -2589,7 +2589,7 @@ vim.o.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:NonT
 
 ---A history of ":" commands, and a history of previous search patterns
 ---is remembered.  This option decides how many entries may be stored in
----each of these histories (see |cmdline-editing| and 'msghistory' for
+---each of these histories (see |cmdline-editing| and 'messagesopt' for
 ---the number of messages to remember).
 ---The maximum value is 10000.
 ---
@@ -3479,6 +3479,25 @@ vim.o.maxmempattern = 1000
 ---@type number
 vim.o.menuitems = 25
 
+---Option settings when outputting messages.  It can consist of the
+---following items.  Items must be separated by a comma.
+---
+---hit-enter	Use |hit-enter| prompt when the message is longer than
+---		'cmdheight' size.
+---
+---wait:{n}	Ignored when "hit-enter" is present.  Instead of using
+---		|hit-enter| prompt, will simply wait for {n}
+---		milliseconds so the user has a chance to read the
+---		message, use 0 to disable sleep (but then the user may
+---		miss an important message).
+---
+---history:{n}	Determines how many entries are remembered in the
+---		|:messages| history.  The maximum value is 10000.
+---		Setting it to zero clears the message history.
+---
+---@type string
+vim.o.messagesopt = "hit-enter,history:500"
+
 ---Parameters for |:mkspell|.  This tunes when to start compressing the
 ---word tree.  Compression can be slow when there are many words, but
 ---it's needed to avoid running out of memory.  The amount of memory used
@@ -3728,13 +3747,6 @@ vim.o.mouseshape = ""
 ---
 ---@type number
 vim.o.mousetime = 500
-
----Determines how many entries are remembered in the |:messages| history.
----The maximum value is 10000.
----Setting it to zero clears the message history.
----
----@type number
-vim.o.msghistory = 500
 
 ---This defines what bases Vim will consider for numbers when using the
 ---CTRL-A and CTRL-X commands for adding to and subtracting from a number
