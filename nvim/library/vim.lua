@@ -618,6 +618,10 @@ function vim._defer_deprecated_module(old_name, new_name) end
 --- @return any
 function vim._with(context, f) end
 
+--- @param bufnr? integer
+--- @return integer
+function vim._resolve_bufnr(bufnr) end
+
 --- Runs a system command or throws an error if {cmd} cannot be run.
 ---
 --- Examples:
