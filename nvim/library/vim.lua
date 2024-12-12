@@ -622,6 +622,11 @@ function vim._with(context, f) end
 --- @return integer
 function vim._resolve_bufnr(bufnr) end
 
+--- @generic T
+--- @param x elem_or_list<T>?
+--- @return T[]
+function vim._ensure_list(x) end
+
 --- Runs a system command or throws an error if {cmd} cannot be run.
 ---
 --- Examples:

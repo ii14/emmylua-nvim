@@ -4270,6 +4270,7 @@ vim.opt.rulerformat = ""
 ---  indent/	indent scripts |indent-expression|
 ---  keymap/	key mapping files |mbyte-keymap|
 ---  lang/		menu translations |:menutrans|
+---  lsp/		LSP client configurations |lsp-config|
 ---  lua/		|Lua| plugins
 ---  menu.vim	GUI menus |menu.vim|
 ---  pack/		packages |:packadd|
