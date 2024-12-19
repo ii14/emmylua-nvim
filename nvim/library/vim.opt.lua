@@ -2396,6 +2396,7 @@ vim.opt.grepprg = "grep -HIn $* /dev/null"
 ---	ci	Command-line Insert mode
 ---	cr	Command-line Replace mode
 ---	sm	showmatch in Insert mode
+---	t	Terminal mode
 ---	a	all modes
 ---The argument-list is a dash separated list of these arguments:
 ---	hor{N}	horizontal bar, {N} percent of the character height
@@ -2413,7 +2414,7 @@ vim.opt.grepprg = "grep -HIn $* /dev/null"
 ---		the numbers is zero, there is no blinking. E.g.: >vim
 ---			set guicursor=n:blinkon0
 ---```
----		- Default is "blinkon0" for each mode.
+---		Default is "blinkon0" for each mode.
 ---	{group-name}
 ---		Highlight group that decides the color and font of the
 ---		cursor.
@@ -2456,7 +2457,7 @@ vim.opt.grepprg = "grep -HIn $* /dev/null"
 ---```
 ---
 ---@type vim.opt.Opt
-vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+vim.opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-blinkon500-blinkoff500-TermCursor"
 
 ---This is a list of fonts which will be used for the GUI version of Vim.
 ---In its simplest form the value is just one font name.  When
@@ -2600,7 +2601,7 @@ vim.opt.helplang = ""
 vim.opt.hidden = true
 
 ---@type vim.opt.Opt
-vim.opt.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,Z:TermCursorNC,@:NonText,d:Directory,e:ErrorMsg,i:IncSearch,l:Search,y:CurSearch,m:MoreMsg,M:ModeMsg,n:LineNr,a:LineNrAbove,b:LineNrBelow,N:CursorLineNr,G:CursorLineSign,O:CursorLineFold,r:Question,s:StatusLine,S:StatusLineNC,c:VertSplit,t:Title,v:Visual,V:VisualNOS,w:WarningMsg,W:WildMenu,f:Folded,F:FoldColumn,A:DiffAdd,C:DiffChange,D:DiffDelete,T:DiffText,>:SignColumn,-:Conceal,B:SpellBad,P:SpellCap,R:SpellRare,L:SpellLocal,+:Pmenu,=:PmenuSel,k:PmenuMatch,<:PmenuMatchSel,[:PmenuKind,]:PmenuKindSel,{:PmenuExtra,}:PmenuExtraSel,x:PmenuSbar,X:PmenuThumb,*:TabLine,#:TabLineSel,_:TabLineFill,!:CursorColumn,.:CursorLine,o:ColorColumn,q:QuickFixLine,z:StatusLineTerm,Z:StatusLineTermNC,g:MsgArea,0:Whitespace,I:NormalNC"
+vim.opt.highlight = "8:SpecialKey,~:EndOfBuffer,z:TermCursor,@:NonText,d:Directory,e:ErrorMsg,i:IncSearch,l:Search,y:CurSearch,m:MoreMsg,M:ModeMsg,n:LineNr,a:LineNrAbove,b:LineNrBelow,N:CursorLineNr,G:CursorLineSign,O:CursorLineFold,r:Question,s:StatusLine,S:StatusLineNC,c:VertSplit,t:Title,v:Visual,V:VisualNOS,w:WarningMsg,W:WildMenu,f:Folded,F:FoldColumn,A:DiffAdd,C:DiffChange,D:DiffDelete,T:DiffText,>:SignColumn,-:Conceal,B:SpellBad,P:SpellCap,R:SpellRare,L:SpellLocal,+:Pmenu,=:PmenuSel,k:PmenuMatch,<:PmenuMatchSel,[:PmenuKind,]:PmenuKindSel,{:PmenuExtra,}:PmenuExtraSel,x:PmenuSbar,X:PmenuThumb,*:TabLine,#:TabLineSel,_:TabLineFill,!:CursorColumn,.:CursorLine,o:ColorColumn,q:QuickFixLine,z:StatusLineTerm,Z:StatusLineTermNC,g:MsgArea,0:Whitespace,I:NormalNC"
 
 ---A history of ":" commands, and a history of previous search patterns
 ---is remembered.  This option decides how many entries may be stored in
