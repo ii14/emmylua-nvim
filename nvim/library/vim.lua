@@ -459,7 +459,7 @@ function vim.endswith(s, suffix) end
 ---       function vim.startswith(s, prefix)
 ---         vim.validate('s', s, 'string')
 ---         vim.validate('prefix', prefix, 'string')
----         ...
+---         -- ...
 ---       end
 ---     ```
 ---
@@ -479,7 +479,7 @@ function vim.endswith(s, suffix) end
 ---           age={age, 'number'},
 ---           hobbies={hobbies, 'table'},
 ---         }
----         ...
+---         -- ...
 ---       end
 ---     ```
 ---
