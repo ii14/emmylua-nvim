@@ -644,7 +644,7 @@ function vim._ensure_list(x) end
 ---
 --- -- Runs synchronously:
 --- local obj = vim.system({'echo', 'hello'}, { text = true }):wait()
---- -- { code = 0, signal = 0, stdout = 'hello', stderr = '' }
+--- -- { code = 0, signal = 0, stdout = 'hello\n', stderr = '' }
 ---
 --- ```
 ---
